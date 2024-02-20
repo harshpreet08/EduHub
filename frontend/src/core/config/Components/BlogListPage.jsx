@@ -9,6 +9,7 @@ import {
   CardMedia,
   Grid,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const blogs = [
   {
@@ -33,6 +34,7 @@ const blogs = [
 ];
 
 function BlogList() {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -87,6 +89,7 @@ function BlogList() {
       </Grid>
       <Box sx={{ textAlign: "center", marginTop: "20px" }}>
         <Button
+          onClick={() => navigate("/blogform")}
           variant="contained"
           color="primary"
           size="large"
