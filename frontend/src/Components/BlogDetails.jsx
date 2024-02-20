@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -9,20 +9,23 @@ import {
   Container,
   IconButton,
   Grid,
-} from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from '@mui/material';
+// eslint-disable-next-line import/no-unresolved
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faThumbsUp,
   faThumbsDown,
   faHeart,
   faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
-import { blogs } from "./BlogListPage";
-import Navbar from "./NavBar";
+// eslint-disable-next-line import/no-unresolved
+} from '@fortawesome/free-solid-svg-icons';
+import { blogs } from './BlogListPage';
+import Navbar from './NavBar';
 
 function BlogDetailsPage() {
   const { id } = useParams();
-  const blog = blogs.find((blog) => blog.id === parseInt(id));
+  // eslint-disable-next-line no-shadow
+  const blog = blogs.find(blog => blog.id === parseInt(id, 10));
 
   if (!blog) {
     return (
@@ -41,9 +44,9 @@ function BlogDetailsPage() {
         <Box mt={4}>
           <Card
             sx={{
-              position: "relative",
-              border: "1px solid white",
-              boxShadow: "none",
+              position: 'relative',
+              border: '1px solid white',
+              boxShadow: 'none',
             }}
           >
             <CardContent>
@@ -51,10 +54,10 @@ function BlogDetailsPage() {
                 aria-label="go-back"
                 onClick={() => window.history.back()}
                 sx={{
-                  position: "absolute",
-                  left: "8px",
-                  top: "8px",
-                  color: "primary.main",
+                  position: 'absolute',
+                  left: '8px',
+                  top: '8px',
+                  color: 'primary.main',
                 }}
               >
                 <FontAwesomeIcon icon={faArrowLeft} />
@@ -62,7 +65,7 @@ function BlogDetailsPage() {
               <Typography
                 variant="h4"
                 gutterBottom
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: 'center' }}
               >
                 {blog.title}
               </Typography>
@@ -70,7 +73,7 @@ function BlogDetailsPage() {
                 variant="subtitle2"
                 color="textSecondary"
                 paragraph
-                sx={{ textAlign: "center" }}
+                sx={{ textAlign: 'center' }}
               >
                 by {blog.author}
               </Typography>
@@ -81,8 +84,8 @@ function BlogDetailsPage() {
               alt={blog.title}
               sx={{
                 height: 300, // You can adjust the height as needed
-                objectFit: "cover",
-                maxWidth: "100%",
+                objectFit: 'cover',
+                maxWidth: '100%',
               }}
             />
             <CardContent>
@@ -91,9 +94,9 @@ function BlogDetailsPage() {
                 color="textSecondary"
                 paragraph
                 sx={{
-                  fontSize: "1.2rem",
-                  marginBottom: "70px",
-                  marginTop: "20px",
+                  fontSize: '1.2rem',
+                  marginBottom: '70px',
+                  marginTop: '20px',
                 }}
               >
                 {blog.description}
@@ -101,11 +104,11 @@ function BlogDetailsPage() {
             </CardContent>
             <Box
               sx={{
-                position: "absolute",
+                position: 'absolute',
                 bottom: 0,
                 left: 0,
-                marginLeft: "8px",
-                marginBottom: "8px",
+                marginLeft: '8px',
+                marginBottom: '8px',
               }}
             >
               <Grid container spacing={2}>

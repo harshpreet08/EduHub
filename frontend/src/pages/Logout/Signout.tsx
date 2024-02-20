@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../Component/Header/Header';
-import { Button } from '@mui/material';
 import { Modal } from 'antd';
+import Header from '../../Components/Header/Header';
 
 const SignOut: React.FC = () => {
      const [open, setOpen] = useState(false);
@@ -32,8 +31,7 @@ const SignOut: React.FC = () => {
 
   return (
     <>
-      <Header></Header>
-      
+      <Header />
       <Modal
         open={open}
         onOk={handleOk}

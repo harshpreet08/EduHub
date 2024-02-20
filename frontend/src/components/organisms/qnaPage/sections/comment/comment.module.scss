@@ -1,0 +1,49 @@
+.commentsContainer {
+  margin: 3rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  .totalAnswers {
+    padding-bottom: 1.5rem;
+    .totalAnswers__count {
+      font-size: 1.2rem;
+    }
+  }
+  .answerSection {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.5rem 0rem 1.5rem;
+    font-size: 1rem;
+    gap: 1rem;
+    .answerSegment {
+      display: grid;
+      grid-template-columns: 0.1fr 2fr;
+      row-gap: 1rem;
+    }
+    .answerCard {
+      background-color: #f4f4f4;
+      border-radius: 0.6rem;
+      .answerBody {
+        padding: 1rem 1rem 0;
+        margin-bottom: 0;
+      }
+    }
+    .userDetailSection {
+      display:flex;
+      flex-direction: column;
+      align-items: end;
+      padding: 0 1rem 1rem;
+
+      .answeredDate {
+        display: flex;
+        gap: 0.3rem;
+        font-size: 0.8rem;
+        color: #787878;
+      }
+      .answeredBy {
+        font-size: 0.8rem;
+        color: hsl(210deg 65.52% 54.51%);
+        font-weight: 500;
+      }
+    }
+    
+  }
+}
