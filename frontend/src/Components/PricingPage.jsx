@@ -92,7 +92,7 @@ const PricingBox = ({ title, amount, sale, description, color }) => (
       color="primary"
       style={{ backgroundColor: color }}
     >
-      Get Started
+      Buy now
     </Button>
   </Paper>
 );
