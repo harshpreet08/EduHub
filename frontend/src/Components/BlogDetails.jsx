@@ -79,7 +79,11 @@ function BlogDetailsPage() {
               variant="body1"
               color="textSecondary"
               paragraph
-              sx={{ fontSize: "1.2rem", marginBottom: "80px" }}
+              sx={{
+                fontSize: "1.2rem",
+                marginBottom: "70px",
+                marginTop: "20px",
+              }}
             >
               {blog.description}
             </Typography>

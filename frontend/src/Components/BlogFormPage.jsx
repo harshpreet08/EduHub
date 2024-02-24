@@ -8,9 +8,11 @@ import {
   Snackbar,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
-// Styled Snackbar component with blue background color
 const StyledSnackbar = styled(Snackbar)({
   "& .MuiSnackbarContent-root": {
     backgroundColor: "#38a13c",
@@ -18,6 +20,8 @@ const StyledSnackbar = styled(Snackbar)({
 });
 
 function SimpleForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -31,6 +35,7 @@ function SimpleForm() {
   const fileInputRef = useRef(null);
 
   const handleImageChange = (e) => {
+    console.log("aagya bhai");
     const file = e.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
@@ -77,6 +82,19 @@ function SimpleForm() {
         paddingY: "20px",
       }}
     >
+      <IconButton
+        aria-label="go-back"
+        onClick={() => navigate(-1)}
+        sx={{
+          position: "relative",
+          left: "8px",
+          top: "8px",
+          color: "primary.main",
+        }}
+      >
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </IconButton>
+
       <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
         Start a new blog
       </Typography>
