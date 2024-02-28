@@ -277,3 +277,6 @@ The code above was created by using the code in [npm-faq-component](https://www.
 * The example given was very useful and proved to be the basis for understanding it’s functionality, operation logic.
  I appreciate their labour and diligence.
 * It offered helpful insights and shaped how I view approaches that are employed in understanding people’s ways of learning specific techniques. Their contribution is much appreciated.
+
+## References
+* Pixlr, 2024.” [Online]. Available: https://pixlr.com/. [Accessed: Feb 26, 2024]. 
