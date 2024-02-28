@@ -1,7 +1,5 @@
-
-
 * *Last Modification Date*: 27 February 2023
-* *Deployed URL*: <https://zippy-hotteok-711e25.netlify.app/ >
+* *Deployed URL*: <web-eduhub.netlify.app>
 * *Git URL*: <https://git.cs.dal.ca/harshpreet/csci_5709_grp-06>
 
 
@@ -9,6 +7,22 @@
 
 * [React](https://legacy.reactjs.org/docs/getting-started.html/) - The web framework used
 * [npm](https://docs.npmjs.com//) - Dependency Management
+
+## Steps to build the project in local
+
+1] Clone the project into local system.
+
+2] Go inside the frontend folder using : cd CSCI_5709_Grp-06/frontend
+
+3] Run below command to install the packages:
+```
+npm install
+```
+4] Then start the project using start command:
+```
+npm start
+```
+5] Open the url which is displayed after starting the application and then explore...
 
 ## Sources Used
 
@@ -277,6 +291,3 @@ The code above was created by using the code in [npm-faq-component](https://www.
 * The example given was very useful and proved to be the basis for understanding it’s functionality, operation logic.
  I appreciate their labour and diligence.
 * It offered helpful insights and shaped how I view approaches that are employed in understanding people’s ways of learning specific techniques. Their contribution is much appreciated.
-
-## References
-* Pixlr, 2024.” [Online]. Available: https://pixlr.com/. [Accessed: Feb 26, 2024]. 
