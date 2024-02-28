@@ -12,7 +12,11 @@
 
 1] Clone the project into local system.
 
-2] Go inside the frontend folder using : cd CSCI_5709_Grp-06/frontend
+2] Go inside the frontend folder using : 
+
+```
+cd CSCI_5709_Grp-06/frontend
+```
 
 3] Run below command to install the packages:
 ```
@@ -291,3 +295,36 @@ The code above was created by using the code in [npm-faq-component](https://www.
 * The example given was very useful and proved to be the basis for understanding it’s functionality, operation logic.
  I appreciate their labour and diligence.
 * It offered helpful insights and shaped how I view approaches that are employed in understanding people’s ways of learning specific techniques. Their contribution is much appreciated.
+
+
+## References
+* Pixlr, 2024.” [Online]. Available: https://pixlr.com/. [Accessed: Feb 26, 2024]. 
+* Pivoted Pixel, “The evolution of logo design in the digital age,” pivotedpixel.com, 25-May-2023.
+
+## Technologies
+* Client-side language: 
+
+* JavaScript: This suits our project requirements as we were looking to implement complex features on web pages. 
+
+* CSS: For better styling of the website which improves the overall look and feel of the website 
+
+* React JS: For making the making the server-side requests and to do the validation. 
+
+## Framework: 
+
+* Tailwind CSS: For writing efficient CSS for the website and making it responsive in fewer lines. 
+
+ 
+
+## Library: 
+
+* Material UI: For form development, cards, and boxes. Basically, to improve the overall UI experience of the website. 
+
+
+## Images: 
+
+* PNG 
+
+* SVG 
+
+* JPG
