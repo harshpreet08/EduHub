@@ -47,7 +47,7 @@ const Contactus: React.FC = () => {
           >
             <TextField
               id="outlined-basic"
-              label="Last Name"
+              label="Full Name"
               variant="standard"
               // sx={{ bgcolor: "#eaeaea" }}
               required
@@ -60,7 +60,7 @@ const Contactus: React.FC = () => {
             />
             <TextField
               id="standard"
-              label="Password"
+              label="Description"
               variant="standard"
               required
             />

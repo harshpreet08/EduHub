@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Faq from "react-faq-component";
-import faqimage from "../../assets/images/about.jpg";
+import faqimage from "../../Assests/faq.svg";
 import Navbar from "../../Components/NavBar";
 
 const FAQS: React.FC = () => {
@@ -8,27 +8,21 @@ const FAQS: React.FC = () => {
     title: "FAQ (How it works)",
     rows: [
       {
-        title: "Lorem ipsum dolor sit amet,",
-        content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed tempor sem. Aenean vel turpis feugiat,
-                       ultricies metus at, consequat velit. Curabitur est nibh, varius in tellus nec, mattis pulvinar metus.
-                       In maximus cursus lorem, nec laoreet velit eleifend vel. Ut aliquet mauris tortor, sed egestas libero interdum vitae.
-                       Fusce sed commodo purus, at tempus turpis.`,
+        title: "How does EduHub work?",
+        content: `Signup for the courses you are interested in and then complete the quizes attend the live lectures finish the course`,
       },
       {
-        title: "Nunc maximus, magna at ultricies elementum",
+        title: "Can you get refund?",
         content:
-          "Nunc maximus, magna at ultricies elementum, risus turpis vulputate quam, vitae convallis ex tortor sed dolor.",
+          "Yes you can get a refund with in 30 days of enrolling",
       },
       {
-        title: "Curabitur laoreet, mauris vel blandit fringilla",
-        content: `Curabitur laoreet, mauris vel blandit fringilla, leo elit rhoncus nunc, ac sagittis leo elit vel lorem.
-                     Fusce tempor lacus ut libero posuere viverra. Nunc velit dolor, tincidunt at varius vel, laoreet vel quam.
-                     Sed dolor urna, lobortis in arcu auctor, tincidunt mattis ante. Vivamus venenatis ultricies nibh in volutpat.
-                     Cras eu metus quis leo vestibulum feugiat nec sagittis lacus.Mauris vulputate arcu sed massa euismod dignissim. `,
+        title: "How long do I have access to a course after enrolling?",
+        content: `The access to the course is lifetime until you drop it.`,
       },
       {
         title: "What is the package version",
-        content: <p>current version is 1.2.1</p>,
+        content: <p>Version Number 0.0.1</p>,
       },
     ],
   };
