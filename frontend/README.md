@@ -1,12 +1,8 @@
 
 
-* *Last Modification Date*: 7 February 2023
-* *Assignment URL*: <https://fancy-seahorse-87b2c6.netlify.app/>
-* *Git URL*: <https://git.cs.dal.ca/kmakwana/csci-4177-5709-assignments/-/tree/main/A1?ref_type=heads>
-
-## Authors
-
-* [Kunal Rajeshkumar Makwana](kn362288@dal.ca)
+* *Last Modification Date*: 27 February 2023
+* *Deployed URL*: <https://zippy-hotteok-711e25.netlify.app/ >
+* *Git URL*: <https://git.cs.dal.ca/harshpreet/csci_5709_grp-06>
 
 
 ## Built With
@@ -197,7 +193,83 @@ The code above was created by referring to the lists of landing page websites. I
 By studying the original code and applying what I learned, I was able to modify the layout and styling to fit the desired design. I have referred to the above code in order to understand the layout for about us and how can i design the layout with image and description together. I have added the code to make it responsive according to the width of mobile, tablet and laptop.
 
 
+### Faqs.tsx
 
+Lines 7 - 62
+
+```
+const data = {
+    title: "FAQ (How it works)",
+    rows: [
+      {
+        title: "How does EduHub work?",
+        content: `Signup for the courses you are interested in and then complete the quizes attend the live lectures finish the course`,
+      },
+      {
+        title: "Can you get refund?",
+        content:
+          "Yes you can get a refund with in 30 days of enrolling",
+      },
+      {
+        title: "How long do I have access to a course after enrolling?",
+        content: `The access to the course is lifetime until you drop it.`,
+      },
+      {
+        title: "What is the package version",
+        content: <p>Version Number 0.0.1</p>,
+      },
+    ],
+  };
+
+  const styles = {
+    bgColor: "white",
+    titleTextColor: "#4a5cfb",
+    titleTextSize: "48px",
+    rowTitleColor: "#53577a",
+    rowTitleTextSize: "medium",
+    rowContentColor: "#0e5a9b",
+    //     rowContentTextSize: "16px",
+    //     rowContentPaddingTop: '10px',
+    //     rowContentPaddingBottom: "10px",
+    //     rowContentPaddingLeft: "50px",
+    //     rowContentPaddingRight: '150px',
+    arrowColor: "#4a5cfb",
+    transitionDuration: "1s",
+    timingFunc: "ease",
+  };
+
+  const config = {
+    animate: true,
+    //     arrowIcon: "V",
+    tabFocus: true,
+  };
+  return (
+    <>
+    <Navbar></Navbar>
+      <Box sx={{ display: "flex", height: "100vh" }}>
+        {/* FAQ Section */}
+        <Box sx={{ flex: 1, backgroundColor: "rgba(255,255,255,0.8)", padding: "20px", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" }}>
+          <Faq data={data} styles={styles} config={config} />
+        </Box>
+        {/* Image Section */}
+        <Box sx={{ flex: 1, backgroundImage: `url(${faqimage})`, backgroundSize: "contain", backgroundRepeat: "no-repeat" }} />
+      </Box>
+    </>
+  );
+};
+```
+
+The code above was created by using the code in [npm-faq-component](https://www.npmjs.com/package/react-faq-component) as shown below: 
+
+
+
+
+- [Form Layouts - Official Material CSS UI Components](https://mui.com/material-ui/react-dialog/)'s This website was used to get the modal help for modal at the logout functionality.
+
+
+
+
+- [Major references take from](https://mui.com/) and (https://ant.design/)
 
 
 ## Acknowledgments
