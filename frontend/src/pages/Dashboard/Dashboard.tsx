@@ -1,12 +1,12 @@
 import { Card, Input, Space, Tag, Typography } from "antd";
 import { useState } from "react";
-import Header from "../../Component/Header/Header";
 import { AudioOutlined } from "@ant-design/icons";
 import { SearchProps } from "antd/es/input";
 import Paragraph from "antd/es/typography/Paragraph";
 import Title from "antd/es/typography/Title";
 import ReactLogo from "../../Assests/React-icon.svg.png";
 import BannerImage from "../../Assests/react-logo.svg";
+import Navbar from "../../Components/NavBar";
 
 const { CheckableTag } = Tag;
 const { Search } = Input;
@@ -51,7 +51,7 @@ const Dashboard: React.FC = () => {
   };
   return (
     <>
-      <Header />
+    <Navbar></Navbar>
       <div
         style={{
           marginTop: "10px",

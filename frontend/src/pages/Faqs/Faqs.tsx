@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import Header from "../../Component/Header/Header";
 import Faq from "react-faq-component";
-import faqimage from "../../Assests/faq.svg";
+import faqimage from "../../assets/images/about.jpg";
+import Navbar from "../../Components/NavBar";
 
 const FAQS: React.FC = () => {
   const data = {
@@ -57,7 +57,7 @@ const FAQS: React.FC = () => {
   };
   return (
     <>
-      <Header></Header>
+    <Navbar></Navbar>
       <Box sx={{ display: "flex", height: "100vh" }}>
         {/* FAQ Section */}
         <Box sx={{ flex: 1, backgroundColor: "rgba(255,255,255,0.8)", padding: "20px", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" }}>

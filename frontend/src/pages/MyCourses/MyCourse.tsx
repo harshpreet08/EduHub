@@ -6,8 +6,8 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import Header from "../../Component/Header/Header";
 import { Link } from "react-router-dom";
+import Navbar from "../../Components/NavBar";
 
 const courses = [
   {
@@ -29,7 +29,7 @@ const courses = [
 const MyCourse: React.FC = () => {
   return (
     <>
-      <Header></Header>
+      <Navbar/>
       <Typography variant="h5" gutterBottom>
         My Courses
       </Typography>

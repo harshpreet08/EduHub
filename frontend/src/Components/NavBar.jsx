@@ -14,7 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Contact Us", "About Us", "FAQs", "Register","Login"];
+const pages = ["Contact Us", "FAQs", "Register","Login"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {

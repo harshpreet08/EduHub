@@ -8,6 +8,9 @@ import SignUp from "./src/pages/Signup.jsx";
 import ForgotPwd from "./src/pages/ForgotPwd.jsx";
 import LandingPage from "./src/pages/Landing.jsx";
 import Error from "./src/components/error.jsx";
+import FAQS from "./src/pages/Faqs/Faqs";
+import Dashboard from "./src/pages/Dashboard/Dashboard";
+import Contactus from "./src/pages/Contact/Contactus";
 
 const appRoute = createBrowserRouter([
   {
@@ -32,7 +35,17 @@ const appRoute = createBrowserRouter([
   },
   {
     path:"/contact us",
-    element: <ForgotPwd />,
+    element: <Contactus></Contactus>,
+    errorElement: <Error/>
+  },
+  {
+    path:"/faqs",
+    element: <FAQS></FAQS>,
+    errorElement: <Error/>
+  },
+  {
+    path:"/",
+    element: <Dashboard></Dashboard>,
     errorElement: <Error/>
   },
 ]);

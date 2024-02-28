@@ -1,11 +1,11 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import Header from "../../Component/Header/Header";
 import ContactImage from "../../Assests/contactpage.png";
+import Navbar from "../../Components/NavBar";
 
 const Contactus: React.FC = () => {
   return (
     <>
-      <Header></Header>
+      <Navbar></Navbar>
       <Box
         sx={{
           display: "flex",
