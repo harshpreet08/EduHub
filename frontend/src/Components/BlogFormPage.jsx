@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./NavBar";
 
 const StyledSnackbar = styled(Snackbar)({
   "& .MuiSnackbarContent-root": {
@@ -73,98 +74,106 @@ function SimpleForm() {
   };
 
   return (
-    <Box
-      sx={{
-        maxWidth: 600,
-        width: "100%",
-        margin: "0 auto",
-        paddingX: { xs: 0, md: "20px" },
-        paddingY: "20px",
-      }}
-    >
-      <IconButton
-        aria-label="go-back"
-        onClick={() => navigate(-1)}
+    <>
+      <Navbar></Navbar>
+      <Box
         sx={{
-          position: "relative",
-          left: "8px",
-          top: "8px",
-          color: "primary.main",
+          maxWidth: 600,
+          width: "100%",
+          margin: "0 auto",
+          paddingX: { xs: 0, md: "20px" },
+          paddingY: "20px",
         }}
       >
-        <FontAwesomeIcon icon={faArrowLeft} />
-      </IconButton>
+        <IconButton
+          aria-label="go-back"
+          onClick={() => navigate(-1)}
+          sx={{
+            position: "relative",
+            left: "8px",
+            top: "8px",
+            color: "primary.main",
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </IconButton>
 
-      <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
-        Start a new blog
-      </Typography>
-      <Box mt={4}>
-        <TextField
-          label="Title"
-          name="title"
-          required
-          fullWidth
-          error={titleError}
-          helperText={titleError ? "Title is required" : ""}
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          sx={{ width: "100%" }}
+        <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
+          Start a new blog
+        </Typography>
+        <Box mt={4}>
+          <TextField
+            label="Title"
+            name="title"
+            required
+            fullWidth
+            error={titleError}
+            helperText={titleError ? "Title is required" : ""}
+            value={formData.title}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+            sx={{ width: "100%" }}
+          />
+        </Box>
+        <Box mt={4}>
+          <TextField
+            label="Description"
+            name="description"
+            multiline
+            rows={8}
+            required
+            fullWidth
+            error={descriptionError}
+            helperText={descriptionError ? "Description is required" : ""}
+            value={formData.description}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
+            sx={{ width: "100%" }}
+          />
+        </Box>
+        <Box mt={4}>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+            id="fileInput"
+          />
+          <Button
+            variant="outlined"
+            onClick={() => fileInputRef.current.click()}
+          >
+            Attach Image
+          </Button>
+          {formData.image && (
+            <Box ml={2} display="flex" alignItems="center">
+              <img
+                src={URL.createObjectURL(formData.image)}
+                alt="Attached"
+                style={{ maxWidth: "200px", maxHeight: "200px" }}
+              />
+              <IconButton onClick={handleRemoveImage}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          )}
+        </Box>
+        <Box mt={4} sx={{ textAlign: "center" }}>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Create Blog
+          </Button>
+        </Box>
+        <StyledSnackbar
+          open={showSuccess}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+          message="Success! Blog Created."
         />
       </Box>
-      <Box mt={4}>
-        <TextField
-          label="Description"
-          name="description"
-          multiline
-          rows={8}
-          required
-          fullWidth
-          error={descriptionError}
-          helperText={descriptionError ? "Description is required" : ""}
-          value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
-          sx={{ width: "100%" }}
-        />
-      </Box>
-      <Box mt={4}>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          style={{ display: "none" }}
-          id="fileInput"
-        />
-        <Button variant="outlined" onClick={() => fileInputRef.current.click()}>
-          Attach Image
-        </Button>
-        {formData.image && (
-          <Box ml={2} display="flex" alignItems="center">
-            <img
-              src={URL.createObjectURL(formData.image)}
-              alt="Attached"
-              style={{ maxWidth: "200px", maxHeight: "200px" }}
-            />
-            <IconButton onClick={handleRemoveImage}>
-              <DeleteIcon />
-            </IconButton>
-          </Box>
-        )}
-      </Box>
-      <Box mt={4} sx={{ textAlign: "center" }}>
-        <Button onClick={handleSubmit} variant="contained" color="primary">
-          Create Blog
-        </Button>
-      </Box>
-      <StyledSnackbar
-        open={showSuccess}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message="Success! Blog Created."
-      />
-    </Box>
+    </>
   );
 }
 
