@@ -111,7 +111,7 @@ function BlogList() {
         </Grid>
         <Box sx={{ textAlign: "center", marginTop: "60px" }}>
           <Button
-            onClick={() => navigate("/blogform")}
+            onClick={() => navigate("/newblog")}
             variant="contained"
             color="primary"
             size="large"
