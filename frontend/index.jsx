@@ -12,6 +12,9 @@ import FAQS from "./src/pages/Faqs/Faqs";
 import Dashboard from "./src/pages/Dashboard/Dashboard";
 import Contactus from "./src/pages/Contact/Contactus";
 import PricingPage from "./src/Components/PricingPage.jsx";
+import BlogList from "./src/Components/BlogListPage.jsx";
+import BlogFormPage from "./src/Components/BlogFormPage.jsx";
+import BlogDetailsPage from "./src/Components/BlogDetails.jsx";
 
 const appRoute = createBrowserRouter([
   {
@@ -52,6 +55,21 @@ const appRoute = createBrowserRouter([
   {
     path: "/pricing",
     element: <PricingPage></PricingPage>,
+    errorElement: <Error />,
+  },
+  {
+    path: "/blogs",
+    element: <BlogList></BlogList>,
+    errorElement: <Error />,
+  },
+  {
+    path: "/blog/:id",
+    element: <BlogDetailsPage></BlogDetailsPage>,
+    errorElement: <Error />,
+  },
+  {
+    path: "/newblog",
+    element: <BlogFormPage></BlogFormPage>,
     errorElement: <Error />,
   },
 ]);
