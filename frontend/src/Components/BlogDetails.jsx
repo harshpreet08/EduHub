@@ -77,9 +77,13 @@ function BlogDetailsPage() {
             </CardContent>
             <CardMedia
               component="img"
-              height="200"
               image={blog.image}
               alt={blog.title}
+              sx={{
+                height: 300, // You can adjust the height as needed
+                objectFit: "cover",
+                maxWidth: "100%",
+              }}
             />
             <CardContent>
               <Typography
