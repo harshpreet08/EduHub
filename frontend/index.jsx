@@ -11,42 +11,48 @@ import Error from "./src/components/error.jsx";
 import FAQS from "./src/pages/Faqs/Faqs";
 import Dashboard from "./src/pages/Dashboard/Dashboard";
 import Contactus from "./src/pages/Contact/Contactus";
+import PricingPage from "./src/Components/PricingPage.jsx";
 
 const appRoute = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
-    errorElement: <Error/>
+    errorElement: <Error />,
   },
   {
     path: "/login",
-    element: <Login/>,
-    errorElement: <Error/>
+    element: <Login />,
+    errorElement: <Error />,
   },
   {
     path: "/register",
     element: <SignUp />,
-    errorElement: <Error/>
+    errorElement: <Error />,
   },
   {
     path: "/forgotpwd",
     element: <ForgotPwd />,
-    errorElement: <Error/>
+    errorElement: <Error />,
   },
   {
-    path:"/contact us",
+    path: "/contact us",
     element: <Contactus></Contactus>,
-    errorElement: <Error/>
+    errorElement: <Error />,
   },
   {
-    path:"/faqs",
+    path: "/faqs",
     element: <FAQS></FAQS>,
-    errorElement: <Error/>
+    errorElement: <Error />,
   },
   {
-    path:"/",
+    path: "/",
     element: <Dashboard></Dashboard>,
-    errorElement: <Error/>
+    errorElement: <Error />,
+  },
+  {
+    path: "/pricing",
+    element: <PricingPage></PricingPage>,
+    errorElement: <Error />,
   },
 ]);
 
