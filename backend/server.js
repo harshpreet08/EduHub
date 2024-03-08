@@ -3,8 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-const { questionBank, answerBank } = require('./constant/index.js')
-
 const app = express();
 /* controller */
 const mongoose = require('mongoose')
@@ -22,15 +20,9 @@ mongoose.connect(dbURL).then(()=>{
 app.use(cors());
 app.use(express.json());
 
-app.get('/getAllQuestions', (_, resp) => {
-  resp.send(questionBank)
-});
+app.use('/api', paymentRouter.routes)
+app.use('/community', communityRouter.routes)
 
-app.post('/getAnswerById', (req, resp) => {
-  const { qid } = req.body;
-  resp.send(answerBank[qid]);
-  resp.end()
-});
 
 app.listen(8000, () => {
   console.log('server started')

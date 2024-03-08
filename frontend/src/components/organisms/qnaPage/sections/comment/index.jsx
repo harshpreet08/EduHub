@@ -9,12 +9,12 @@ import { getAnswerById } from '../../qnaPage.service';
 import styles from './comment.module.scss';
 /* assets */
 import tick from '../../../../../public/assets/tick.svg';
-import { setAnswerData } from '../question/slice/questionSlice';
+import { setAnswerData } from './slice/questionAnswerSlice';
 
 const Comment = () => {
   const { qid } = useParams();
   const dispatch = useDispatch();
-  const answerData = useSelector(state => state.question.answerData);
+  const answerData = useSelector(state => state.questionAnswer.answerData);
   const {
     answers = [],
     selectedAnswer = 0,

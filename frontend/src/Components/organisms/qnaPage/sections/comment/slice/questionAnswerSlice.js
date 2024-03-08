@@ -4,8 +4,8 @@ const initialState = {
   answerData: null,
 };
 
-export const commentSlice = createSlice({
-  name: 'answer',
+export const questionAnswerSlice = createSlice({
+  name: 'questionAnswer',
   initialState,
   reducers: {
     setAnswerData: (state, action) => ({
@@ -15,5 +15,5 @@ export const commentSlice = createSlice({
   },
 });
 
-export const { setAnswerData } = commentSlice.actions;
-export default commentSlice.reducer;
+export const { setAnswerData } = questionAnswerSlice.actions;
+export default questionAnswerSlice.reducer;

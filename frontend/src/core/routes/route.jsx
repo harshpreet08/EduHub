@@ -1,95 +1,61 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
+import Loader from '../../Components/atom/loader';
 /* internal components */
-import SignUp from '../../pages/Signup';
-import Login from '../../pages/Login';
-import ForgotPwd from '../../pages/ForgotPwd';
-import LandingPage from '../../pages/Landing';
-import Error from '../../Components/error';
-import FAQS from '../../pages/Faqs/Faqs.tsx';
-import Dashboard from '../../pages/Dashboard/Dashboard.tsx';
-import Contactus from '../../pages/Contact/Contactus.tsx';
-import PricingPage from '../../Components/PricingPage';
-import BlogList from '../../Components/BlogListPage';
-import BlogFormPage from '../../Components/BlogFormPage';
-import BlogDetailsPage from '../../Components/BlogDetails';
-import Questions from '../../Components/molecules/questions';
-import QnAPage from '../../Components/organisms/qnaPage';
+const SignUp = lazy(() => import('../../pages/Signup'));
+const Login = lazy(() => import('../../pages/Login'));
+const ForgotPwd = lazy(() => import('../../pages/ForgotPwd'));
+const LandingPage = lazy(() => import('../../pages/Landing'));
+const Error = lazy(() => import('../../Components/error'));
+const FAQS = lazy(() => import('../../pages/Faqs/Faqs.tsx'));
+const Dashboard = lazy(() => import('../../pages/Dashboard/Dashboard.tsx'));
+const Contactus = lazy(() => import('../../pages/Contact/Contactus.tsx'));
+const PricingPage = lazy(() => import('../../Components/PricingPage'));
+const BlogList = lazy(() => import('../../Components/BlogListPage'));
+const BlogFormPage = lazy(() => import('../../Components/BlogFormPage'));
+const BlogDetailsPage = lazy(() => import('../../Components/BlogDetails'));
+const Questions = lazy(() => import('../../Components/molecules/questions'));
+const QnAPage = lazy(() => import('../../Components/organisms/qnaPage'));
+
+const ErrorElement = () => {
+  <Suspense fallback={<Loader />}>
+    <Error />
+  </Suspense>;
+};
+
+const routes = {
+  '/': LandingPage,
+  '/login': Login,
+  '/register': SignUp,
+  '/forgotpwd': ForgotPwd,
+  '/contactus': Contactus,
+  '/faqs': FAQS,
+  '/dashboard': Dashboard,
+  '/pricing': PricingPage,
+  '/blogs': BlogList,
+  '/blog/:id': BlogDetailsPage,
+  '/newblog': BlogFormPage,
+  '/questions': Questions,
+  '/questions/:qid': QnAPage,
+};
 
 function RouteConfig() {
-  const routes = createBrowserRouter([
-    {
-      path: '/',
-      element: <LandingPage />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/login',
-      element: <Login />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/register',
-      element: <SignUp />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/forgotpwd',
-      element: <ForgotPwd />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/contact us',
-      element: <Contactus />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/faqs',
-      element: <FAQS></FAQS>,
-      errorElement: <Error />,
-    },
-    {
-      path: '/',
-      element: <Dashboard />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/pricing',
-      element: <PricingPage />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/blogs',
-      element: <BlogList />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/blog/:id',
-      element: <BlogDetailsPage />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/newblog',
-      element: <BlogFormPage />,
-      errorElement: <Error />,
-    },
-    {
-      path: '/questions',
-      element: <Questions />,
-      errorElement: <Error />,
-      children: [{
-        path: 'qid',
-        element: <QnAPage />,
-      }],
-    },
-  ]);
+  const routeComponents = Object.entries(routes).map(([path, Component]) => ({
+    path,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <Component />
+      </Suspense>
+    ),
+    errorElement: ErrorElement,
+  }));
 
-  return (
-    <RouterProvider router={routes} />
-  );
+  const router = createBrowserRouter(routeComponents);
+
+  return <RouterProvider router={router} />;
 }
 
 export default RouteConfig;

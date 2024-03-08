@@ -12,6 +12,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 /* styles */
+// import { response } from 'express';
 import styles from './Questions.module.scss';
 /* services */
 import { getAllQuestions, postAllQuestions } from './Questions.service';
@@ -20,7 +21,6 @@ import Navbar from '../navbar';
 import {
   setquestionData, setModalVisible, setTitle, setDescription,
 } from './slice/questionSlice';
-import { response } from 'express';
 
 const Questions = () => {
   const dispatch = useDispatch();
@@ -51,11 +51,8 @@ const Questions = () => {
       description,
     };
     postAllQuestions(payload)
-      .then((response) => {
-        if(!response.data.error){
-
-        }
-      })
+      .then(() => {
+      });
   };
 
   const handleQuestionClick = (questionId) => {

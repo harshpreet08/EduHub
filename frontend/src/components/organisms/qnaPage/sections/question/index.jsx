@@ -7,13 +7,12 @@ import moment from 'moment';
 import { getAnswerById } from '../../qnaPage.service';
 /* styles */
 import styles from './question.module.scss';
-import { setAnswerData } from './slice/questionSlice';
+import { setAnswerData } from '../comment/slice/questionAnswerSlice';
 
 const Question = () => {
   const { qid } = useParams();
   const dispatch = useDispatch();
-  // const [answerData, setAnswerData] = useState(null);
-  const answerData = useSelector(state => state.question.answerData);
+  const answerData = useSelector(state => state.questionAnswer.answerData);
   const {
     qTitle = '',
     qDesc = '',
@@ -24,7 +23,7 @@ const Question = () => {
     const questionId = Number(qid);
     getAnswerById({ qid: questionId })
       .then(({ data }) => {
-        // setAnswerData(data);
+        setAnswerData(data);
         dispatch(setAnswerData(data));
       })
       .catch((err) => {
