@@ -1,27 +1,31 @@
 /* external imports */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { getAnswerById } from '../../qnaPage.service';
 /* styles */
 import styles from './question.module.scss';
+import { setAnswerData } from './slice/questionSlice';
 
 const Question = () => {
   const { qid } = useParams();
-  const [answerData, setAnswerData] = useState(null);
+  const dispatch = useDispatch();
+  // const [answerData, setAnswerData] = useState(null);
+  const answerData = useSelector(state => state.question.answerData);
   const {
     qTitle = '',
     qDesc = '',
     timeStamp = '',
-    // answers = [],
   } = answerData || {};
 
   useEffect(() => {
     const questionId = Number(qid);
     getAnswerById({ qid: questionId })
       .then(({ data }) => {
-        setAnswerData(data);
+        // setAnswerData(data);
+        dispatch(setAnswerData(data));
       })
       .catch((err) => {
         message.error(err);

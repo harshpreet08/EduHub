@@ -1,5 +1,6 @@
 /* external imports */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
 import moment from 'moment';
@@ -8,10 +9,12 @@ import { getAnswerById } from '../../qnaPage.service';
 import styles from './comment.module.scss';
 /* assets */
 import tick from '../../../../../public/assets/tick.svg';
+import { setAnswerData } from '../question/slice/questionSlice';
 
 const Comment = () => {
   const { qid } = useParams();
-  const [answerData, setAnswerData] = useState(null);
+  const dispatch = useDispatch();
+  const answerData = useSelector(state => state.question.answerData);
   const {
     answers = [],
     selectedAnswer = 0,
@@ -21,7 +24,7 @@ const Comment = () => {
     const questionId = Number(qid);
     getAnswerById({ qid: questionId })
       .then(({ data }) => {
-        setAnswerData(data);
+        dispatch(setAnswerData(data));
       })
       .catch((err) => {
         message.error(err);
