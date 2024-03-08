@@ -1,7 +1,7 @@
 {
     "env": {
       "browser": true,
-      "es2021": true
+      "es2022": true
     },
     "extends": ["airbnb"],
     "parserOptions": {
@@ -75,6 +75,7 @@
       ],
       "prefer-template": 2,
       "react/forbid-prop-types": 0,
+      "react/function-component-definition": "off",
       "react/jsx-first-prop-new-line": [2, "multiline"],
       "react/jsx-filename-extension": 0,
       "react/jsx-no-target-blank": 0,

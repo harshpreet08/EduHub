@@ -1,7 +1,8 @@
+import React from "react";
 import { Form, Select } from "antd";
-import Header from "../../Component/Header/Header";
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
+import Header from "../../Components/Header/Header";
 
 const { Option } = Select;
 
@@ -63,7 +64,7 @@ const Profile: React.FC = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <Box
         component="form"
         sx={{

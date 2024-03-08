@@ -1,18 +1,15 @@
 import React from 'react';
-import NavBar from '../components/navbar';
-import LandingBody from '../components/landing-body';
-import About from '../components/about';
-import Contact from '../components/contact';
+import Navbar from '../Components/NavBar';
+import LandingBody from '../Components/landing-body';
+import About from '../Components/about';
 
-const LandingPage = () =>{
-    return(
-        <div class="landing-page">
-        <NavBar/>
-        <LandingBody/>
-        <About/>
-        {/* <Contact/> */}
-        </div>
-    )
-}
+const LandingPage = () => (
+  <div className="landing-page">
+    <Navbar />
+    <LandingBody />
+    <About />
+    {/* <Contact/> */}
+  </div>
+);
 
 export default LandingPage;

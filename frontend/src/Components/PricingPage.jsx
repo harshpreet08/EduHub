@@ -1,56 +1,57 @@
-import React from "react";
-import { Grid, Typography, Button, Paper } from "@mui/material";
-import Navbar from "./NavBar";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import {
+  Grid, Typography, Button, Paper,
+} from '@mui/material';
+import Navbar from './NavBar';
 
-const PricingPage = () => {
-  return (
-    <>
-      <Navbar></Navbar>
-      <Grid container spacing={2} justifyContent="center" marginTop={4}>
-        <Grid item xs={12}>
-          <Typography variant="h2" align="center" gutterBottom>
-            Features
-          </Typography>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Typography variant="h5" color="textSecondary">
-                <CheckMark /> Custom domain for your website
-              </Typography>
-              <Typography variant="h5" color="textSecondary">
-                <CheckMark /> Stripe payment gateway
-              </Typography>
-              <Typography variant="h5" color="textSecondary">
-                <CheckMark /> Host 3 live sessions at the same time
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid style={{ marginTop: "20px" }} item xs={12}>
-          <Grid container justifyContent="center" spacing={4}>
-            <Grid item xs={12} sm={6} md={3}>
-              <PricingBox
-                title="Basic"
-                amount="$399"
-                sale="10% sale"
-                description="Best choice to start your business"
-                color="#007bff"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <PricingBox
-                title="Pro"
-                amount="$1099"
-                sale="3% sale"
-                description="Best for established creators"
-                color="#28a745"
-              />
-            </Grid>
+const PricingPage = () => (
+  <>
+    <Navbar></Navbar>
+    <Grid container spacing={2} justifyContent="center" marginTop={4}>
+      <Grid item xs={12}>
+        <Typography variant="h2" align="center" gutterBottom>
+          Features
+        </Typography>
+        <Grid container justifyContent="center">
+          <Grid item>
+            <Typography variant="h5" color="textSecondary">
+              <CheckMark /> Custom domain for your website
+            </Typography>
+            <Typography variant="h5" color="textSecondary">
+              <CheckMark /> Stripe payment gateway
+            </Typography>
+            <Typography variant="h5" color="textSecondary">
+              <CheckMark /> Host 3 live sessions at the same time
+            </Typography>
           </Grid>
         </Grid>
       </Grid>
-    </>
-  );
-};
+      <Grid style={{ marginTop: '20px' }} item xs={12}>
+        <Grid container justifyContent="center" spacing={4}>
+          <Grid item xs={12} sm={6} md={3}>
+            <PricingBox
+              title="Basic"
+              amount="$399"
+              sale="10% sale"
+              description="Best choice to start your business"
+              color="#007bff"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <PricingBox
+              title="Pro"
+              amount="$1099"
+              sale="3% sale"
+              description="Best for established creators"
+              color="#28a745"
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  </>
+);
 
 const CheckMark = () => (
   <Typography variant="body1" component="span" color="primary">
@@ -58,18 +59,20 @@ const CheckMark = () => (
   </Typography>
 );
 
-const PricingBox = ({ title, amount, sale, description, color }) => (
+const PricingBox = ({
+  title, amount, sale, description, color,
+}) => (
   <Paper
     sx={{
       padding: 4,
-      backgroundColor: "#fff",
+      backgroundColor: '#fff',
       borderColor: color,
       borderWidth: 2,
-      borderStyle: "solid",
-      transition: "transform 0.3s, box-shadow 0.3s",
-      "&:hover": {
-        transform: "translateY(-2px)",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+      borderStyle: 'solid',
+      transition: 'transform 0.3s, box-shadow 0.3s',
+      '&:hover': {
+        transform: 'translateY(-2px)',
+        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
       },
     }}
   >
