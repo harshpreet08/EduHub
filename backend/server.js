@@ -11,10 +11,10 @@ const communityRouter = require('./routes/communityForum')
 
 const dbURL = process.env.DB_URL
 
-mongoose.connect(dbURL).then(()=>{
-  console.log("connected to db");
-}).catch((e)=>{
-  console.log("Error",e);
+mongoose.connect(dbURL).then(() => {
+  console.log('connected to db');
+}).catch((e) => {
+  console.log('Error', e);
 })
 
 app.use(cors());

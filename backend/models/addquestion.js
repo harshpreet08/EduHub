@@ -2,18 +2,26 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const addQuestionSchema = new Schema({
-  title:{
+  qTitle: {
     type: String,
-    required: true
+    required: true,
   },
-  description:{
-    type:String,
-    required: true
-  },
-  dateAndTime:{
+  qDesc: {
     type: String,
-    required: true
+    required: true,
+  },
+  askedByUsername: {
+    type: String,
+    required: true,
+  },
+  timeStamp: {
+    type: Number,
+    default: () => Date.now(),
+  },
+  totalAnswers: {
+    type: Number,
+    default: 0,
   }
 })
 
-exports.PostQuestion = mongoose.model('PostQuestion',addQuestionSchema)
+exports.postQuestion = mongoose.model('postQuestion', addQuestionSchema, 'Questions')
