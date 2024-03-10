@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const addQuestionSchema = new Schema({
+const questionBankSchema = new Schema({
   qTitle: {
     type: String,
     required: true,
@@ -24,4 +24,4 @@ const addQuestionSchema = new Schema({
   }
 })
 
-exports.postQuestion = mongoose.model('postQuestion', addQuestionSchema, 'Questions')
+exports.questionBank = mongoose.model('questionBank', questionBankSchema, 'Questions')

@@ -4,15 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
-import { getAnswerById } from '../../qnaPage.service';
+/* services */
+import { getQuestionById } from '../../qnaPage.service';
 /* styles */
 import styles from './question.module.scss';
+/* slices */
 import { setAnswerData } from '../comment/slice/questionAnswerSlice';
 
 const Question = () => {
   const { qid } = useParams();
   const dispatch = useDispatch();
-  const answerData = useSelector(state => state.questionAnswer.answerData);
+  const answerData = useSelector(state => state.answerReducer.answerData);
   const {
     qTitle = '',
     qDesc = '',
@@ -20,10 +22,8 @@ const Question = () => {
   } = answerData || {};
 
   useEffect(() => {
-    const questionId = Number(qid);
-    getAnswerById({ qid: questionId })
+    getQuestionById({ qid })
       .then(({ data }) => {
-        setAnswerData(data);
         dispatch(setAnswerData(data));
       })
       .catch((err) => {

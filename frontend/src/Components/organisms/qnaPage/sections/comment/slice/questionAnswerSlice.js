@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export const questionAnswerSlice = createSlice({
-  name: 'questionAnswer',
+  name: 'answerReducer',
   initialState,
   reducers: {
     setAnswerData: (state, action) => ({

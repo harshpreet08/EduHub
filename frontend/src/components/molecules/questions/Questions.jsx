@@ -65,7 +65,7 @@ const Questions = () => {
         <div className={styles.topQuestions}>Questionarium</div>
         {(questionData || []).map((questions) => {
           const {
-            qId = '',
+            _id: qId = '',
             qTitle = '',
             qDesc = '',
             totalAnswers = 0,
@@ -125,7 +125,7 @@ const Questions = () => {
       {isModalVisible && (
         <ModalWrapper
           title="Ask a Question"
-          onSubmit={() => fetchQuestionData}
+          onSubmit={fetchQuestionData}
         />
       )}
     </div>

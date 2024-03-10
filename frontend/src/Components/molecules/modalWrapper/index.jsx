@@ -3,10 +3,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, message } from 'antd';
+/* internal components */
 import Modal from '../../atom/modal/index';
-
+/* slices */
 import { setDescription, setTitle, setModalVisible } from './slice/modalSlice';
+/* services */
 import { postQuestion } from '../questions/Questions.service';
+/* styles */
+import styles from './index.module.scss';
 
 const ModalWrapper = ({
   title = '',
@@ -35,7 +39,7 @@ const ModalWrapper = ({
     };
     postQuestion(payload)
       .then((response) => {
-        if (!response.ok) {
+        if (response.statusText === 'OK') {
           onSubmit();
           resetData();
         }
@@ -49,6 +53,7 @@ const ModalWrapper = ({
       open={isModalVisible}
       onCancel={handleCancel}
       title={title}
+      classNames={styles.modalContainer}
       footer={[<Button key="post" onClick={handleSave}>Post</Button>]}
     >
       <div>

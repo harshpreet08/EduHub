@@ -1,15 +1,17 @@
 /* constants */
-const { questionBank, answerBank } = require('../constant/index');
+const { answerBank } = require('../constant/index');
 /* models */
-const { postQuestion } = require('../models/addquestion');
+const { questionBank } = require('../models/questionBank');
 
-exports.getAllQuestions = (_, resp) => {
-  resp.send(questionBank)
+exports.getAllQuestions = async (_, resp) => {
+  const allQuestions = await questionBank.find();
+  resp.send(allQuestions || [])
 }
 
-exports.getAnswerById = (req, resp) => {
+exports.getQuestionById = async (req, resp) => {
   const { qid } = req.body;
-  resp.send(answerBank[qid]);
+  const answer = await questionBank.findById(qid);
+  resp.status(200).json(answer);
   resp.end()
 };
 

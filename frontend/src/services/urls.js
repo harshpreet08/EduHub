@@ -2,6 +2,6 @@ const baseURL = 'http://localhost:8000';
 
 export const questionsService = {
   getAllQuestions: `${baseURL}/community/getAllQuestions`,
-  getAnswerById: `${baseURL}/community/getAnswerById`,
+  getQuestionById: `${baseURL}/community/getQuestionById`,
   postQuestion: `${baseURL}/community/postQuestion`,
 };

@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  qTitle: null,
-  qDesc: null,
+  qTitle: '',
+  qDesc: '',
   isModalVisible: false,
 };
 
@@ -12,7 +12,7 @@ export const modalSlice = createSlice({
   reducers: {
     setTitle: (state, action) => ({
       ...state,
-      qtitle: action.payload,
+      qTitle: action.payload,
     }),
     setDescription: (state, action) => ({
       ...state,
