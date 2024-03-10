@@ -1,8 +1,15 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Modal as AntdModal, Button } from 'antd';
 
 const Modal = ({
-  open, onOk, onCancel, title, children,
+  open,
+  onOk,
+  onCancel,
+  title,
+  children,
+  ...rest
 }) => {
   const handleOk = () => {
     onOk();
@@ -26,6 +33,7 @@ const Modal = ({
           Post
         </Button>,
       ]}
+      {...rest}
     >
       {children}
     </AntdModal>
