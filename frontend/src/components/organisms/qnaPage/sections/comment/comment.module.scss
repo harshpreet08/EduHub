@@ -5,7 +5,23 @@
     padding-bottom: 1.5rem;
     .totalAnswers__count {
       font-size: 1.2rem;
+      padding-bottom: 2rem;
     }
+    .comments{
+      border-bottom: 1px solid #757575;
+      cursor: text;
+      
+    }
+    .commentText{
+      color:#787878;
+      outline: none;
+      width:100%;
+      &:focus {
+        border-bottom: 2px solid #000;
+        
+      }
+    }
+    
   }
   .answerSection {
     display: flex;
