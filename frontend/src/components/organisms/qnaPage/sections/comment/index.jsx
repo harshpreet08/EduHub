@@ -1,20 +1,19 @@
-/* external imports */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
 import moment from 'moment';
 import { getQuestionById } from '../../qnaPage.service';
-/* styles */
 import styles from './comment.module.scss';
-/* assets */
 import tick from '../../../../../public/assets/tick.svg';
-import { setAnswerData } from './slice/questionAnswerSlice';
+import { setAnswerData, setComment } from './slice/questionAnswerSlice';
 
 const Comment = () => {
   const { qid } = useParams();
   const dispatch = useDispatch();
   const answerData = useSelector(state => state.answerReducer.answerData);
+  const [isFocused, setIsFocused] = useState(false);
+
   const {
     answers = [],
     selectedAnswer = 0,
@@ -32,14 +31,33 @@ const Comment = () => {
 
   return (
     <div className={styles.commentsContainer}>
-      {/* 1. total answers */}
       <section className={styles.totalAnswers}>
-        <span className={styles.totalAnswers__count}>
+        <div className={styles.totalAnswers__count}>
           {(answers || []).length} answers
-        </span>
+        </div>
+        <input
+          type="text"
+          className={styles.commentText}
+          placeholder="Add a comment ..."
+          onFocus={() => setIsFocused(true)} // Update focus state
+          onBlur={() => setIsFocused(false)} // Update focus state
+        />
+        <div className={styles.comments}></div>
+
+        {/* Render comment button conditionally */}
+        {isFocused && (
+          <button
+            type="button"
+            className={styles.commentButton}
+            style={{
+              backgroundColor: '#065fd4', color: '#fff', marginTop: '1rem', padding: '0.3rem', borderRadius: '1rem',
+            }}
+          >
+            Comment
+          </button>
+        )}
       </section>
 
-      {/* 2. render answer */}
       <section className={styles.answerSection}>
         {(answers || []).map((answer, index) => {
           const {
@@ -49,7 +67,7 @@ const Comment = () => {
           } = answer || {};
           const answeredDate = moment(answerUnixStamp).format('MMM DD, YYYY [at] HH:mm');
           return (
-            <div className={styles.answerSegment}>
+            <div className={styles.answerSegment} key={index}>
               <div>
                 {selectedAnswer === index && (
                   <img
@@ -79,7 +97,6 @@ const Comment = () => {
             </div>
           );
         })}
-
       </section>
     </div>
   );

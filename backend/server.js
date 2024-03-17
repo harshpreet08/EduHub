@@ -1,5 +1,6 @@
 /* external */
 require('dotenv').config();
+// process.loadEnvFile()
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
@@ -10,6 +11,7 @@ const app = express();
 const mongoose = require('mongoose')
 const paymentRouter = require('./routes/payment')
 const communityRouter = require('./routes/communityForum')
+const commentRouter = require('./routes/comments')
 const blogRouter = require('./routes/blog');
 
 const dbURL = process.env.DB_URL
@@ -26,6 +28,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 
 app.use('/api', paymentRouter.routes)
 app.use('/community', communityRouter.routes)
+app.use('/', commentRouter.routes)
 app.use('/api/blog', blogRouter);
 
 
