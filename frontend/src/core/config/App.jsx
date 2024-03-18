@@ -4,11 +4,14 @@ import NavBar from "../../Components/NavBar";
 import BlogFormPage from "../../Components/BlogFormPage";
 import BlogListPage from "../../Components/BlogListPage";
 import BlogDetailsPage from "../../Components/BlogDetails";
+import PricingPage from "../../Components/PricingPage";
+import QuestionBank from "../../pages/Tests/QuestionBank"; 
 import "../../Components/Global.css";
 
-import PricingPage from "../../Components/PricingPage";
-
 function App() {
+  const defaultUserId = "user123";
+  const defaultCourseId = "course123";
+
   return (
     <Router>
       <div>
@@ -18,6 +21,10 @@ function App() {
           <Route path="/blogform" element={<BlogFormPage />} />
           <Route path="/bloglist" element={<BlogListPage />} />
           <Route path="/blog/:id" element={<BlogDetailsPage />} />
+          <Route
+            path="/questionbank"
+            element={<QuestionBank userId={defaultUserId} courseId={defaultCourseId} />}
+          />
         </Routes>
       </div>
     </Router>
@@ -25,3 +32,4 @@ function App() {
 }
 
 export default App;
+

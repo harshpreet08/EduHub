@@ -15,6 +15,10 @@ import PricingPage from "./src/Components/PricingPage.jsx";
 import BlogList from "./src/Components/BlogListPage.jsx";
 import BlogFormPage from "./src/Components/BlogFormPage.jsx";
 import BlogDetailsPage from "./src/Components/BlogDetails.jsx";
+import QuestionBank from "./src/pages/Tests/QuestionBank.jsx";
+import AddQuestion from "./src/pages/Tests/AddQuestion.jsx";
+import EditQuestion from "./src/pages/Tests/EditQuestion.jsx";
+import CreateTest from "./src/pages/Tests/CreateTest.jsx";
 
 const appRoute = createBrowserRouter([
   {
@@ -72,6 +76,26 @@ const appRoute = createBrowserRouter([
     element: <BlogFormPage></BlogFormPage>,
     errorElement: <Error />,
   },
+  {
+    path: "/questionbank",
+    element: <QuestionBank/>,
+    errorElement: <Error />,
+  },
+  {
+    path: "/addquestion",
+    element: <AddQuestion />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/editquestion",
+    element: <EditQuestion/>,
+    errorElement: <Error />,
+  },
+  {
+    path: "/createtest",
+    element: <CreateTest/>,
+    errorElement: <Error/>
+  }
 ]);
 
 const rootElement = document.getElementById("root");
