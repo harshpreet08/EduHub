@@ -1,17 +1,21 @@
+/* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
 import moment from 'moment';
 import { getQuestionById } from '../../qnaPage.service';
+import { postComment } from './comment.service';
 import styles from './comment.module.scss';
 import tick from '../../../../../public/assets/tick.svg';
-import { setAnswerData, setComment } from './slice/questionAnswerSlice';
+import { setAnswerData, setCommentText, setComments } from './slice/questionAnswerSlice';
 
 const Comment = () => {
   const { qid } = useParams();
   const dispatch = useDispatch();
   const answerData = useSelector(state => state.answerReducer.answerData);
+  const commentText = useSelector(state => state.answerReducer.commentText);
+  const comments = useSelector(state => state.answerReducer.comments);
   const [isFocused, setIsFocused] = useState(false);
 
   const {
@@ -29,26 +33,43 @@ const Comment = () => {
       });
   }, []);
 
+  const handlePostClick = () => {
+    if (!commentText.trim()) {
+      message.warning('Please enter a comment');
+      return;
+    }
+    const payload = { qid, userName: 'disha', comment: commentText };
+    postComment(qid, payload)
+      .then((response) => {
+        dispatch(setComments(response.data));
+        dispatch(setCommentText(''));
+      }).catch((error) => {
+        message.error(error);
+      });
+  };
+
   return (
     <div className={styles.commentsContainer}>
       <section className={styles.totalAnswers}>
         <div className={styles.totalAnswers__count}>
-          {(answers || []).length} answers
+          {(comments || []).length} answers
         </div>
         <input
           type="text"
           className={styles.commentText}
           placeholder="Add a comment ..."
-          onFocus={() => setIsFocused(true)} // Update focus state
-          onBlur={() => setIsFocused(false)} // Update focus state
+          onFocus={() => setIsFocused(true)}
+          // onBlur={() => setIsFocused(false)}
+          value={commentText}
+          onChange={e => dispatch(setCommentText(e.target.value))}
         />
         <div className={styles.comments}></div>
 
-        {/* Render comment button conditionally */}
         {isFocused && (
           <button
             type="button"
             className={styles.commentButton}
+            onClick={handlePostClick}
             style={{
               backgroundColor: '#065fd4', color: '#fff', marginTop: '1rem', padding: '0.3rem', borderRadius: '1rem',
             }}
@@ -59,13 +80,12 @@ const Comment = () => {
       </section>
 
       <section className={styles.answerSection}>
-        {(answers || []).map((answer, index) => {
+        {(comments || []).map((comment, index) => {
           const {
             userName = '',
-            answerUnixStamp = '',
-            comment = '',
-          } = answer || {};
-          const answeredDate = moment(answerUnixStamp).format('MMM DD, YYYY [at] HH:mm');
+            timeStamp = '',
+          } = comment || {};
+          const answeredDate = moment(timeStamp).format('MMM DD, YYYY [at] HH:mm');
           return (
             <div className={styles.answerSegment} key={index}>
               <div>
@@ -80,8 +100,9 @@ const Comment = () => {
               </div>
               <div className={styles.answerCard}>
                 <p className={styles.answerBody}>
-                  {comment}
+                  {comment.comment}
                 </p>
+                <span>Reply</span>
                 <div className={styles.userDetailSection}>
                   {answeredDate !== 'Invalid date' && (
                     <div className={styles.answeredDate}>

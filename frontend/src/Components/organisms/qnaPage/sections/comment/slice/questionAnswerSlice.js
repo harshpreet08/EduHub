@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   answerData: null,
-  commentFocused: false,
+  comments: [],
+  commentText: '',
 };
 
 export const questionAnswerSlice = createSlice({
@@ -13,12 +14,17 @@ export const questionAnswerSlice = createSlice({
       ...state,
       answerData: action.payload,
     }),
-    setComment: (state, action) => ({
+    setCommentText: (state, action) => ({
       ...state,
-      commentFocused: action.payload,
+      commentText: action.payload,
+    }),
+    setComments: (state, action) => ({
+      ...state,
+      comments: [...state.comments, action.payload],
+
     }),
   },
 });
 
-export const { setAnswerData, setComment } = questionAnswerSlice.actions;
+export const { setAnswerData, setCommentText, setComments } = questionAnswerSlice.actions;
 export default questionAnswerSlice.reducer;
