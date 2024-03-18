@@ -16,6 +16,10 @@ const commentSchema = new Schema ({
     ref: 'Question',               
     required: true
   },
+  timeStamp: {
+    type: Number,
+    default: () => Date.now(),
+  },
   replies: [{
     userName:{
       type: String,
