@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import {
   TextField,
   Button,
@@ -6,19 +6,17 @@ import {
   Typography,
   IconButton,
   Snackbar,
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-// eslint-disable-next-line import/no-unresolved
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// eslint-disable-next-line import/no-unresolved
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
-import Navbar from './NavBar';
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import Navbar from "./NavBar";
 
 const StyledSnackbar = styled(Snackbar)({
-  '& .MuiSnackbarContent-root': {
-    backgroundColor: '#38a13c',
+  "& .MuiSnackbarContent-root": {
+    backgroundColor: "#38a13c",
   },
 });
 
@@ -26,8 +24,8 @@ function SimpleForm() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     image: null,
   });
 
@@ -39,21 +37,21 @@ function SimpleForm() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
       image: file,
     }));
   };
 
   const handleRemoveImage = () => {
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
       image: null,
     }));
-    fileInputRef.current.value = '';
+    fileInputRef.current.value = "";
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!formData.title) {
       setTitleError(true);
     } else {
@@ -65,8 +63,31 @@ function SimpleForm() {
       setDescriptionError(false);
     }
 
-    if (formData.title && formData.description) {
-      setShowSuccess(true);
+    try {
+      let formDataToSend = {
+        title: formData.title,
+        description: formData.description,
+      };
+
+      if (formData.image) {
+        formDataToSend.image = await convertToBase64(formData.image);
+      }
+
+      const response = await fetch("http://localhost:8000/api/blog/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataToSend),
+      });
+
+      if (response.ok) {
+        setShowSuccess(true);
+      } else {
+        console.error("Failed to create blog post:", response.status);
+      }
+    } catch (error) {
+      console.error("Error creating blog post:", error);
     }
   };
 
@@ -80,26 +101,26 @@ function SimpleForm() {
       <Box
         sx={{
           maxWidth: 600,
-          width: '100%',
-          margin: '0 auto',
-          paddingX: { xs: 0, md: '20px' },
-          paddingY: '20px',
+          width: "100%",
+          margin: "0 auto",
+          paddingX: { xs: 0, md: "20px" },
+          paddingY: "20px",
         }}
       >
         <IconButton
           aria-label="go-back"
           onClick={() => navigate(-1)}
           sx={{
-            position: 'relative',
-            left: '8px',
-            top: '8px',
-            color: 'primary.main',
+            position: "relative",
+            left: "8px",
+            top: "8px",
+            color: "primary.main",
           }}
         >
           <FontAwesomeIcon icon={faArrowLeft} />
         </IconButton>
 
-        <Typography variant="h3" gutterBottom sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
           Start a new blog
         </Typography>
         <Box mt={4}>
@@ -109,10 +130,12 @@ function SimpleForm() {
             required
             fullWidth
             error={titleError}
-            helperText={titleError ? 'Title is required' : ''}
+            helperText={titleError ? "Title is required" : ""}
             value={formData.title}
-            onChange={e => setFormData({ ...formData, title: e.target.value })}
-            sx={{ width: '100%' }}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+            sx={{ width: "100%" }}
           />
         </Box>
         <Box mt={4}>
@@ -124,10 +147,12 @@ function SimpleForm() {
             required
             fullWidth
             error={descriptionError}
-            helperText={descriptionError ? 'Description is required' : ''}
+            helperText={descriptionError ? "Description is required" : ""}
             value={formData.description}
-            onChange={e => setFormData({ ...formData, description: e.target.value })}
-            sx={{ width: '100%' }}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
+            sx={{ width: "100%" }}
           />
         </Box>
         <Box mt={4}>
@@ -136,7 +161,7 @@ function SimpleForm() {
             type="file"
             accept="image/*"
             onChange={handleImageChange}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             id="fileInput"
           />
           <Button
@@ -150,7 +175,7 @@ function SimpleForm() {
               <img
                 src={URL.createObjectURL(formData.image)}
                 alt="Attached"
-                style={{ maxWidth: '200px', maxHeight: '200px' }}
+                style={{ maxWidth: "200px", maxHeight: "200px" }}
               />
               <IconButton onClick={handleRemoveImage}>
                 <DeleteIcon />
@@ -158,7 +183,7 @@ function SimpleForm() {
             </Box>
           )}
         </Box>
-        <Box mt={4} sx={{ textAlign: 'center' }}>
+        <Box mt={4} sx={{ textAlign: "center" }}>
           <Button onClick={handleSubmit} variant="contained" color="primary">
             Create Blog
           </Button>
@@ -175,3 +200,12 @@ function SimpleForm() {
 }
 
 export default SimpleForm;
+
+function convertToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
