@@ -1,8 +1,5 @@
-/* constants */
-const { answerBank } = require('../constant/index');
 /* models */
 const {questionBank} = require('../models/questionBank');
-// const questions = model.questionBank
  
 exports.getAllQuestions = async (_, resp) => {
   const allQuestions = await questionBank.find();
@@ -10,8 +7,8 @@ exports.getAllQuestions = async (_, resp) => {
 }
  
 exports.getQuestionById = async (req, resp) => {
-  const { qid } = req.body;
-  const answer = await questionBank.findById(qid);
+  const { qId } = req.body;
+  const answer = await questionBank.findById(qId);
   resp.status(200).json(answer);
   resp.end()
 };

@@ -39,7 +39,7 @@ const routes = {
   '/blog/:id': BlogDetailsPage,
   '/newblog': BlogFormPage,
   '/questions': Questions,
-  '/questions/:qid': QnAPage,
+  '/questions/:qId': QnAPage,
 };
 
 function RouteConfig() {

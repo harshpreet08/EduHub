@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import answerReducer from './Components/organisms/qnaPage/sections/comment/slice/questionAnswerSlice';
+import qnaPageReducer from './Components/organisms/qnaPage/reducer/qnaPage.reducer';
 import questionsDisplayReducer from './Components/molecules/questions/slice/questionSlice';
 import modalDisplayReducer from './Components/molecules/modalWrapper/slice/modalSlice';
 
 const store = configureStore({
   reducer: {
-    answerReducer,
+    qnaPageReducer,
     questionsDisplay: questionsDisplayReducer,
     modalReducer: modalDisplayReducer,
   },

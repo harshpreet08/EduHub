@@ -3,9 +3,7 @@
 /* eslint-disable no-unused-expressions */
 /* external imports */
 import React, { useEffect } from 'react';
-import {
-  message,
-} from 'antd';
+import { message } from 'antd';
 import moment from 'moment';
 import cx from 'classnames';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -27,8 +25,12 @@ const Questions = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const questionData = useSelector(state => state.questionsDisplay.questionData);
-  const isModalVisible = useSelector(state => state.modalReducer.isModalVisible);
+  const questionData = useSelector(
+    state => state.questionsDisplay.questionData,
+  );
+  const isModalVisible = useSelector(
+    state => state.modalReducer.isModalVisible,
+  );
 
   useEffect(() => {
     fetchQuestionData();
@@ -65,7 +67,7 @@ const Questions = () => {
         <div className={styles.topQuestions}>Questionarium</div>
         {(questionData || []).map((questions) => {
           const {
-            _id: qId = '',
+            qId = '',
             qTitle = '',
             qDesc = '',
             totalAnswers = 0,
@@ -73,7 +75,7 @@ const Questions = () => {
             askedByUsername = '',
           } = questions || {};
           return (
-          /* container */
+            /* container */
             <div key={qId} className={styles.questionContainer}>
               {/* 1. answer section */}
               <section className={styles.answerCountSection}>
@@ -83,7 +85,7 @@ const Questions = () => {
                     totalAnswers === 0 ? styles.noAnswer : '',
                   )}
                 >
-                  { totalAnswers || 0} answers
+                  {totalAnswers || 0} answers
                 </p>
               </section>
               {/* 2. main question */}
@@ -111,9 +113,7 @@ const Questions = () => {
                     <FaUser />
                   </span>
                 </p>
-                <span className={styles.authorName}>
-                  {askedByUsername}
-                </span>
+                <span className={styles.authorName}>{askedByUsername}</span>
                 <p className={styles.created}>
                   asked {moment(timeStamp).fromNow()}
                 </p>
@@ -123,10 +123,7 @@ const Questions = () => {
         })}
       </div>
       {isModalVisible && (
-        <ModalWrapper
-          title="Ask a Question"
-          onSubmit={fetchQuestionData}
-        />
+        <ModalWrapper title="Ask a Question" onSubmit={fetchQuestionData} />
       )}
     </div>
   );
