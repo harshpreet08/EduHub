@@ -1,4 +1,5 @@
 import { http } from '../../../../../services/http';
-import { questionsService } from '../../../../../services/urls';
+import { commentService } from '../../../../../services/urls';
 
-export const postComment = (qid, payload) => http.post(questionsService.postComment.replace(':id', qid), payload);
+export const getCommentByQid = payload => http.post(commentService.getCommentsByQid, payload);
+export const replyToComment = payload => http.post(commentService.postReplyToComment, payload);
