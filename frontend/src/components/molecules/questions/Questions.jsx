@@ -67,7 +67,7 @@ const Questions = () => {
         <div className={styles.topQuestions}>Questionarium</div>
         {(questionData || []).map((questions) => {
           const {
-            qId = '',
+            _id: qId = '',
             qTitle = '',
             qDesc = '',
             totalAnswers = 0,
