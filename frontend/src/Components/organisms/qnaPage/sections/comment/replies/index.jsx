@@ -2,10 +2,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
-import styles from '../comment.module.scss';
+import styles from '../../../qnaPage.module.scss';
 
-const Comment = ({ comment = {} }) => {
+const Replies = ({ comment = {} }) => {
   const [replyText, setReplyText] = useState('');
+  const [commentCollapse, setCommentCollapse] = useState(false);
   const {
     userName = 'anonymous',
     parentId = '',
@@ -15,41 +16,37 @@ const Comment = ({ comment = {} }) => {
     answeredDate = new Date().valueOf(),
   } = comment || {};
 
-  const onReply = (parentId) => {
-    console.log(parentId);
+  const onReply = (/* parentId */) => {
+    // console.log(parentId);
   };
 
   return (
     <div className={styles.commentsContainer}>
-      <section className={styles.answerSection}>
-        <div className={styles.answerSegment} key={docId}>
-          <div className={styles.answerCard}>
-            <p className={styles.answerBody}>{commentText}</p>
-            <div role="button" tabIndex={0} onClick={() => onReply(parentId)}>
-              <input
-                type="text"
-                value={replyText}
-                onChange={e => setReplyText(e?.target.value)}
-              />
-              <button type="button">Reply</button>
-            </div>
-            <div className={styles.userDetailSection}>
-              {answeredDate !== 'Invalid date' && (
-                <div className={styles.answeredDate}>
-                  <span>answered</span>
-                  <span>{answeredDate}</span>
-                </div>
-              )}
-              <div className={styles.answeredBy}>{userName}</div>
-            </div>
-          </div>
+      <div className={styles.commentCard} key={docId}>
+        <p className={styles.commentText}>{commentText}</p>
+        <div role="button" tabIndex={0} onClick={() => onReply(parentId)}>
+          <input
+            type="text"
+            value={replyText}
+            onChange={e => setReplyText(e?.target.value)}
+          />
+          <button type="button">Reply</button>
         </div>
-        {(replies || []).map(reply => (
-          <Comment comment={reply} />
-        ))}
-      </section>
+        <div className={styles.userDetailSection}>
+          {answeredDate !== 'Invalid date' && (
+            <div className={styles.answeredDate}>
+              <span>answered</span>
+              <span>{answeredDate}</span>
+            </div>
+          )}
+          <div className={styles.answeredBy}>{userName}</div>
+        </div>
+      </div>
+      {(replies || []).map(reply => (
+        <Replies comment={reply} />
+      ))}
     </div>
   );
 };
 
-export default Comment;
+export default Replies;
