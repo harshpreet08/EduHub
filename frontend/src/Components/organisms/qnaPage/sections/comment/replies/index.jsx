@@ -6,7 +6,7 @@ import styles from '../../../qnaPage.module.scss';
 
 const Replies = ({ comment = {} }) => {
   const [replyText, setReplyText] = useState('');
-  const [commentCollapse, setCommentCollapse] = useState(false);
+  const [commentCollapse, setCommentCollapse] = useState(true);
   const {
     userName = 'anonymous',
     parentId = '',
@@ -22,7 +22,13 @@ const Replies = ({ comment = {} }) => {
 
   return (
     <div className={styles.commentsContainer}>
-      <div className={styles.commentCard} key={docId}>
+      <section
+        role="button"
+        tabIndex={0}
+        className={styles.commentCard}
+        key={docId}
+        onClick={() => setCommentCollapse(!commentCollapse)}
+      >
         <p className={styles.commentText}>{commentText}</p>
         <div role="button" tabIndex={0} onClick={() => onReply(parentId)}>
           <input
@@ -41,10 +47,17 @@ const Replies = ({ comment = {} }) => {
           )}
           <div className={styles.answeredBy}>{userName}</div>
         </div>
-      </div>
-      {(replies || []).map(reply => (
-        <Replies comment={reply} />
-      ))}
+        {(replies.length && commentCollapse) ? (
+          <span className={styles.seeMoreReplies}> {replies.length} more replies</span>
+        ) : null}
+      </section>
+      {!commentCollapse && (
+        <>
+          {(replies || []).map(reply => (
+            <Replies comment={reply} />
+          ))}
+        </>
+      )}
     </div>
   );
 };
