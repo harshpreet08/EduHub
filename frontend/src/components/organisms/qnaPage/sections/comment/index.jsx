@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
-import Comment from './replies';
+import Replies from './replies';
 import { getCommentByQid } from './comment.service';
 import { setComment, setNewCommentText } from './slice/commentsSlice';
-import styles from './comment.module.scss';
+import styles from '../../qnaPage.module.scss';
 
 const CommentContainer = () => {
   const { qId } = useParams();
@@ -49,14 +49,14 @@ const CommentContainer = () => {
         </div>
         <input
           type="text"
-          className={styles.commentText}
+          className={styles.answerText}
           placeholder="Add a comment ..."
           value={newCommentText}
           onChange={e => dispatch(setNewCommentText(e.target.value))}
         />
         <button
           type="button"
-          className={styles.commentButton}
+          className={styles.answerButton}
           onClick={handlePostClick}
         >
           Comment
@@ -64,7 +64,7 @@ const CommentContainer = () => {
       </section>
       {/* Comment Section */}
       <section className={styles.commentsSection}>
-        <Comment comment={comment} />
+        <Replies comment={comment} />
       </section>
     </>
   );

@@ -1,10 +1,10 @@
 .totalAnswersSection {
-   margin: 3rem;
+  margin: 3rem;
   .totalAnswers__count {
     font-size: 1.2rem;
     padding-bottom: 2rem;
   }
-  .commentButton {
+  .answerButton {
     display: none;
     background-color: #065fd4;
     color: #fff;
@@ -12,7 +12,7 @@
     padding: 0.3rem;
     border-radius: 1rem;
   }
-  .commentText {
+  .answerText {
     color: #787878;
     outline: none;
     width: 100%;
@@ -20,42 +20,35 @@
     &:focus {
       border-bottom: 2px solid #000;
     }
-  
-    &:focus + .commentButton {
+
+    &:focus + .answerButton {
       display: block;
     }
   }
 }
 
 .commentsSection {
-  margin: 3rem;
+  padding-right: 3rem;
   .commentsContainer {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    .answerSection {
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-left: 3rem;
+    .commentCard {
+      border-radius: 0.6rem;
       margin-left: 3rem;
       font-size: 1rem;
-      gap: 2rem;
-      .answerSegment {
-        // display: grid;
-        // grid-template-columns: 0.1fr 2fr;
-        // row-gap: 1rem;
-      }
-      .answerCard {
-        background-color: #f4f4f4;
-        border-radius: 0.6rem;
-        .answerBody {
-          padding: 1rem 1rem 0;
-          margin-bottom: 0;
-        }
+      background-color: #f4f4f4;
+      .commentText {
+        padding: 1rem 1rem 0;
+        margin-bottom: 0;
       }
       .userDetailSection {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         padding: 0 1rem 1rem;
-  
+
         .answeredDate {
           display: flex;
           gap: 0.3rem;
