@@ -1,64 +1,72 @@
-.commentsContainer {
-  margin: 3rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  .totalAnswers {
-    padding-bottom: 1.5rem;
-    .totalAnswers__count {
-      font-size: 1.2rem;
-      padding-bottom: 2rem;
+.totalAnswersSection {
+   margin: 3rem;
+  .totalAnswers__count {
+    font-size: 1.2rem;
+    padding-bottom: 2rem;
+  }
+  .commentButton {
+    display: none;
+    background-color: #065fd4;
+    color: #fff;
+    margin-top: 1rem;
+    padding: 0.3rem;
+    border-radius: 1rem;
+  }
+  .commentText {
+    color: #787878;
+    outline: none;
+    width: 100%;
+    border-bottom: 1px solid #757575;
+    &:focus {
+      border-bottom: 2px solid #000;
     }
-    .commentButton {
-      display: none;
-    }
-    .commentText {
-      color: #787878;
-      outline: none;
-      width: 100%;
-      border-bottom: 1px solid #757575;
-      &:focus {
-        border-bottom: 2px solid #000;
-      }
-    
-      &:focus + .commentButton {
-        display: block;
-      }
+  
+    &:focus + .commentButton {
+      display: block;
     }
   }
-  .answerSection {
-    display: flex;
-    flex-direction: column;
-    padding: 0 1.5rem 0rem 1.5rem;
-    font-size: 1rem;
-    gap: 1rem;
-    .answerSegment {
-      display: grid;
-      grid-template-columns: 0.1fr 2fr;
-      row-gap: 1rem;
-    }
-    .answerCard {
-      background-color: #f4f4f4;
-      border-radius: 0.6rem;
-      .answerBody {
-        padding: 1rem 1rem 0;
-        margin-bottom: 0;
-      }
-    }
-    .userDetailSection {
+}
+
+.commentsSection {
+  margin: 3rem;
+  .commentsContainer {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .answerSection {
       display: flex;
       flex-direction: column;
-      align-items: end;
-      padding: 0 1rem 1rem;
-
-      .answeredDate {
-        display: flex;
-        gap: 0.3rem;
-        font-size: 0.8rem;
-        color: #787878;
+      margin-left: 3rem;
+      font-size: 1rem;
+      gap: 2rem;
+      .answerSegment {
+        // display: grid;
+        // grid-template-columns: 0.1fr 2fr;
+        // row-gap: 1rem;
       }
-      .answeredBy {
-        font-size: 0.8rem;
-        color: hsl(210deg 65.52% 54.51%);
-        font-weight: 500;
+      .answerCard {
+        background-color: #f4f4f4;
+        border-radius: 0.6rem;
+        .answerBody {
+          padding: 1rem 1rem 0;
+          margin-bottom: 0;
+        }
+      }
+      .userDetailSection {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 0 1rem 1rem;
+  
+        .answeredDate {
+          display: flex;
+          gap: 0.3rem;
+          font-size: 0.8rem;
+          color: #787878;
+        }
+        .answeredBy {
+          font-size: 0.8rem;
+          color: hsl(210deg 65.52% 54.51%);
+          font-weight: 500;
+        }
       }
     }
   }

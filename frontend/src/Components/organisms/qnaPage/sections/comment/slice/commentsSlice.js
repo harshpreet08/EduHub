@@ -1,24 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  allComments: [],
-  commentText: '',
+  comment: [],
+  newCommentText: '',
 };
 
 const comments = createSlice({
   name: 'commentReducer',
   initialState,
   reducers: {
-    setAllComments: (state, action) => ({
+    setComment: (state, action) => ({
       ...state,
-      allComments: action.payload,
+      comment: action.payload,
     }),
-    setCommentText: (state, action) => ({
+    setNewCommentText: (state, action) => ({
       ...state,
-      commentText: action.payload,
+      newCommentText: action.payload,
     }),
   },
 });
 
-export const { setAllComments, setCommentText } = comments.actions;
+export const { setComment, setNewCommentText } = comments.actions;
 export default comments.reducer;
