@@ -39,16 +39,14 @@
       margin-left: 3rem;
       font-size: 1rem;
       background-color: #f4f4f4;
+      padding: 1rem 1rem;
       .commentText {
-        padding: 1rem 1rem 0;
         margin-bottom: 0;
       }
       .userDetailSection {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        padding: 0 1rem 1rem;
-
         .answeredDate {
           display: flex;
           gap: 0.3rem;
@@ -60,6 +58,11 @@
           color: hsl(210deg 65.52% 54.51%);
           font-weight: 500;
         }
+      }
+      .seeMoreReplies {
+        display: flex;
+        justify-content: flex-end;
+        color: #0b50a9
       }
     }
   }
