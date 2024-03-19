@@ -205,7 +205,11 @@ function convertToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => {
+      let base64String = reader.result.split(",")[1];
+      base64String = base64String.replace(/\"$/, "");
+      resolve(base64String);
+    };
     reader.onerror = (error) => reject(error);
   });
 }
