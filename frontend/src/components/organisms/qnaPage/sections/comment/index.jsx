@@ -6,7 +6,7 @@ import { message } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import Replies from './replies';
 import { getCommentByQid, replyToComment } from './comment.service';
-import { setComment, setNewCommentText } from './slice/commentsSlice';
+import { setComment, setNewCommentText, resetCommentData } from './slice/commentsSlice';
 import styles from '../../qnaPage.module.scss';
 
 const CommentContainer = () => {
@@ -23,6 +23,7 @@ const CommentContainer = () => {
       .catch((err) => {
         message.error(err);
       });
+    return () => dispatch(resetCommentData());
   }, []);
 
   const handlePostClick = () => {
@@ -35,7 +36,6 @@ const CommentContainer = () => {
     replyToComment(payload)
       .then((response) => {
         dispatch(setComment(response.data));
-        dispatch(setNewCommentText(''));
       })
       .catch((error) => {
         const errorMessage = error.message || 'An error occurred';

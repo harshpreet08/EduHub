@@ -17,8 +17,12 @@ const comments = createSlice({
       ...state,
       newCommentText: action.payload,
     }),
+    resetCommentData: state => ({
+      ...state,
+      ...initialState,
+    }),
   },
 });
 
-export const { setComment, setNewCommentText } = comments.actions;
+export const { setComment, setNewCommentText, resetCommentData } = comments.actions;
 export default comments.reducer;
