@@ -5,7 +5,7 @@
     padding-bottom: 2rem;
   }
   .answerButton {
-    display: none;
+    display: block;
     background-color: #065fd4;
     color: #fff;
     margin-top: 1rem;
@@ -21,9 +21,9 @@
       border-bottom: 2px solid #000;
     }
 
-    &:focus + .answerButton {
-      display: block;
-    }
+    // &:focus + .answerButton {
+    //   display: block;
+    // }
   }
 }
 
@@ -42,6 +42,14 @@
       padding: 1rem 1rem;
       .commentText {
         margin-bottom: 0;
+      }
+      .replyButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .replyIcon {
+          font-size: 2rem;
+        }
       }
       .userDetailSection {
         display: flex;
@@ -62,7 +70,7 @@
       .seeMoreReplies {
         display: flex;
         justify-content: flex-end;
-        color: #0b50a9
+        color: #0b50a9;
       }
     }
   }
