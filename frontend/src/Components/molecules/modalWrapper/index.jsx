@@ -53,10 +53,10 @@ const ModalWrapper = ({
       open={isModalVisible}
       onCancel={handleCancel}
       title={title}
-      classNames={styles.modalContainer}
+      className={styles.modalContainer}
       footer={[<Button key="post" onClick={handleSave}>Post</Button>]}
     >
-      <div>
+      <div className={styles.postCreationContainer}>
         <section>
           <label htmlFor="title">Title</label>
           <Input

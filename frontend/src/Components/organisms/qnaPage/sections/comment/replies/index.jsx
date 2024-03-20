@@ -36,7 +36,9 @@ const Replies = ({ comment = {} }) => {
             value={replyText}
             onChange={e => setReplyText(e?.target.value)}
           />
-          <button type="button">Reply</button>
+          <button type="button" className={styles.replyButton}>
+            <span className={styles.replyIcon}>💬</span>Reply
+          </button>
         </div>
         <div className={styles.userDetailSection}>
           {answeredDate !== 'Invalid date' && (
@@ -48,7 +50,9 @@ const Replies = ({ comment = {} }) => {
           <div className={styles.answeredBy}>{userName}</div>
         </div>
         {(replies.length && commentCollapse) ? (
-          <span className={styles.seeMoreReplies}> {replies.length} more replies</span>
+          <span className={styles.seeMoreReplies}>
+            {replies.length} more replies
+          </span>
         ) : null}
       </section>
       {!commentCollapse && (

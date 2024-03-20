@@ -3,9 +3,9 @@ const { Comment } = require('../models/comments');
 exports.getCommentByQid = async (req, res) => {
   try {
     const { qId: questionId = '' } = req.body;
-    console.log({ questionId })
+    // console.log({ questionId })
     const comment = await Comment.findOne({ qId: { $eq: questionId }});
-    console.log({ comment })
+    // console.log({ comment })
     return res.status(200).json(comment);
   } catch (err) {
     return res.status(404).json({ error: 'Parent comment not found' });
@@ -18,16 +18,18 @@ exports.updateComment = async (req, res) => {
 
   try {
     const document = await Comment.findOne({ id: { $eq: questionId }});
+    console.log({document})
+    
     const { parentComment } = findParentCommentId(document, parentId);
 
-    if (!parentComment._id) {
+    if (!parentComment) {
       return res.status(404).json({ error: 'Parent comment not found' });
     }
 
     const newComment = {
       _id: String(new Date().valueOf()),
       text: text,
-      parentId: String(parentId),
+      parentId: parentId,
       replies: [],
     };
 
@@ -44,7 +46,6 @@ exports.updateComment = async (req, res) => {
 
 const findParentCommentId = (comment, commentId) => {
   let foundComment;
-
   const recurFindComment = (currComment, targetId) => {
     console.log({ currId: currComment._id, targetId });
 

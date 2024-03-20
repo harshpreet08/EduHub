@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
+import { v4 as uuidv4 } from 'uuid';
 import Replies from './replies';
-import { getCommentByQid } from './comment.service';
+import { getCommentByQid, replyToComment } from './comment.service';
 import { setComment, setNewCommentText } from './slice/commentsSlice';
 import styles from '../../qnaPage.module.scss';
 
@@ -25,19 +26,21 @@ const CommentContainer = () => {
   }, []);
 
   const handlePostClick = () => {
-    // if (!commentText.trim()) {
-    //   message.warning('Please enter a comment');
-    //   return;
-    // }
-    // const payload = { qId, userName: 'disha', comment: commentText };
-    // replyToComment(qId, payload)
-    //   .then((response) => {
-    //     dispatch(setAllComments(response.data));
-    //     dispatch(setCommentText(''));
-    //   })
-    //   .catch((error) => {
-    //     message.error(error);
-    //   });
+    if (!newCommentText.trim()) {
+      message.warning('Please enter a comment');
+      return;
+    }
+    const parentId = uuidv4();
+    const payload = { questionId: qId, parentId, text: newCommentText };
+    replyToComment(payload)
+      .then((response) => {
+        dispatch(setComment(response.data));
+        dispatch(setNewCommentText(''));
+      })
+      .catch((error) => {
+        const errorMessage = error.message || 'An error occurred';
+        message.error(errorMessage);
+      });
   };
 
   return (
