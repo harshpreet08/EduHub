@@ -97,7 +97,7 @@ function BlogDetailsPage() {
                 image={blog.image}
                 alt={blog.title}
                 sx={{
-                  height: "auto",
+                  height: 400,
                   objectFit: "cover",
                   maxWidth: "100%",
                 }}
