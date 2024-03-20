@@ -61,6 +61,7 @@ const CommentContainer = () => {
           type="button"
           className={styles.answerButton}
           onClick={handlePostClick}
+          style={{ display: newCommentText !== '' ? 'block' : 'none' }}
         >
           Comment
         </button>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-shadow */
@@ -10,7 +11,7 @@ const Replies = ({ comment = {} }) => {
   const {
     userName = 'anonymous',
     parentId = '',
-    replies = '',
+    replies = [],
     text: commentText = '',
     _id: docId = '',
     answeredDate = new Date().valueOf(),
@@ -19,6 +20,14 @@ const Replies = ({ comment = {} }) => {
   const onReply = (/* parentId */) => {
     // console.log(parentId);
   };
+
+  if (parentId === '0') {
+    return (
+      (replies || []).map(reply => (
+        <Replies comment={reply} />
+      ))
+    );
+  }
 
   return (
     <div className={styles.commentsContainer}>
@@ -56,11 +65,9 @@ const Replies = ({ comment = {} }) => {
         ) : null}
       </section>
       {!commentCollapse && (
-        <>
-          {(replies || []).map(reply => (
-            <Replies comment={reply} />
-          ))}
-        </>
+        (replies || []).map(reply => (
+          <Replies comment={reply} />
+        ))
       )}
     </div>
   );
