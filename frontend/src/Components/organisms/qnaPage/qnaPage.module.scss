@@ -5,7 +5,6 @@
     padding-bottom: 2rem;
   }
   .answerButton {
-    display: block;
     background-color: #065fd4;
     color: #fff;
     margin-top: 1rem;
@@ -21,22 +20,24 @@
       border-bottom: 2px solid #000;
     }
 
-    // &:focus + .answerButton {
-    //   display: block;
-    // }
+    &:focus + .answerButton {
+      display: block;
+    }
   }
 }
 
 .commentsSection {
   padding-right: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   .commentsContainer {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     padding-left: 3rem;
     .commentCard {
       border-radius: 0.6rem;
-      margin-left: 3rem;
       font-size: 1rem;
       background-color: #f4f4f4;
       padding: 1rem 1rem;
