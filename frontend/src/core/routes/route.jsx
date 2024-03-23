@@ -19,6 +19,8 @@ const BlogFormPage = lazy(() => import('../../Components/BlogFormPage'));
 const BlogDetailsPage = lazy(() => import('../../Components/BlogDetails'));
 const Questions = lazy(() => import('../../Components/molecules/questions/Questions'));
 const QnAPage = lazy(() => import('../../Components/organisms/qnaPage'));
+const Success = lazy(() => import('../../Components/molecules/payment/success'));
+const Cancel = lazy(() => import('../../Components/molecules/payment/failure'));
 
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
@@ -40,6 +42,8 @@ const routes = {
   '/newblog': BlogFormPage,
   '/questions': Questions,
   '/questions/:qId': QnAPage,
+  '/success': Success,
+  '/cancel': Cancel,
 };
 
 function RouteConfig() {

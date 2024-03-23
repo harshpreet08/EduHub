@@ -4,7 +4,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
-const PORT = 8000;
 
 const app = express();
 /* controller */
@@ -32,6 +31,6 @@ app.use('/', commentRouter.routes)
 app.use('/api/blog', blogRouter);
 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(7000, () => {
+  console.log('server started')
+})
