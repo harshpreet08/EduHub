@@ -44,18 +44,18 @@ function BlogList() {
     setSelectedBlog(null);
   };
 
-  const handleEdit = (blogId) => {
-    // Handle edit functionality
+  const handleEdit = (event, blogId) => {
+    event.stopPropagation();
+    navigate(`/edit-blog/${blogId}`);
   };
 
   const handleDelete = async (blogId, event) => {
     try {
-      event.stopPropagation(); // Stop event propagation
+      event.stopPropagation();
       const response = await fetch(`http://localhost:8000/api/blog/${blogId}`, {
         method: "DELETE",
       });
       if (response.ok) {
-        // Remove the deleted blog from the state
         setBlogs(blogs.filter((blog) => blog._id !== blogId));
       } else {
         console.error("Failed to delete blog post");
@@ -141,7 +141,10 @@ function BlogList() {
                   >
                     <Button size="small">Read More</Button>
                     <Box>
-                      <Button size="small" onClick={() => handleEdit(blog._id)}>
+                      <Button
+                        size="small"
+                        onClick={(event) => handleEdit(event, blog._id)}
+                      >
                         <EditIcon color="primary" />
                       </Button>
                       <Button

@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 
-// GET blog post by their unique id
+// GET blog
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Post method for creating a new blog post
+// Post method
 router.post('/create', async (req, res) => {
   try {
     const { title, description, image } = req.body;
@@ -43,7 +43,7 @@ router.post('/create', async (req, res) => {
   }
 });
 
-// DELETE blog post by its unique id
+// DELETE blog
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -56,5 +56,28 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+// PUT method
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, image } = req.body;
+
+    const updatedPost = await BlogPost.findByIdAndUpdate(
+      id,
+      { title, description, image },
+      { new: true }
+    );
+
+    if (!updatedPost) {
+      return res.status(404).json({ message: 'Blog post not found' });
+    }
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 module.exports = router;
