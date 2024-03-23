@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import BlogDetails from "./BlogDetails";
 import Navbar from "./NavBar";
 import CircularProgress from "@mui/material/CircularProgress";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function BlogList() {
   const navigate = useNavigate();
@@ -40,6 +42,27 @@ function BlogList() {
 
   const handleClose = () => {
     setSelectedBlog(null);
+  };
+
+  const handleEdit = (blogId) => {
+    // Handle edit functionality
+  };
+
+  const handleDelete = async (blogId, event) => {
+    try {
+      event.stopPropagation(); // Stop event propagation
+      const response = await fetch(`http://localhost:8000/api/blog/${blogId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        // Remove the deleted blog from the state
+        setBlogs(blogs.filter((blog) => blog._id !== blogId));
+      } else {
+        console.error("Failed to delete blog post");
+      }
+    } catch (error) {
+      console.error("Error deleting blog post:", error);
+    }
   };
 
   return (
@@ -109,8 +132,25 @@ function BlogList() {
                       {blog.description}
                     </Typography>
                   </CardContent>
-                  <CardActions sx={{ justifyContent: "flex-end" }}>
+                  <CardActions
+                    sx={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "8px",
+                    }}
+                  >
                     <Button size="small">Read More</Button>
+                    <Box>
+                      <Button size="small" onClick={() => handleEdit(blog._id)}>
+                        <EditIcon color="primary" />
+                      </Button>
+                      <Button
+                        size="small"
+                        onClick={(event) => handleDelete(blog._id, event)}
+                      >
+                        <DeleteIcon color="error" />
+                      </Button>
+                    </Box>
                   </CardActions>
                 </Card>
               </Grid>
