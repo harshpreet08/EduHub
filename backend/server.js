@@ -10,8 +10,8 @@ const app = express();
 const mongoose = require('mongoose')
 const paymentRouter = require('./routes/payment')
 const communityRouter = require('./routes/communityForum')
-const commentRouter = require('./routes/comments')
 const blogRouter = require('./routes/blog');
+const commentRouter = require('./routes/comments')
 
 const dbURL = process.env.DB_URL
 
@@ -27,8 +27,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 
 app.use('/api', paymentRouter.routes)
 app.use('/community', communityRouter.routes)
-app.use('/', commentRouter.routes)
 app.use('/api/blog', blogRouter);
+app.use('/', commentRouter.routes)
 
 
 app.listen(7000, () => {
