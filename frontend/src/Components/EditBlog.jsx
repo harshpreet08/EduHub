@@ -8,17 +8,9 @@ import {
   IconButton,
   Snackbar,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { styled } from "@mui/material/styles";
+import { faArrowLeft, faUpload } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./NavBar";
-
-const StyledSnackbar = styled(Snackbar)({
-  "& .MuiSnackbarContent-root": {
-    backgroundColor: "#38a13c",
-  },
-});
 
 function EditBlog() {
   const navigate = useNavigate();
@@ -40,6 +32,19 @@ function EditBlog() {
         console.error("Error fetching blog post:", error);
       });
   }, [id]);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setFormData({ ...formData, image: reader.result });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -120,16 +125,60 @@ function EditBlog() {
             sx={{ width: "100%" }}
           />
         </Box>
+        <Box display="flex" alignItems="center">
+          <Box mr={2} mt={4} sx={{ textAlign: "left" }}>
+            {formData.image && (
+              <>
+                <Typography variant="h6" gutterBottom>
+                  Image
+                </Typography>
+                <img
+                  src={formData.image}
+                  alt="Blog Image"
+                  style={{
+                    maxWidth: "100px",
+                    maxHeight: "100px",
+                  }}
+                />
+              </>
+            )}
+          </Box>
+          <Box mt={4}>
+            <input
+              accept="image/*"
+              id="image-upload"
+              type="file"
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+            />
+            <label htmlFor="image-upload">
+              <Button
+                variant="outlined"
+                component="span"
+                startIcon={<FontAwesomeIcon icon={faUpload} />}
+                size="small"
+              >
+                Upload New Image
+              </Button>
+            </label>
+          </Box>
+        </Box>
+
         <Box mt={4} sx={{ textAlign: "center" }}>
           <Button onClick={handleSubmit} variant="contained" color="primary">
             Update Blog
           </Button>
         </Box>
-        <StyledSnackbar
+        <Snackbar
           open={showSuccess}
-          autoHideDuration={6000}
+          autoHideDuration={2000}
           onClose={handleCloseSnackbar}
           message="Success! Blog Updated."
+          sx={{
+            "& .MuiSnackbarContent-root": {
+              backgroundColor: "#38a13c",
+            },
+          }}
         />
       </Box>
     </>
