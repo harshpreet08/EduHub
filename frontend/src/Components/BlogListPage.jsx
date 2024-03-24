@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import BlogDetails from "./BlogDetails";
 import Navbar from "./NavBar";
 import CircularProgress from "@mui/material/CircularProgress";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function BlogList() {
   const navigate = useNavigate();
@@ -40,6 +42,27 @@ function BlogList() {
 
   const handleClose = () => {
     setSelectedBlog(null);
+  };
+
+  const handleEdit = (event, blogId) => {
+    event.stopPropagation();
+    navigate(`/edit-blog/${blogId}`);
+  };
+
+  const handleDelete = async (blogId, event) => {
+    try {
+      event.stopPropagation();
+      const response = await fetch(`http://localhost:8000/api/blog/${blogId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setBlogs(blogs.filter((blog) => blog._id !== blogId));
+      } else {
+        console.error("Failed to delete blog post");
+      }
+    } catch (error) {
+      console.error("Error deleting blog post:", error);
+    }
   };
 
   return (
@@ -109,8 +132,28 @@ function BlogList() {
                       {blog.description}
                     </Typography>
                   </CardContent>
-                  <CardActions sx={{ justifyContent: "flex-end" }}>
+                  <CardActions
+                    sx={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "8px",
+                    }}
+                  >
                     <Button size="small">Read More</Button>
+                    <Box>
+                      <Button
+                        size="small"
+                        onClick={(event) => handleEdit(event, blog._id)}
+                      >
+                        <EditIcon color="primary" />
+                      </Button>
+                      <Button
+                        size="small"
+                        onClick={(event) => handleDelete(blog._id, event)}
+                      >
+                        <DeleteIcon color="error" />
+                      </Button>
+                    </Box>
                   </CardActions>
                 </Card>
               </Grid>
