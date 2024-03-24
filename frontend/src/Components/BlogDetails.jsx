@@ -27,7 +27,7 @@ function BlogDetailsPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:8000/api/blog/${id}`)
+    fetch(`http://localhost:6001/api/blog/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setBlog(data);

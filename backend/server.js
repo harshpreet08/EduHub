@@ -31,6 +31,6 @@ app.use('/api/blog', blogRouter);
 app.use('/', commentRouter.routes)
 
 
-app.listen(8000, () => {
+app.listen(6001, () => {
   console.log('server started')
 })
