@@ -2,7 +2,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input, Button, message } from 'antd';
+import {
+  Input, Button, message,
+} from 'antd';
 /* internal components */
 import Modal from '../../atom/modal/index';
 /* slices */
@@ -68,7 +70,9 @@ const ModalWrapper = ({
         </section>
         <section>
           <label htmlFor="description">Description</label>
-          <Input
+          <textarea
+            rows="10"
+            className={styles.textArea}
             id="description"
             name="description"
             value={qDesc}
