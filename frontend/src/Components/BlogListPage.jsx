@@ -23,7 +23,7 @@ function BlogList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/blog")
+    fetch("http://localhost:6001/api/blog")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data);
@@ -52,7 +52,7 @@ function BlogList() {
   const handleDelete = async (blogId, event) => {
     try {
       event.stopPropagation();
-      const response = await fetch(`http://localhost:8000/api/blog/${blogId}`, {
+      const response = await fetch(`http://localhost:6001/api/blog/${blogId}`, {
         method: "DELETE",
       });
       if (response.ok) {
