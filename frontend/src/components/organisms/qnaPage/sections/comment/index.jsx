@@ -1,89 +1,77 @@
-/* external imports */
+/* eslint-disable no-shadow */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
-import moment from 'moment';
-import { getAnswerById } from '../../qnaPage.service';
-/* styles */
-import styles from './comment.module.scss';
-/* assets */
-import tick from '../../../../../public/assets/tick.svg';
-import { setAnswerData } from './slice/questionAnswerSlice';
+import { v4 as uuidv4 } from 'uuid';
+import Replies from './replies';
+import { getCommentByQid, replyToComment } from './comment.service';
+import { setComment, setNewCommentText, resetCommentData } from './slice/commentsSlice';
+import styles from '../../qnaPage.module.scss';
 
-const Comment = () => {
-  const { qid } = useParams();
+const CommentContainer = () => {
+  const { qId } = useParams();
   const dispatch = useDispatch();
-  const answerData = useSelector(state => state.questionAnswer.answerData);
-  const {
-    answers = [],
-    selectedAnswer = 0,
-  } = answerData || {};
+  const comment = useSelector(state => state.qnaPageReducer.commentReducer.comment);
+  const newCommentText = useSelector(state => state.qnaPageReducer.commentReducer.newCommentText);
 
   useEffect(() => {
-    const questionId = Number(qid);
-    getAnswerById({ qid: questionId })
-      .then(({ data }) => {
-        dispatch(setAnswerData(data));
+    getCommentByQid({ qId })
+      .then(({ data: allComments }) => {
+        dispatch(setComment(allComments));
       })
       .catch((err) => {
         message.error(err);
       });
+    return () => dispatch(resetCommentData());
   }, []);
 
+  const handlePostClick = () => {
+    if (!newCommentText.trim()) {
+      message.warning('Please enter a comment');
+      return;
+    }
+    const parentId = uuidv4();
+    const payload = { questionId: qId, parentId, text: newCommentText };
+    replyToComment(payload)
+      .then((response) => {
+        dispatch(setComment(response.data));
+      })
+      .catch((error) => {
+        const errorMessage = error.message || 'An error occurred';
+        message.error(errorMessage);
+      });
+  };
+
   return (
-    <div className={styles.commentsContainer}>
-      {/* 1. total answers */}
-      <section className={styles.totalAnswers}>
-        <span className={styles.totalAnswers__count}>
-          {(answers || []).length} answers
-        </span>
+    <>
+      {/* Post Parent Level Comment */}
+      <section className={styles.totalAnswersSection}>
+        <div className={styles.totalAnswers__count}>
+          {(comment?.replies || []).length} answers
+        </div>
+        <input
+          type="text"
+          className={styles.answerText}
+          placeholder="Add a comment ..."
+          value={newCommentText}
+          onChange={e => dispatch(setNewCommentText(e.target.value))}
+        />
+        <button
+          type="button"
+          className={styles.answerButton}
+          onClick={handlePostClick}
+          style={{ display: newCommentText !== '' ? 'block' : 'none' }}
+        >
+          Comment
+        </button>
       </section>
-
-      {/* 2. render answer */}
-      <section className={styles.answerSection}>
-        {(answers || []).map((answer, index) => {
-          const {
-            userName = '',
-            answerUnixStamp = '',
-            comment = '',
-          } = answer || {};
-          const answeredDate = moment(answerUnixStamp).format('MMM DD, YYYY [at] HH:mm');
-          return (
-            <div className={styles.answerSegment}>
-              <div>
-                {selectedAnswer === index && (
-                  <img
-                    src={tick}
-                    alt="selected answer"
-                    height={25}
-                    width={25}
-                  />
-                )}
-              </div>
-              <div className={styles.answerCard}>
-                <p className={styles.answerBody}>
-                  {comment}
-                </p>
-                <div className={styles.userDetailSection}>
-                  {answeredDate !== 'Invalid date' && (
-                    <div className={styles.answeredDate}>
-                      <span>answered</span>
-                      <span>{answeredDate}</span>
-                    </div>
-                  )}
-                  <div className={styles.answeredBy}>
-                    {userName}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-
+      {/* Comment Section */}
+      <section className={styles.commentsSection}>
+        <Replies comment={comment} />
       </section>
-    </div>
+    </>
   );
 };
 
-export default Comment;
+export default CommentContainer;

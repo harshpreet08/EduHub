@@ -1,9 +1,9 @@
 /* external */
 require('dotenv').config();
+// process.loadEnvFile()
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
-const PORT = 8000;
 
 const app = express();
 /* controller */
@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 const paymentRouter = require('./routes/payment')
 const communityRouter = require('./routes/communityForum')
 const blogRouter = require('./routes/blog');
+const commentRouter = require('./routes/comments')
 
 const dbURL = process.env.DB_URL
 
@@ -27,8 +28,9 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use('/api', paymentRouter.routes)
 app.use('/community', communityRouter.routes)
 app.use('/api/blog', blogRouter);
+app.use('/', commentRouter.routes)
 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(8000, () => {
+  console.log('server started')
+})

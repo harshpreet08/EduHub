@@ -1,0 +1,13 @@
+.modalContainer {
+  color: #993737;
+  font-weight: 600;
+  .postCreationContainer{
+    section{
+      padding:1rem;
+    }
+  }
+  :global([class*='ant-btn css-dev-only-do-not-override-1k979oh ant-btn-default']){
+    background-color: rgb(62, 84, 170);
+    color:white;
+  }
+}
