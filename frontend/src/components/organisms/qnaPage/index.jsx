@@ -1,6 +1,6 @@
 import React from 'react';
 /* internal components */
-import Navbar from '../../molecules/navbar';
+import Navbar from '../../NavBar';
 import Question from './sections/question';
 import Comment from './sections/comment';
 

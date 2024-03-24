@@ -16,9 +16,9 @@ import { getAllQuestions } from './Questions.service';
 /* internal components */
 import CustomBtn from '../../button';
 import ModalWrapper from '../modalWrapper/index';
-import Navbar from '../navbar';
 import { setquestionData } from './slice/questionSlice';
 import { setModalVisible } from '../modalWrapper/slice/modalSlice';
+import Navbar from '../../NavBar';
 
 const Questions = () => {
   const dispatch = useDispatch();
