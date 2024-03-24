@@ -10,15 +10,17 @@ const Login = lazy(() => import('../../pages/Login'));
 const ForgotPwd = lazy(() => import('../../pages/ForgotPwd'));
 const LandingPage = lazy(() => import('../../pages/Landing'));
 const Error = lazy(() => import('../../Components/error'));
-const FAQS = lazy(() => import('../../pages/Faqs/Faqs.tsx'));
+const Faqs = lazy(() => import('../../pages/Faqs/Faqs.tsx'));
 const Dashboard = lazy(() => import('../../pages/Dashboard/Dashboard.tsx'));
 const Contactus = lazy(() => import('../../pages/Contact/Contactus.tsx'));
 const PricingPage = lazy(() => import('../../Components/PricingPage'));
 const BlogList = lazy(() => import('../../Components/BlogListPage'));
 const BlogFormPage = lazy(() => import('../../Components/BlogFormPage'));
 const BlogDetailsPage = lazy(() => import('../../Components/BlogDetails'));
-const Questions = lazy(() => import('../../Components/molecules/questions'));
+const Questions = lazy(() => import('../../Components/molecules/questions/Questions'));
 const QnAPage = lazy(() => import('../../Components/organisms/qnaPage'));
+const Success = lazy(() => import('../../Components/molecules/payment/success'));
+const Cancel = lazy(() => import('../../Components/molecules/payment/failure'));
 
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
@@ -32,14 +34,16 @@ const routes = {
   '/register': SignUp,
   '/forgotpwd': ForgotPwd,
   '/contactus': Contactus,
-  '/faqs': FAQS,
+  '/faqs': Faqs,
   '/dashboard': Dashboard,
   '/pricing': PricingPage,
   '/blogs': BlogList,
   '/blog/:id': BlogDetailsPage,
   '/newblog': BlogFormPage,
   '/questions': Questions,
-  '/questions/:qid': QnAPage,
+  '/questions/:qId': QnAPage,
+  '/success': Success,
+  '/cancel': Cancel,
 };
 
 function RouteConfig() {

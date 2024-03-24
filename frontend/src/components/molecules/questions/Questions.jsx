@@ -3,33 +3,34 @@
 /* eslint-disable no-unused-expressions */
 /* external imports */
 import React, { useEffect } from 'react';
-import {
-  message, Modal, Button, Input,
-} from 'antd';
+import { message } from 'antd';
 import moment from 'moment';
 import cx from 'classnames';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 /* styles */
-// import { response } from 'express';
 import styles from './Questions.module.scss';
 /* services */
-import { getAllQuestions, postAllQuestions } from './Questions.service';
+import { getAllQuestions } from './Questions.service';
 /* internal components */
+import CustomBtn from '../../button';
+import ModalWrapper from '../modalWrapper/index';
 import Navbar from '../navbar';
-import {
-  setquestionData, setModalVisible, setTitle, setDescription,
-} from './slice/questionSlice';
+import { setquestionData } from './slice/questionSlice';
+import { setModalVisible } from '../modalWrapper/slice/modalSlice';
 
 const Questions = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const questionData = useSelector(state => state.questionsDisplay.questionData);
-  const isModalVisible = useSelector(state => state.questionsDisplay.isModalVisible);
-  const title = useSelector(state => state.questionsDisplay.title);
-  const description = useSelector(state => state.questionsDisplay.description);
+
+  const questionData = useSelector(
+    state => state.questionsDisplay.questionData,
+  );
+  const isModalVisible = useSelector(
+    state => state.modalReducer.isModalVisible,
+  );
 
   useEffect(() => {
     fetchQuestionData();
@@ -45,45 +46,36 @@ const Questions = () => {
       });
   };
 
-  const handleSave = () => {
-    const payload = {
-      title,
-      description,
-    };
-    postAllQuestions(payload)
-      .then(() => {
-      });
+  const handleButtonClick = () => {
+    dispatch(setModalVisible(true));
   };
 
   const handleQuestionClick = (questionId) => {
     navigate(`${location.pathname}/${questionId}`);
   };
-
-  const handleButtonClick = () => {
-    dispatch(setModalVisible(true));
-  };
-
   return (
     <div>
       <Navbar />
       <div className={styles.container}>
-        <button type="button" className={styles.askButton} onClick={handleButtonClick}>
-          Ask a Question
-        </button>
+        <CustomBtn
+          title="Ask a Question"
+          className={styles.askButton}
+          onClickHandler={handleButtonClick}
+        />
       </div>
       <div className={styles.questions}>
         <div className={styles.topQuestions}>Questionarium</div>
         {(questionData || []).map((questions) => {
           const {
-            qTitle = '-',
-            qDesc = '-',
-            qId = '',
+            _id: qId = '',
+            qTitle = '',
+            qDesc = '',
             totalAnswers = 0,
-            askedByUsername = '',
             timeStamp = 0,
+            askedByUsername = '',
           } = questions || {};
           return (
-          /* container */
+            /* container */
             <div key={qId} className={styles.questionContainer}>
               {/* 1. answer section */}
               <section className={styles.answerCountSection}>
@@ -93,7 +85,7 @@ const Questions = () => {
                     totalAnswers === 0 ? styles.noAnswer : '',
                   )}
                 >
-                  { totalAnswers || 0} answers
+                  {totalAnswers || 0} answers
                 </p>
               </section>
               {/* 2. main question */}
@@ -121,9 +113,7 @@ const Questions = () => {
                     <FaUser />
                   </span>
                 </p>
-                <span className={styles.authorName}>
-                  { askedByUsername}
-                </span>
+                <span className={styles.authorName}>{askedByUsername}</span>
                 <p className={styles.created}>
                   asked {moment(timeStamp).fromNow()}
                 </p>
@@ -132,37 +122,9 @@ const Questions = () => {
           );
         })}
       </div>
-      <Modal
-        description="write message"
-        open={isModalVisible}
-        className={styles.modalContainer}
-        footer={[<Button key="post" onClick={handleSave}>Post</Button>]}
-      >
-        <div className={styles.postContainer}>
-          <section>
-            <label htmlFor="title">
-              Title:
-            </label>
-            <Input
-              id="title"
-              name="title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-          </section>
-          <section>
-            <label htmlFor="description">
-              Description
-            </label>
-            <Input
-              id="description"
-              name="description"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-            />
-          </section>
-        </div>
-      </Modal>
+      {isModalVisible && (
+        <ModalWrapper title="Ask a Question" onSubmit={fetchQuestionData} />
+      )}
     </div>
   );
 };

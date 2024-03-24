@@ -19,6 +19,9 @@
     cursor: pointer;
     font-size: 15px;
   }
+  .askButton:hover {
+    background-color: #0e3e86;
+  }
 }
 
 .questions {
@@ -30,9 +33,11 @@
   }
 
   .questionContainer {
+    content-visibility: auto;
     display: grid;
     grid-template-columns: 3fr 6fr 2.5fr;
     border-bottom: 1px solid #e3e4e2;
+    padding: 1rem;
     .answerCountSection {
       display: flex;
       justify-content: center;
@@ -48,6 +53,7 @@
       .qTitle {
         color: #005792;
         width: 100%;
+        padding-bottom: 1rem;
         .qTitle__para {
           margin-bottom: 0;
           @include truncateText();

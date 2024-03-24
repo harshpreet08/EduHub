@@ -3,11 +3,41 @@ import React from 'react';
 import {
   Grid, Typography, Button, Paper,
 } from '@mui/material';
-import Navbar from './NavBar';
+import { loadStripe } from '@stripe/stripe-js';
 
-const PricingPage = () => (
-  <>
-    <Navbar></Navbar>
+const PricingPage = () => {
+  const handlePayment = async (productDetails) => {
+    const stripe = await loadStripe(String(import.meta.env.VITE_PUBLIC_KEY));
+
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const body = {
+      product: productDetails,
+    };
+
+    const response = await fetch(
+      'http://localhost:7000/api/create-checkout-session',
+      {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+      },
+    );
+
+    const { session = {} } = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      // eslint-disable-next-line no-console
+      console.log(result.error);
+    }
+  };
+
+  return (
     <Grid container spacing={2} justifyContent="center" marginTop={4}>
       <Grid item xs={12}>
         <Typography variant="h2" align="center" gutterBottom>
@@ -27,31 +57,33 @@ const PricingPage = () => (
           </Grid>
         </Grid>
       </Grid>
-      <Grid style={{ marginTop: '20px' }} item xs={12}>
+      <Grid item style={{ marginTop: '20px' }} xs={12}>
         <Grid container justifyContent="center" spacing={4}>
           <Grid item xs={12} sm={6} md={3}>
             <PricingBox
               title="Basic"
-              amount="$399"
+              amount="399"
               sale="10% sale"
               description="Best choice to start your business"
               color="#007bff"
+              handlePayment={handlePayment}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <PricingBox
               title="Pro"
-              amount="$1099"
+              amount="1099"
               sale="3% sale"
               description="Best for established creators"
               color="#28a745"
+              handlePayment={handlePayment}
             />
           </Grid>
         </Grid>
       </Grid>
     </Grid>
-  </>
-);
+  );
+};
 
 const CheckMark = () => (
   <Typography variant="body1" component="span" color="primary">
@@ -60,7 +92,12 @@ const CheckMark = () => (
 );
 
 const PricingBox = ({
-  title, amount, sale, description, color,
+  title,
+  amount,
+  sale,
+  description,
+  color,
+  handlePayment,
 }) => (
   <Paper
     sx={{
@@ -98,6 +135,14 @@ const PricingBox = ({
       fullWidth
       color="primary"
       style={{ backgroundColor: color }}
+      onClick={() => handlePayment([
+        {
+          title,
+          amount,
+          sale,
+          description,
+        },
+      ])}
     >
       Buy now
     </Button>
