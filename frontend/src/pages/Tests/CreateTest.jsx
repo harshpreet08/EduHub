@@ -30,10 +30,11 @@ const CreateTest = () => {
   const [modalTestName, setModalTestName] = useState('');
   const [selectedTestId, setSelectedTestId] = useState('');
   const [selectedTestDetails, setSelectedTestDetails] = useState({});
+  const deployedLink = `https://testbackend-sy5g.onrender.com`;
 
   useEffect(() => {
     // Fetch already created tests
-    axios.get(`http://localhost:8080/tests/getAll/${userId}/${courseId}`)
+    axios.get(`${deployedLink}/tests/getAll/${userId}/${courseId}`)
       .then(response => {
         setCreatedTests({ data: response.data, loading: false });
       })
@@ -67,7 +68,7 @@ const CreateTest = () => {
       return;
     }
 
-    axios.post('http://localhost:8080/tests/createTest', test)
+    axios.post(`${deployedLink}/tests/createTest`, test)
       .then(response => {
         console.log('Test created successfully:', response.data);
         updateCreatedTests([...createdTests.data, response.data]);
@@ -86,7 +87,7 @@ const CreateTest = () => {
 
   const handleEditTest = (testId) => {
     setSelectedTestId(testId);
-    axios.get(`http://localhost:8080/tests/getTest/${testId}`)
+    axios.get(`${deployedLink}/tests/getTest/${testId}`)
       .then(response => {
         setSelectedTestDetails(response.data);
         setModalDifficulty(response.data.difficultyLevel || '');
@@ -128,7 +129,7 @@ const CreateTest = () => {
       alert('Time limit and number of questions must be greater than 0.');
       return;
     }
-    axios.put(`http://localhost:8080/tests/update/${selectedTestId}`, updatedTest)
+    axios.put(`${deployedLink}/tests/update/${selectedTestId}`, updatedTest)
       .then(response => {
         console.log('Test updated successfully:', response.data);
         const updatedTests = createdTests.data.map(test => {
@@ -147,7 +148,7 @@ const CreateTest = () => {
   };
 
   const handleDeleteTest = (testId) => {
-    axios.delete(`http://localhost:8080/tests/delete/${testId}`)
+    axios.delete(`${deployedLink}/tests/delete/${testId}`)
       .then(response => {
         console.log('Test deleted successfully:', response.data);
         const updatedTests = createdTests.data.filter(test => test.id !== testId);

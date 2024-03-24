@@ -6,6 +6,7 @@ import '../Tests/EditQuestionPage.css';
 import { FaPlus, FaMinus } from 'react-icons/fa'; 
 import NavBar from '../../Components/NavBar.jsx';
 
+
 const EditQuestion = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -13,6 +14,7 @@ const EditQuestion = () => {
     const userId = searchParams.get('userId')
     const courseId= searchParams.get('courseId')
     const questionId = searchParams.get('questionId')
+    const deployedLink = `https://testbackend-sy5g.onrender.com`;
 
     const [questionData, setQuestionData] = useState({
         userId: userId,
@@ -34,7 +36,7 @@ const EditQuestion = () => {
 
     useEffect(() => {
         // Fetch question data
-        axios.get(`http://localhost:8080/qb/getQuestion/${questionId}`)
+        axios.get(`${deployedLink}/qb/getQuestion/${questionId}`)
             .then(response => {
                 setQuestionData(response.data);
             })
@@ -57,7 +59,7 @@ const EditQuestion = () => {
         }
     
         // Send PUT request to update the question
-        axios.put(`http://localhost:8080/qb/updateQuestion/${questionId}`, questionData)
+        axios.put(`${deployedLink}/qb/updateQuestion/${questionId}`, questionData)
             .then(response => {
                 console.log('Question updated successfully:', response.data);
                 setSuccessMessage('Question updated successfully!');

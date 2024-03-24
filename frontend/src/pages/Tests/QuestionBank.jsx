@@ -21,10 +21,11 @@ const QuestionBank = () => {
   const params = new URLSearchParams(location.search);
   const userId = params.get('userId');
   const courseId = params.get('courseId');
+  const deployedLink = `https://testbackend-sy5g.onrender.com`;
 
   useEffect(() => {
 
-    axios.get(`http://localhost:8080/qb/getAllQuestions/${userId}/${courseId}`, {
+    axios.get(`${deployedLink}/qb/getAllQuestions/${userId}/${courseId}`, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -52,7 +53,7 @@ const QuestionBank = () => {
   };
 
   const handleConfirmDelete = () => {
-    axios.delete(`http://localhost:8080/qb/deleteQuestion/${deletedQuestionId}`)
+    axios.delete(`${deployedLink}/qb/deleteQuestion/${deletedQuestionId}`)
       .then(response => {
         console.log("Question deleted successfully:", response.data);
         setQuestions(questions.filter(q => q.questionId !== deletedQuestionId));

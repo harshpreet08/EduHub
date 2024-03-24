@@ -12,6 +12,7 @@ const AddQuestion = () => {
     const searchParams = new URLSearchParams(location.search);
     const userId = searchParams.get('userId')
     const courseId= searchParams.get('courseId')
+    const deployedLink = `https://testbackend-sy5g.onrender.com`;
 
     const [questionData, setQuestionData] = useState({
         userId,
@@ -39,7 +40,7 @@ const AddQuestion = () => {
             setValidationError('Positive and negative marks should be greater than or equal to zero.');
             return;
         }
-        axios.post('http://localhost:8080/qb/addQuestion', questionData)
+        axios.post(`${deployedLink}/qb/addQuestion`, questionData)
             .then(response => {
                 console.log('Question added successfully:', response.data);
                 setSuccessMessage('Question added successfully!');
