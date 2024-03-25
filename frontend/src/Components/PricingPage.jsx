@@ -17,7 +17,7 @@ const PricingPage = () => {
     };
 
     const response = await fetch(
-      'http://localhost:7000/api/create-checkout-session',
+      'http://localhost:6002/api/create-checkout-session',
       {
         method: 'POST',
         headers,
