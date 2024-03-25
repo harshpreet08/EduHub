@@ -1,13 +1,34 @@
 .modalContainer {
-  color: #993737;
   font-weight: 600;
-  .postCreationContainer{
-    section{
-      padding:1rem;
+  width: 36.4rem !important;
+  .postCreationContainer {
+    section {
+      padding: 1rem;
     }
   }
-  :global([class*='ant-btn css-dev-only-do-not-override-1k979oh ant-btn-default']){
+  .quilEditor {
+    width: 31.4rem;
+    height: 15rem;
+    overflow: auto;
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
+    :global([class*='ql-toolbar']) {
+      position: sticky;
+      top: 0;
+      background-color: whitesmoke;
+      z-index: 2;
+    }
+  }
+
+  :global([class*='ant-btn ant-btn-default']) {
     background-color: rgb(62, 84, 170);
-    color:white;
+    color: white;
+  }
+  :global([class*='ant-modal-title']) {
+    padding-left: 1rem;
+  }
+  :global([class*='ant-modal-footer']) {
+    padding-right: 1.2rem;
+    margin-top: 1rem;
   }
 }

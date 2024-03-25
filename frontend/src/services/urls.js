@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:7000';
+const baseURL = 'http://localhost:6002';
 
 const questionUrl = `${baseURL}/community`;
 const commentUrl = `${baseURL}/comments`;
