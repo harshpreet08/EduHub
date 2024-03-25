@@ -17,8 +17,9 @@ const Replies = ({ comment = {} }) => {
     answeredDate = new Date().valueOf(),
   } = comment || {};
 
-  const onReply = (/* parentId */) => {
-    // console.log(parentId);
+  const onReply = (qId) => {
+    
+
   };
 
   if (parentId === '0') {
