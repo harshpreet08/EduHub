@@ -16,7 +16,9 @@ const CommentContainer = () => {
 
   useEffect(() => {
     fetchComment();
-    return () => dispatch(resetCommentData());
+    return () => {
+      dispatch(resetCommentData());
+    };
   }, []);
 
   const fetchComment = () => {
