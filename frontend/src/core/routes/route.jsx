@@ -67,13 +67,44 @@ const ProtectedRoute = (props) => {
   }
 };
 
-const routes = {
-  '/': LandingPage,
-  '/login': Login,
-  '/register': SignUp,
-  '/forgotpwd': ForgotPwd,
-  '/contactus': Contactus,
-  '/faqs': Faqs,
+
+const PublicRoute = (props) => {
+
+  try{
+
+    const [authenticated, SetAuthenticated] = useState(false);
+    const [allowAccess, setAllowAccess] = useState(false);
+
+    useEffect(() => {
+      axios.post(
+        "http://localhost:7000/user/validate",
+        null,
+        { withCredentials: true }
+      ).then(() => SetAuthenticated(true))
+      .catch(error => {
+        setAllowAccess(true);
+      });
+    }, []);
+
+  console.log("Inside public route");
+  var navigate = useNavigate();
+
+
+  return (
+    <Suspense fallback={<Loader />}>
+      {authenticated && navigate("/dashboard")}
+      {allowAccess && <props.component />}
+    </Suspense>
+  );
+  }
+
+  catch(error){
+    console.log(error);
+    navigate('/login');
+  }
+};
+
+const privateRoutes = {
   '/dashboard': Dashboard,
   '/pricing': PricingPage,
   '/blogs': BlogList,
@@ -85,16 +116,39 @@ const routes = {
   '/cancel': Cancel,
 };
 
+const publicRoutes ={
+  '/': LandingPage,
+  '/login': Login,
+  '/register': SignUp,
+  '/forgotpwd': ForgotPwd,
+  '/contactus': Contactus,
+  '/faqs': Faqs,
+}
+
 function RouteConfig() {
-  const routeComponents = Object.entries(routes).map(([path, Component]) => ({
+  const privateRouteComponents = Object.entries(privateRoutes).map(([path, Component]) => ({
     path,
     element: (
       <Suspense fallback={<Loader />}>
-        <ProtectedRoute component = {Component} />
+        <ProtectedRoute component = {Component} path = {path}/>
       </Suspense>
     ),
     errorElement: ErrorElement,
   }));
+
+  const publicRouteComponents = Object.entries(publicRoutes).map(([path, Component]) => ({
+    path,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <PublicRoute component = {Component} path = {path}/>
+      </Suspense>
+    ),
+    errorElement: ErrorElement,
+  }));
+
+  const routeComponents = [ ...privateRouteComponents, ...publicRouteComponents ];
+
+  console.log(routeComponents);
 
   const router = createBrowserRouter(routeComponents);
 
