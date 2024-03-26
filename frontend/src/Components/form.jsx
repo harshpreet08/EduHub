@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Email, Pwd, CreateAccount } from "./input";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 const SignForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -9,6 +10,8 @@ const SignForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const cookies = new Cookies();
+
 
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
@@ -35,7 +38,9 @@ const SignForm = () => {
         { withCredentials: true }
       );
       console.log(response);
-      console.log(response.headers?.accessToken);
+      console.log(response.headers.accesstoken);
+      cookies.set("accesstoken",response.headers.accesstoken);
+      console.log(cookies.get("accesstoken"));
       console.log(document.cookies);
 
       if (response.error) {

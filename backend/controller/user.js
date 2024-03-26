@@ -4,6 +4,8 @@ const ErrorResponse = require("../utils/common/ErrorResponse");
 const StatusCodes = require("http-status-codes");
 const { options } = require("../utils/common/cookieHelper");
 const sendMail = require("../utils/helper/mailHelper");
+const jwt = require('jsonwebtoken');
+
 
 async function createUser(req, res) {
   try {
@@ -50,7 +52,7 @@ async function createUser(req, res) {
 async function login(req, res) {
   try {
     console.log("Inside login controller");
-    console.log(req);
+    console.log(req.cookies);
     const { email, password, role } = req.body;
 
     const user = await User.findOne({ email, role }).select("+password");
@@ -182,6 +184,32 @@ async function resetPassword(req,res){
   }
 }
 
+async function isValidated(req,res){
+  try{
+    console.log(req.cookies);
+    const token = req.cookies?.accesstoken;
+    console.log(token);
+
+    if(!token){
+      ErrorResponse.error = "You are not allowed to view this page, please sign in!";
+      return res.status(StatusCodes.UNAUTHORIZED).json(ErrorResponse);
+    }
+
+    const userDetails = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+    SuccessResponse.message = "Successfully verified";
+
+    SuccessResponse.data = userDetails;
+
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  }
+  catch(error){
+    console.log(error);
+    ErrorResponse.error = error.message;
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+  }
+}
+
 
 
 module.exports = {
@@ -189,5 +217,6 @@ module.exports = {
   login,
   logout,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  isValidated
 };

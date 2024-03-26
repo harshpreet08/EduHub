@@ -1,9 +1,13 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
 import Loader from '../../Components/atom/loader';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
+
 /* internal components */
 const SignUp = lazy(() => import('../../pages/Signup'));
 const Login = lazy(() => import('../../pages/Login'));
@@ -26,6 +30,41 @@ const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
     <Error />
   </Suspense>;
+};
+
+const ProtectedRoute = (props) => {
+
+  try{
+
+    const [authenticated, SetAuthenticated] = useState(false);
+
+    useEffect(() => {
+      axios.post(
+        "http://localhost:7000/user/validate",
+        null,
+        { withCredentials: true }
+      ).then(() => SetAuthenticated(true))
+      .catch(error => {
+        console.log(error);
+        navigate('/login');
+      });
+    }, []);
+
+  console.log("Inside protected route");
+  var navigate = useNavigate();
+
+
+  return (
+    <Suspense fallback={<Loader />}>
+      {authenticated && <props.component />}
+    </Suspense>
+  );
+  }
+
+  catch(error){
+    console.log(error);
+    navigate('/login');
+  }
 };
 
 const routes = {
@@ -51,7 +90,7 @@ function RouteConfig() {
     path,
     element: (
       <Suspense fallback={<Loader />}>
-        <Component />
+        <ProtectedRoute component = {Component} />
       </Suspense>
     ),
     errorElement: ErrorElement,
