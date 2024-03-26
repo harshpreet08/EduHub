@@ -4,29 +4,32 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Link } from 'react-router-dom';
-export const Email = () => (
+export const Email = ({value, fn}) => (
   <div>
     <label className="block text-gray-700 font-semibold">Email Address</label>
     <input
       type="email"
       name=""
       id=""
+      value = {value}
+      onChange = {(e) => {fn(e.target.value)}}
       placeholder="Enter Email Address"
       className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border border-gray-700 focus:border-blue-500 focus:bg-white focus:outline-none"
       autoFocus
-      autoComplete
       required
     />
   </div>
 );
 
-export const Pwd = () => (
+export const Pwd = ({value, fn}) => (
   <div className="mt-4">
     <label className="block text-gray-700 font-semibold">Password</label>
     <input
       type="password"
       name=""
       id=""
+      value = {value}
+      onChange={(e)=>{fn(e.target.value)}}
       placeholder="Enter Password"
       minLength="6"
       className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border border-gray-700 focus:border-blue-500

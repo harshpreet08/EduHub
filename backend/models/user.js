@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const nanoid  = require("nanoid");
+const {nanoid}  = require("nanoid");
 
 const userSchema = new mongoose.Schema({
   firstName: {

@@ -1,14 +1,54 @@
-import React, { useState } from 'react';
-import {
-  FirstName, LastName, SignUp, SignInInstead,
-} from './signup-input';
-import { Email, Pwd } from './input';
+import React, { useState , useEffect} from "react";
+import { FirstName, LastName, SignUp, SignInInstead } from "./signup-input";
+import { Email, Pwd } from "./input";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { select } from "@material-tailwind/react";
 
 const SignUpForm = () => {
-  const [selectedRole, setSelectedRole] = useState('Teacher');
+  const [selectedRole, setSelectedRole] = useState("Teacher");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
+  };
+
+  useEffect(()=>{
+    console.log(lastName);
+    console.log(firstName);
+    console.log(selectedRole);
+  }, [lastName,firstName]);
+
+  const handleSignUp = async (e) => {
+    try {
+      e.preventDefault();
+      const payload = {
+        firstName: firstName,
+        lastName: lastName,
+        password: password,
+        email: email,
+        role: selectedRole.toLowerCase()
+      };
+
+      const response = await axios.post(
+        "http://localhost:7000/user/signup",
+        payload
+      );
+
+      console.log(response);
+
+      if (selectedRole == "Student") {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+      setError(error?.response?.data?.error);
+    }
   };
 
   return (
@@ -21,22 +61,22 @@ const SignUpForm = () => {
           <div className="border-2 border-blue-500 rounded-md overflow-hidden">
             <button
               type="button"
-              onClick={() => handleRoleToggle('Teacher')}
+              onClick={() => handleRoleToggle("Teacher")}
               className={`${
-                selectedRole === 'Teacher'
-                  ? 'bg-indigo-500 text-white'
-                  : 'text-blue-500'
+                selectedRole === "Teacher"
+                  ? "bg-indigo-500 text-white"
+                  : "text-blue-500"
               } font-semibold px-4 py-2 rounded-l-md`}
             >
               Teacher
             </button>
             <button
               type="button"
-              onClick={() => handleRoleToggle('Student')}
+              onClick={() => handleRoleToggle("Student")}
               className={`${
-                selectedRole === 'Student'
-                  ? 'bg-indigo-500 text-white'
-                  : 'text-blue-500'
+                selectedRole === "Student"
+                  ? "bg-indigo-500 text-white"
+                  : "text-blue-500"
               } font-semibold px-4 py-2 rounded-r-md`}
             >
               Student
@@ -46,16 +86,26 @@ const SignUpForm = () => {
 
         <hr className="my-6 border-gray-300 w-full" />
 
-        <form className="mt-3" action="#" method="POST">
+        <form className="mt-3" onSubmit={handleSignUp}>
           <div className="grid grid-cols-2 gap-4">
-            <FirstName />
-            <LastName />
+            <FirstName value={firstName} fn={setFirstName} />
+            <LastName value={lastName} fn={setLastName} />
           </div>
           <div className="mt-4">
-            <Email />
+            <Email value={email} fn={setEmail} />
           </div>
 
-          <Pwd />
+          <Pwd value={password} fn={setPassword} />
+
+          {error && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold">Error:</strong>
+              <span className="block sm:inline ml-2">{error}</span>
+            </div>
+          )}
 
           <SignUp />
 

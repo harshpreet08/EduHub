@@ -17,13 +17,20 @@ const userRouter = require('./routes/user');
 
 const dbURL = process.env.DB_URL
 
+const corsOptions ={
+  origin:'http://localhost:5173', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+  exposedHeaders: ["accessToken"]
+}
+
 mongoose.connect(dbURL).then(() => { 
   console.log('connected to db');
 }).catch((e) => {
   console.log('Error', e);
 })
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());

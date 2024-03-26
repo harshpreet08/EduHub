@@ -68,7 +68,7 @@ const CommentSchema = new Schema({
   _id: String,
   text: String,
   parentId: { type: Schema.Types.Mixed, default: null, ref: 'Comment' },
-  replies: [Object]
+  replies: [Object] 
 });
 
 exports.Comment = mongoose.model('Comment', CommentSchema, 'nestedComment');
