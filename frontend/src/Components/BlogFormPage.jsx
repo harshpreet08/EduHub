@@ -73,7 +73,7 @@ function SimpleForm() {
         formDataToSend.image = await convertToBase64(formData.image);
       }
 
-      const response = await fetch("http://localhost:6001/api/blog/create", {
+      const response = await fetch("http://localhost:6002/api/blog/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

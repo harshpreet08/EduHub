@@ -23,7 +23,7 @@ function EditBlog() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:6001/api/blog/${id}`)
+    fetch(`http://localhost:6002/api/blog/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setFormData(data);
@@ -48,7 +48,7 @@ function EditBlog() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:6001/api/blog/${id}`, {
+      const response = await fetch(`http://localhost:6002/api/blog/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
