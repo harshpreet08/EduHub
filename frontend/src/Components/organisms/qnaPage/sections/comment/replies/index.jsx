@@ -29,7 +29,6 @@ const Replies = ({ comment = {} }) => {
 
   useEffect(
     () =>
-    // fetchComment();
       () => dispatch(resetCommentData()),
     [],
   );
@@ -60,7 +59,7 @@ const Replies = ({ comment = {} }) => {
       });
   };
 
-  const onReply = async (e) => {
+  const onReply = async () => {
     await onAddNewComment();
     fetchComment();
   };

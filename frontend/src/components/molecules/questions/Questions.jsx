@@ -31,6 +31,7 @@ const Questions = () => {
   const isModalVisible = useSelector(
     state => state.modalReducer.isModalVisible,
   );
+  const comment = useSelector(state => state.qnaPageReducer.commentReducer.comment);
 
   useEffect(() => {
     fetchQuestionData();
@@ -70,7 +71,7 @@ const Questions = () => {
             _id: qId = '',
             qTitle = '',
             qDesc = '',
-            totalAnswers = 0,
+            // totalAnswers = 0,
             timeStamp = 0,
             askedByUsername = '',
           } = questions || {};
@@ -82,10 +83,11 @@ const Questions = () => {
                 <p
                   className={cx(
                     styles.answers,
-                    totalAnswers === 0 ? styles.noAnswer : '',
+                    // totalAnswers === 0 ? styles.noAnswer : '',
+                    (comment?.replies || []).length === 0 ? styles.noAnswer : '',
                   )}
                 >
-                  {totalAnswers || 0} answers
+                  {comment?.replies || []} answers
                 </p>
               </section>
               {/* 2. main question */}

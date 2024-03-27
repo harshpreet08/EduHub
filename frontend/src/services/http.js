@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:6001',
+  baseURL: 'http://localhost:6002',
 });
 
 export const http = {
