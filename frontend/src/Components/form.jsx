@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Email, Pwd, CreateAccount } from "./input";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserData } from "./molecules/questions/slice/userSlice";
 
 const SignForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -11,7 +13,7 @@ const SignForm = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const cookies = new Cookies();
-
+  const dispatch = useDispatch();
 
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
@@ -37,9 +39,28 @@ const SignForm = () => {
         payload,
         { withCredentials: true }
       );
-      console.log(response);
+
+      const userData = response?.data?.data;
+
+      const userPayload = {
+        userId: userData._id,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        role: userData.role,
+      };
+
+      dispatch(setUserData(userPayload));
+
+      // const trialData = useSelector(
+      //   state => state.userSlice.firstName
+      // );
+
+      console.log("Here is trial data");
+
+      console.log(response.data.data);
       console.log(response.headers.accesstoken);
-      cookies.set("accesstoken",response.headers.accesstoken);
+      cookies.set("accesstoken", response.headers.accesstoken);
       console.log(cookies.get("accesstoken"));
       console.log(document.cookies);
 

@@ -14,10 +14,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Contact Us', 'FAQs', 'Register', 'Login'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Navbar() {
+function Navbar({pages}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -98,7 +97,7 @@ function Navbar() {
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
-            noWrap
+            noWraps
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{

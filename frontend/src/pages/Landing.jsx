@@ -5,7 +5,7 @@ import About from '../Components/about';
 
 const LandingPage = () => (
   <div className="landing-page">
-    <Navbar />
+    <Navbar pages = {["Login", "B", "C"]}/>
     <LandingBody />
     <About />
     {/* <Contact/> */}
