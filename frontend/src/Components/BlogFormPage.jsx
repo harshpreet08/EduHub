@@ -97,7 +97,7 @@ function SimpleForm() {
 
   return (
     <>
-      <Navbar pages={["Contact Us", "FAQs", "Register", "Login"]}></Navbar>
+      <Navbar></Navbar>
       <Box
         sx={{
           maxWidth: 600,
