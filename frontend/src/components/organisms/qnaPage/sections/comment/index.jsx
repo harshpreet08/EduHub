@@ -77,7 +77,10 @@ const CommentContainer = () => {
       </section>
       {/* Comment Section */}
       <section className={styles.commentsSection}>
-        <Replies comment={comment} />
+        <Replies
+          comment={comment}
+          fetchComment={fetchComment}
+        />
       </section>
     </>
   );
