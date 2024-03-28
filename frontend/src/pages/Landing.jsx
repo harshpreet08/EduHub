@@ -1,13 +1,12 @@
-import React from 'react';
-import NavBar from '../components/navbar';
-import LandingBody from '../components/landing-body';
-import About from '../components/about';
-import Contact from '../components/contact';
+import React from "react";
+import Navbar from "../Components/NavBar";
+import LandingBody from "../Components/landing-body";
+import About from "../Components/about";
 
 const LandingPage = () =>{
     return(
         <div class="landing-page">
-        <NavBar/>
+        <NavBarpages={["Contact Us", "FAQs", "Register", "Login"]} />
         <LandingBody/>
         <About/>
         {/* <Contact/> */}
