@@ -1,9 +1,11 @@
-import { Email, Pwd, GoogleSignIn, CreateAccount } from "./input";
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import {
+  Email, Pwd, CreateAccount,
+} from './input';
 
 const SignForm = () => {
-  const [selectedRole, setSelectedRole] = useState("Teacher");
+  const [selectedRole, setSelectedRole] = useState('Teacher');
 
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
@@ -18,21 +20,23 @@ const SignForm = () => {
         <div className="flex mb-8 mt-4">
           <div className="border-2 border-blue-500 rounded-md overflow-hidden">
             <button
-              onClick={() => handleRoleToggle("Teacher")}
+              type="button"
+              onClick={() => handleRoleToggle('Teacher')}
               className={`${
-                selectedRole === "Teacher"
-                  ? "bg-indigo-500 text-white"
-                  : "text-blue-500"
+                selectedRole === 'Teacher'
+                  ? 'bg-indigo-500 text-white'
+                  : 'text-blue-500'
               } font-semibold px-4 py-2 rounded-l-md`}
             >
               Teacher
             </button>
             <button
-              onClick={() => handleRoleToggle("Student")}
+              type="button"
+              onClick={() => handleRoleToggle('Student')}
               className={`${
-                selectedRole === "Student"
-                  ? "bg-indigo-500 text-white"
-                  : "text-blue-500"
+                selectedRole === 'Student'
+                  ? 'bg-indigo-500 text-white'
+                  : 'text-blue-500'
               } font-semibold px-4 py-2 rounded-r-md`}
             >
               Student

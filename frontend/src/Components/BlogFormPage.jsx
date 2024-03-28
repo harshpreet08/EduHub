@@ -36,7 +36,6 @@ function SimpleForm() {
   const fileInputRef = useRef(null);
 
   const handleImageChange = (e) => {
-    console.log("aagya bhai");
     const file = e.target.files[0];
     setFormData((prevData) => ({
       ...prevData,
@@ -52,7 +51,7 @@ function SimpleForm() {
     fileInputRef.current.value = "";
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!formData.title) {
       setTitleError(true);
     } else {
@@ -64,8 +63,31 @@ function SimpleForm() {
       setDescriptionError(false);
     }
 
-    if (formData.title && formData.description) {
-      setShowSuccess(true);
+    try {
+      let formDataToSend = {
+        title: formData.title,
+        description: formData.description,
+      };
+
+      if (formData.image) {
+        formDataToSend.image = await convertToBase64(formData.image);
+      }
+
+      const response = await fetch("http://localhost:6002/api/blog/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataToSend),
+      });
+
+      if (response.ok) {
+        setShowSuccess(true);
+      } else {
+        console.error("Failed to create blog post:", response.status);
+      }
+    } catch (error) {
+      console.error("Error creating blog post:", error);
     }
   };
 
@@ -178,3 +200,12 @@ function SimpleForm() {
 }
 
 export default SimpleForm;
+
+function convertToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}

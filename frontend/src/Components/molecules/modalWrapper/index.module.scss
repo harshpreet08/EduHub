@@ -1,0 +1,34 @@
+.modalContainer {
+  font-weight: 600;
+  width: 36.4rem !important;
+  .postCreationContainer {
+    section {
+      padding: 1rem;
+    }
+  }
+  .quilEditor {
+    width: 31.4rem;
+    height: 15rem;
+    overflow: auto;
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
+    :global([class*='ql-toolbar']) {
+      position: sticky;
+      top: 0;
+      background-color: whitesmoke;
+      z-index: 2;
+    }
+  }
+
+  :global([class*='ant-btn ant-btn-default']) {
+    background-color: rgb(62, 84, 170);
+    color: white;
+  }
+  :global([class*='ant-modal-title']) {
+    padding-left: 1rem;
+  }
+  :global([class*='ant-modal-footer']) {
+    padding-right: 1.2rem;
+    margin-top: 1rem;
+  }
+}

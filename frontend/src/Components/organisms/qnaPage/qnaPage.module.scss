@@ -1,0 +1,81 @@
+.totalAnswersSection {
+  margin: 3rem;
+  .totalAnswers__count {
+    font-size: 1.2rem;
+    padding-bottom: 2rem;
+  }
+  .answerButton {
+    background-color: #065fd4;
+    color: #fff;
+    margin-top: 1rem;
+    padding: 0.3rem;
+    border-radius: 1rem;
+  }
+  .answerText {
+    color: #787878;
+    outline: none;
+    width: 100%;
+    border-bottom: 1px solid #757575;
+    &:focus {
+      border-bottom: 2px solid #000;
+    }
+
+    &:focus + .answerButton {
+      display: block;
+    }
+  }
+}
+
+.commentsSection {
+  padding-right: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  .commentsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 3rem;
+    .commentCard {
+      border-radius: 0.6rem;
+      font-size: 1rem;
+      background-color: #f4f4f4;
+      padding: 1rem 1rem;
+      .commentText {
+        margin-bottom: 0;
+      }
+      .replyTextArea{
+        width:100%;
+      }
+      .replyButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .replyIcon {
+          font-size: 2rem;
+        }
+      }
+      .userDetailSection {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        .answeredDate {
+          display: flex;
+          gap: 0.3rem;
+          font-size: 0.8rem;
+          color: #787878;
+        }
+        .answeredBy {
+          font-size: 0.8rem;
+          color: hsl(210deg 65.52% 54.51%);
+          font-weight: 500;
+        }
+      }
+      .seeMoreReplies {
+        display: flex;
+        justify-content: flex-end;
+        color: #0b50a9;
+      }
+    }
+  }
+}

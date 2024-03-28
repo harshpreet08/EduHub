@@ -7,6 +7,9 @@ import BlogDetailsPage from "../../Components/BlogDetails";
 import PricingPage from "../../Components/PricingPage";
 import QuestionBank from "../../pages/Tests/Professor/JSX/QuestionBank"; 
 import "../../Components/Global.css";
+import React from 'react';
+import NavBar from '../../Components/NavBar';
+import Router from '../routes/route';
 
 function App() {
   const defaultUserId = "user123";

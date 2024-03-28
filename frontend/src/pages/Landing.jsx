@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../Components/NavBar.jsx';
+import NavBar from '../components/navbar';
 import LandingBody from '../components/landing-body';
 import About from '../components/about';
 import Contact from '../components/contact';

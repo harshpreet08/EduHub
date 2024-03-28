@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -12,127 +12,178 @@ import {
 import { useNavigate } from "react-router-dom";
 import BlogDetails from "./BlogDetails";
 import Navbar from "./NavBar";
-
-export const blogs = [
-  {
-    id: 1,
-    title: "First Blog",
-    author: "Harshpreet Singh",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image:
-      "https://www.nasa.gov/wp-content/uploads/2018/07/s75-31690.jpeg?w=2048",
-  },
-  {
-    id: 2,
-    title: "Second Blog",
-    author: "Harshpreet Singh",
-    description: "This is the description of the second blog.",
-    image: "https://1000logos.net/wp-content/uploads/2020/08/MongoDB-Logo.png",
-  },
-  {
-    id: 3,
-    title: "Third Blog",
-    author: "Harshpreet Singh",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "https://1000logos.net/wp-content/uploads/2021/03/Paytm_Logo.jpg",
-  },
-];
+import CircularProgress from "@mui/material/CircularProgress";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function BlogList() {
   const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:6002/api/blog")
+      .then((response) => response.json())
+      .then((data) => {
+        setBlogs(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching blogs:", error);
+        setLoading(false);
+      });
+  }, []);
 
   const handleBlogClick = (blog) => {
     setSelectedBlog(blog);
-    navigate(`/blog/${blog.id}`);
+    navigate(`/blog/${blog._id}`);
   };
 
   const handleClose = () => {
     setSelectedBlog(null);
   };
 
+  const handleEdit = (event, blogId) => {
+    event.stopPropagation();
+    navigate(`/edit-blog/${blogId}`);
+  };
+
+  const handleDelete = async (blogId, event) => {
+    try {
+      event.stopPropagation();
+      const response = await fetch(`http://localhost:6002/api/blog/${blogId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setBlogs(blogs.filter((blog) => blog._id !== blogId));
+      } else {
+        console.error("Failed to delete blog post");
+      }
+    } catch (error) {
+      console.error("Error deleting blog post:", error);
+    }
+  };
+
   return (
     <>
-      <Navbar></Navbar>
-      <Box
-        sx={{
-          maxWidth: { xs: 600, md: 800, lg: 1000 },
-          width: "100%",
-          margin: "0 auto",
-          paddingX: { xs: 0, md: "20px" },
-          paddingY: "20px",
-        }}
-      >
-        <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
-          BLOG LIST
-        </Typography>
-        <Grid container spacing={2}>
-          {blogs.map((blog) => (
-            <Grid key={blog.id} item xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  marginBottom: "20px",
-                  boxShadow: 3,
-                  transition: "transform 0.3s",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                  },
-                }}
-                onClick={() => handleBlogClick(blog)}
-              >
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={blog.image}
-                  alt={blog.title}
-                  sx={{ objectFit: "cover", height: 140 }} // Add this line
-                />
-                <CardContent sx={{ height: 160 }}>
-                  <Typography variant="h5" component="h2" noWrap>
-                    {blog.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                    noWrap
-                  >
-                    {blog.description}
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{ justifyContent: "flex-end" }}>
-                  <Button size="small">Read More</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-        <Box sx={{ textAlign: "center", marginTop: "60px" }}>
-          <Button
-            onClick={() => navigate("/newblog")}
-            variant="contained"
-            color="primary"
-            size="large"
-            sx={{
-              borderRadius: "50px",
-              padding: "15px 30px",
-              fontWeight: "bold",
-              boxShadow: 3,
-              "&:hover": {
-                backgroundColor: "#1976D2",
-              },
-            }}
-          >
-            Post a New Blog
-          </Button>
+      <Navbar />
+      {loading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+          }}
+        >
+          <CircularProgress />
         </Box>
+      ) : (
+        <Box
+          sx={{
+            maxWidth: { xs: 600, md: 800, lg: 1000 },
+            width: "100%",
+            margin: "0 auto",
+            paddingX: { xs: 0, md: "20px" },
+            paddingY: "20px",
+          }}
+        >
+          <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
+            BLOG LIST
+          </Typography>
+          <Grid container spacing={2}>
+            {blogs.map((blog) => (
+              <Grid key={blog._id} item xs={12} sm={6} md={4}>
+                <Card
+                  sx={{
+                    marginBottom: "20px",
+                    boxShadow: 3,
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.05)",
+                    },
+                  }}
+                  onClick={() => handleBlogClick(blog)}
+                >
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={blog.image}
+                    alt={blog.title}
+                    sx={{ objectFit: "cover", height: 140 }}
+                  />
+                  <CardContent sx={{ height: 160 }}>
+                    <Typography variant="h5" component="h2" noWrap>
+                      {blog.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      noWrap
+                    >
+                      {blog.description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions
+                    sx={{
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "8px",
+                    }}
+                  >
+                    <Button size="small">Read More</Button>
+                    <Box>
+                      <Button
+                        size="small"
+                        onClick={(event) => handleEdit(event, blog._id)}
+                      >
+                        <EditIcon color="primary" />
+                      </Button>
+                      <Button
+                        size="small"
+                        onClick={(event) => handleDelete(blog._id, event)}
+                      >
+                        <DeleteIcon color="error" />
+                      </Button>
+                    </Box>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          <Box sx={{ textAlign: "center", marginTop: "60px" }}>
+            <Button
+              onClick={() => navigate("/newblog")}
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{
+                borderRadius: "50px",
+                padding: "15px 30px",
+                fontWeight: "bold",
+                boxShadow: 3,
+                "&:hover": {
+                  backgroundColor: "#1976D2",
+                },
+              }}
+            >
+              Post a New Blog
+            </Button>
+          </Box>
 
-        {selectedBlog && (
-          <BlogDetails blog={selectedBlog} onClose={handleClose} />
-        )}
-      </Box>
+          {selectedBlog && (
+            <BlogDetails blog={selectedBlog} onClose={handleClose} />
+          )}
+        </Box>
+      )}
     </>
   );
 }
