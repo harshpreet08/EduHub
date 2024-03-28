@@ -4,14 +4,12 @@ import LandingBody from "../Components/landing-body";
 import About from "../Components/about";
 
 const LandingPage = () =>{
-    return(
         <div class="landing-page">
-        <NavBarpages={["Contact Us", "FAQs", "Register", "Login"]} />
+        <Navbar pages={["Contact Us", "FAQs", "Register", "Login"]} />
         <LandingBody/>
         <About/>
         {/* <Contact/> */}
         </div>
-    )
 }
 
 export default LandingPage;
