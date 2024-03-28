@@ -25,8 +25,6 @@ const ModalWrapper = ({
   const qTitle = useSelector(state => state.modalReducer.qTitle);
   const qDesc = useSelector(state => state.modalReducer.qDesc);
   const isModalVisible = useSelector(state => state.modalReducer.isModalVisible);
-  const { firstName, lastName } = useSelector(state => state.userReducer.userDetails)
-
   useEffect(() => {
     if (quill) {
       quill.on('text-change', () => {
@@ -47,7 +45,7 @@ const ModalWrapper = ({
     const payload = {
       qTitle,
       qDesc,
-      askedByUsername: `${firstName}, ${lastName}`,
+      askedByUsername: 'disha',
     };
     postQuestion(payload)
       .then((response) => {
@@ -80,6 +78,14 @@ const ModalWrapper = ({
         </section>
         <section>
           <label htmlFor="description">Description</label>
+          {/* <textarea
+            rows="10"
+            className={styles.textArea}
+            id="description"
+            name="description"
+            value={qDesc}
+            onChange={e => dispatch(setDescription(e.target.value))}
+          /> */}
           <div className={styles.quilEditor}>
             <div ref={quillRef} />
           </div>
