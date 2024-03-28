@@ -1,47 +1,37 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-shadow */
-import React, { useState, useEffect } from 'react';
+/* external imports */
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
 import moment from 'moment';
-import { getCommentByQid, replyToComment } from '../comment.service';
-import { setComment, resetCommentData } from '../slice/commentsSlice';
+/* service */
+import { replyToComment } from '../comment.service';
+/* slice */
+import { setComment } from '../slice/commentsSlice';
+/* styles */
 import styles from '../../../qnaPage.module.scss';
 
-const Replies = ({ comment = {} }) => {
+const Replies = ({ comment = {}, fetchComment }) => {
   const { qId } = useParams();
-  const [replyText, setReplyText] = useState('');
-  const [commentCollapse, setCommentCollapse] = useState(true);
   const dispatch = useDispatch();
+  const [replyText, setReplyText] = useState('');
+  const [replyCardCollapse, setReplyCardCollapse] = useState(true);
+  const [showReplyInput, setShowReplyInput] = useState(false);
 
   const {
     userName = 'anonymous',
-    parentId = '',
+    // parentId = '',
     replies = [],
     text: commentText = '',
     _id: docId = '',
     answeredDate = new Date().valueOf(),
   } = comment || {};
-
-  useEffect(
-    () =>
-      () => dispatch(resetCommentData()),
-    [],
-  );
-
-  const fetchComment = () => {
-    getCommentByQid({ qId })
-      .then(({ data: allComments }) => {
-        dispatch(setComment(allComments));
-      })
-      .catch((err) => {
-        message.error(err);
-      });
-  };
 
   const onAddNewComment = async () => {
     const payload = {
@@ -59,15 +49,20 @@ const Replies = ({ comment = {} }) => {
       });
   };
 
-  const onReply = async () => {
-    await onAddNewComment();
-    fetchComment();
+  const onReplyBtnClick = () => {
+    setShowReplyInput(!showReplyInput);
   };
 
-  if (parentId === '0') {
-    return (replies || []).map(reply => <Replies comment={reply} />);
-  }
-  const formattedAnsweredDate = answeredDate !== 'Invalid date' ? moment(answeredDate).format('MMMM Do YYYY, h:mm a') : '';
+  const onReplyCardClick = () => {
+    setReplyCardCollapse(!replyCardCollapse);
+  };
+
+  const onPostReplyHandler = async () => {
+    if (!replyText.length) return;
+    await onAddNewComment();
+    await fetchComment();
+    setReplyText('');
+  };
 
   return (
     <div className={styles.commentsContainer}>
@@ -76,40 +71,64 @@ const Replies = ({ comment = {} }) => {
         tabIndex={0}
         className={styles.commentCard}
         key={docId}
-        onClick={() => setCommentCollapse(!commentCollapse)}
+        onClick={onReplyCardClick}
       >
         <p className={styles.commentText}>{commentText}</p>
-        <div role="button" tabIndex={0}>
-          <input
-            type="text"
-            value={replyText}
-            onChange={e => setReplyText(e?.target.value)}
-          />
-          <button
-            type="button"
-            className={styles.replyButton}
-            onClick={e => onReply(e)}
-          >
-            <span className={styles.replyIcon}>💬</span>Reply
-          </button>
-        </div>
+        {showReplyInput && (
+          <div role="button" tabIndex={0} onClick={e => e.stopPropagation()}>
+            <textarea
+              value={replyText}
+              onChange={e => setReplyText(e?.target.value)}
+              className={styles.replyTextArea}
+            />
+            <button
+              type="button"
+              className={styles.replyButton}
+              onClick={e => onPostReplyHandler(e)}
+            >
+              <span className={styles.replyIcon}>💬</span>
+              <span>Post</span>
+            </button>
+          </div>
+        )}
+        {!showReplyInput && (
+          <div onClick={e => e.stopPropagation()}>
+            <button
+              type="button"
+              className={styles.replyButton}
+              onClick={e => onReplyBtnClick(e)}
+            >
+              <span className={styles.replyIcon}>💬</span>
+              <span>Reply</span>
+            </button>
+          </div>
+        )}
         <div className={styles.userDetailSection}>
           {answeredDate !== 'Invalid date' && (
             <div className={styles.answeredDate}>
               <span>answered</span>
-              <span>{formattedAnsweredDate}</span>
+              <span>{moment(answeredDate).format('MMMM Do YYYY, h:mm a')}</span>
             </div>
           )}
           <div className={styles.answeredBy}>{userName}</div>
         </div>
-        {replies.length && commentCollapse ? (
+        {replies.length && replyCardCollapse ? (
           <span className={styles.seeMoreReplies}>
             {replies.length} more replies
           </span>
         ) : null}
       </section>
-      {!commentCollapse
-        && (replies || []).map(reply => <Replies comment={reply} />)}
+      {!replyCardCollapse && (
+        <div className={styles.repliesContainer}>
+          {(replies || []).map(reply => (
+            <Replies
+              key={reply._id}
+              comment={reply}
+              fetchComment={fetchComment}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
