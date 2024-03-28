@@ -25,7 +25,15 @@ const ResultDetailedView = () => {
           const questionDetailsResponse = await axios.get(`${deployedLink}/qb/getQuestion/${question.questionId}`);
           setQuestionDetails(prevDetails => ({
             ...prevDetails,
-            [question.questionId]: questionDetailsResponse.data
+            [question.questionId]: {
+              question: questionDetailsResponse.data.question,
+              options: questionDetailsResponse.data.options,
+              correctOptions: questionDetailsResponse.data.correctOptions,
+              selectedOptions: question.selectedOptions,
+              positiveMarks: questionDetailsResponse.data.positiveMarks,
+              negativeMarks: questionDetailsResponse.data.negativeMarks,
+              solutionDescription: questionDetailsResponse.data.solutionDescription
+            }
           }));
         }));
       } catch (error) {
@@ -47,8 +55,9 @@ const ResultDetailedView = () => {
   }
 
   return (
-    <div className="result-detailed-view-container">
+    <div>
       <Navbar />
+    <div className="result-detailed-view-container">
       <div className="result-details">
         <h1>Attempt Detailed View</h1>
         <p>Attempt ID: {attempt.attemptId}</p>
@@ -58,21 +67,24 @@ const ResultDetailedView = () => {
         <h2>Questions</h2>
         {attempt.attemptedQuestions.map((question) => (
           <div key={question.questionId} className="question-details">
-            <h3>Question ID: {question.questionId}</h3>
-            <p>Selected Options: {question.selectedOptions.join(', ')}</p>
-            <h4>Question Details:</h4>
-            <p>{questionDetails[question.questionId]?.description}</p>
-            <p>Options:</p>
+            <h3>Question:</h3>
+            <h3>{questionDetails[question.questionId]?.question}</h3>
+            <h4>Options:</h4>
             <ul>
               {questionDetails[question.questionId]?.options.map((option, index) => (
                 <li key={index}>{option}</li>
               ))}
             </ul>
+            <p>Correct Options: {questionDetails[question.questionId]?.correctOptions.join(', ')}</p>
+            <p>Selected Options: {questionDetails[question.questionId]?.selectedOptions.join(', ')}</p>
+            <p>Positive Marks: {questionDetails[question.questionId]?.positiveMarks}</p>
+            <p>Negative Marks: {questionDetails[question.questionId]?.negativeMarks}</p>
             <p>Solution Description: {questionDetails[question.questionId]?.solutionDescription}</p>
           </div>
         ))}
         <button className="back-button" onClick={handleBackToList}>Back to Attempt List</button>
       </div>
+    </div>
     </div>
   );
 };

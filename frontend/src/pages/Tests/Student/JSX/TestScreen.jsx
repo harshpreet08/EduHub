@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../CSS/TestScreen.css';
 
 const TestScreen = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const TestScreen = () => {
   const [showPrevious, setShowPrevious] = useState(false);
   const [showNext, setShowNext] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState({});
+  const [markedForReview, setMarkedForReview] = useState([]);
+
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
 
   useEffect(() => {
@@ -55,28 +58,12 @@ const TestScreen = () => {
     fetchTestInfo();
   }, [studentId, testId]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining(prevTime => {
-        if (prevTime <= 0) {
-          clearInterval(timer);
-          handleFinishTest();
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
   const handleFinishTest = async () => {
     const attemptedQuestions = questions.map((question, index) => {
       return {
         questionId: question.questionId,
-        selectedOptions: selectedOptions[index] || []
+        selectedOptions: selectedOptions[index] || [],
+        markedForReview: markedForReview.includes(index),
       };
     });
   
@@ -88,7 +75,7 @@ const TestScreen = () => {
     try {
       const response = await axios.post(`${deployedLink}/finish-test`, finishTestRequest);
       if (response.status === 200) {
-        navigate(`/finish-test?studentId=${studentId}&courseId=${testInfo.courseId}`);
+        navigate(`/finish-test?studentId=${studentId}&courseId=${testInfo.courseId}&attemptId=${finishTestRequest.attemptId}`);
       } else {
         console.error('Failed to finish test:', response.data);
       }
@@ -96,6 +83,25 @@ const TestScreen = () => {
       console.error('Error finishing test:', error);
     }
   };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeRemaining(prevTime => {
+        if (prevTime <= 0) {
+          clearInterval(timer);
+          handleFinishTest();
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+  
+    return () => {
+      clearInterval(timer);
+    };
+  }, [handleFinishTest]);
+
+
 
   const handlePreviousQuestion = () => {
     setCurrentQuestionIndex(prevIndex => prevIndex - 1);
@@ -122,28 +128,40 @@ const TestScreen = () => {
     }));
   };
 
-  return (
-    <div>
-      <h1 style={{ textAlign: 'center' }}>{testInfo.testName}</h1>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>Time Remaining: {timeRemaining} seconds</div>
-        <button onClick={handleFinishTest}>Finish Test</button>
+  const handleMarkForReview = () => {
+    if (markedForReview.includes(currentQuestionIndex)) {
+      setMarkedForReview(prev => prev.filter(index => index !== currentQuestionIndex));
+    } else {
+      setMarkedForReview(prev => [...prev, currentQuestionIndex]);
+    }
+  };
+
+ return (
+    <div className="test-screen-box">
+      <h1 className="test-screen-header">{testInfo.testName}</h1>
+      <div className="test-screen-info">
+        <div className="time-remaining">Time Remaining: <span className="bold">{timeRemaining}</span> seconds</div>
+        <button className="finish-button" onClick={handleFinishTest}>Finish Test</button>
       </div>
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '20%', marginRight: '20px' }}>
+      <div className="test-screen-content">
+        <div className="question-list">
           <h3>Questions:</h3>
           {questions.map((question, index) => (
-            <button key={question.questionId} onClick={() => setCurrentQuestionIndex(index)}>
+            <button
+              key={question.questionId}
+              className={`question-button ${index === currentQuestionIndex ? 'active' : ''} ${markedForReview.includes(index) ? 'review' : ''}`}
+              onClick={() => setCurrentQuestionIndex(index)}
+            >
               Question {index + 1}
             </button>
           ))}
         </div>
-        <div style={{ width: '80%' }}>
+        <div className="question-details">
           {questions.length > 0 && (
-            <div style={{ border: '1px solid black', padding: '20px' }}>
+            <div className="question-box">
               <h3>Question: {currentQuestionIndex + 1}</h3>
-              <p>{questions[currentQuestionIndex].question}</p>
-              <ul>
+              <p className="question-text">{questions[currentQuestionIndex].question}</p>
+              <ul className="option-list">
                 {questions[currentQuestionIndex].options.map((optionText, index) => (
                   <li key={index}>
                     <input
@@ -159,10 +177,10 @@ const TestScreen = () => {
           )}
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <button style={{ marginRight: '10px' }} onClick={handlePreviousQuestion} disabled={!showPrevious}>Previous Question</button>
-        <button style={{ marginRight: '10px' }}>Mark for Review</button>
-        <button onClick={handleNextQuestion} disabled={!showNext}>Next Question</button>
+      <div className="navigation-buttons">
+        <button className="nav-button" onClick={handlePreviousQuestion} disabled={!showPrevious}>Previous</button>
+        <button className="mark-button" onClick={handleMarkForReview}>Mark for Review</button>
+        <button className="nav-button" onClick={handleNextQuestion} disabled={!showNext}>Next</button>
       </div>
     </div>
   );
