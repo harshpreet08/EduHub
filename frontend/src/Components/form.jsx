@@ -4,7 +4,7 @@ import { Email, Pwd, CreateAccount } from "./input";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserData } from "./molecules/questions/slice/userSlice";
+import { setUserData } from "./slices/userSlice";
 
 const SignForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
