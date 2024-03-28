@@ -13,15 +13,16 @@ const ResultDetailedView = () => {
   const [attempt, setAttempt] = useState(null);
   const [questionDetails, setQuestionDetails] = useState({});
   const navigate = useNavigate();
+  const deployedLink = 'https://testbackend-sy5g.onrender.com';
 
   useEffect(() => {
     const fetchAttempt = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/getAttempt/${attemptId}`);
+        const response = await axios.get(`${deployedLink}/getAttempt/${attemptId}`);
         setAttempt(response.data);
         // Fetch question details for each attempted question
         await Promise.all(response.data.attemptedQuestions.map(async (question) => {
-          const questionDetailsResponse = await axios.get(`http://localhost:8080/qb/getQuestion/${question.questionId}`);
+          const questionDetailsResponse = await axios.get(`${deployedLink}/qb/getQuestion/${question.questionId}`);
           setQuestionDetails(prevDetails => ({
             ...prevDetails,
             [question.questionId]: questionDetailsResponse.data

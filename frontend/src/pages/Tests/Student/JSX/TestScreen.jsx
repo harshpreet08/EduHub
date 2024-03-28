@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const TestScreen = () => {
@@ -15,12 +15,13 @@ const TestScreen = () => {
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [showPrevious, setShowPrevious] = useState(false);
   const [showNext, setShowNext] = useState(true);
-  const [selectedOptions, setSelectedOptions] = useState({}); // Store selected options
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const deployedLink = 'https://testbackend-sy5g.onrender.com';
 
   useEffect(() => {
     const fetchTestInfo = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/tests/getTest/${testId}`);
+        const response = await axios.get(`${deployedLink}/tests/getTest/${testId}`);
         const testInfo = response.data;
         setTestInfo(testInfo);
         setTimeRemaining(testInfo.testTime * 60); // Convert minutes to seconds
@@ -34,7 +35,7 @@ const TestScreen = () => {
 
     const fetchQuestions = async (testInfo) => {
       try {
-        const response = await axios.post('http://localhost:8080/launch-test', {
+        const response = await axios.post(`${deployedLink}/launch-test`, {
           userId: studentId,
           testId: testId,
           courseId: testInfo.courseId,
@@ -59,7 +60,7 @@ const TestScreen = () => {
       setTimeRemaining(prevTime => {
         if (prevTime <= 0) {
           clearInterval(timer);
-          handleFinishTest(); // Automatically finish test when timer reaches zero
+          handleFinishTest();
           return 0;
         }
         return prevTime - 1;
@@ -71,12 +72,11 @@ const TestScreen = () => {
     };
   }, []);
 
-  // Function to handle finishing the test
   const handleFinishTest = async () => {
     const attemptedQuestions = questions.map((question, index) => {
       return {
         questionId: question.questionId,
-        selectedOptions: selectedOptions[index] || [] // Get selected options for each question
+        selectedOptions: selectedOptions[index] || []
       };
     });
   
@@ -86,7 +86,7 @@ const TestScreen = () => {
     };
   
     try {
-      const response = await axios.post('http://localhost:8080/finish-test', finishTestRequest);
+      const response = await axios.post(`${deployedLink}/finish-test`, finishTestRequest);
       if (response.status === 200) {
         navigate(`/finish-test?studentId=${studentId}&courseId=${testInfo.courseId}`);
       } else {
@@ -97,7 +97,6 @@ const TestScreen = () => {
     }
   };
 
-  // Function to handle moving to the previous question
   const handlePreviousQuestion = () => {
     setCurrentQuestionIndex(prevIndex => prevIndex - 1);
     setShowNext(true);
@@ -106,7 +105,6 @@ const TestScreen = () => {
     }
   };
 
-  // Function to handle moving to the next question
   const handleNextQuestion = () => {
     setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     setShowPrevious(true);
@@ -115,7 +113,6 @@ const TestScreen = () => {
     }
   };
 
-  // Function to handle selecting an option
   const handleOptionSelect = (optionText) => {
     setSelectedOptions(prevSelectedOptions => ({
       ...prevSelectedOptions,

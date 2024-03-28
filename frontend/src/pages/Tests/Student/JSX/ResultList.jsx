@@ -11,11 +11,12 @@ const ResultList = () => {
   const studentId = searchParams.get('studentId');
   const courseId = searchParams.get('courseId');
   const [attempts, setAttempts] = useState([]);
+  const deployedLink = 'https://testbackend-sy5g.onrender.com';
 
   useEffect(() => {
     const fetchAttempts = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/getAttempts/${studentId}/${courseId}`);
+        const response = await axios.get(`${deployedLink}/getAttempts/${studentId}/${courseId}`);
         setAttempts(response.data);
       } catch (error) {
         console.error('Error fetching attempts:', error);
