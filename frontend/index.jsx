@@ -72,6 +72,7 @@ const appRoute = createBrowserRouter([
     element: <BlogFormPage></BlogFormPage>,
     errorElement: <Error />,
   },
+  
 ]);
 
 const rootElement = document.getElementById("root");
