@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import '../CSS/CreateTestPage.css';
-import NavBar from '../../../../Components/NavBar.jsx';
+import NavBar from '../../../../components/NavBar.jsx';
 
 const CreateTest = () => {
   const location = useLocation();

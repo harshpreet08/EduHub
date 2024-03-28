@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import NavBar from "../../Components/NavBar";
-import BlogFormPage from "../../Components/BlogFormPage";
-import BlogListPage from "../../Components/BlogListPage";
-import BlogDetailsPage from "../../Components/BlogDetails";
-import PricingPage from "../../Components/PricingPage";
+import NavBar from "../../components/NavBar";
+import BlogFormPage from "../../components/BlogFormPage";
+import BlogListPage from "../../components/BlogListPage";
+import BlogDetailsPage from "../../components/BlogDetails";
+import PricingPage from "../../components/PricingPage";
 import QuestionBank from "../../pages/Tests/Professor/JSX/QuestionBank"; 
-import "../../Components/Global.css";
+import "../../components/Global.css";
 import React from 'react';
-import NavBar from '../../Components/NavBar';
+import NavBar from '../../components/NavBar';
 import Router from '../routes/route';
 
 function App() {

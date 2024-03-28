@@ -11,10 +11,10 @@ import Error from "./src/components/error.jsx";
 import FAQS from "./src/pages/Faqs/Faqs";
 import Dashboard from "./src/pages/Dashboard/Dashboard";
 import Contactus from "./src/pages/Contact/Contactus";
-import PricingPage from "./src/Components/PricingPage.jsx";
-import BlogList from "./src/Components/BlogListPage.jsx";
-import BlogFormPage from "./src/Components/BlogFormPage.jsx";
-import BlogDetailsPage from "./src/Components/BlogDetails.jsx";
+import PricingPage from "./src/components/PricingPage.jsx";
+import BlogList from "./src/components/BlogListPage.jsx";
+import BlogFormPage from "./src/components/BlogFormPage.jsx";
+import BlogDetailsPage from "./src/components/BlogDetails.jsx";
 
 const appRoute = createBrowserRouter([
   {
