@@ -67,7 +67,7 @@ function BlogList() {
 
   return (
     <>
-      <Navbar />
+      <Navbar pages={["Contact Us", "FAQs", "Register", "Login"]} />
       {loading ? (
         <Box
           sx={{
@@ -96,7 +96,7 @@ function BlogList() {
           }}
         >
           <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
-            BLOG LIST
+            BLOGS
           </Typography>
           <Grid container spacing={2}>
             {blogs.map((blog) => (

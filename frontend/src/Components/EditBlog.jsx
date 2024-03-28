@@ -72,7 +72,7 @@ function EditBlog() {
 
   return (
     <>
-      <Navbar />
+      <Navbar pages={["Contact Us", "FAQs", "Register", "Login"]} />
       <Box
         sx={{
           maxWidth: 600,
