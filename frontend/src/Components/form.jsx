@@ -1,14 +1,64 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
-import {
-  Email, Pwd, CreateAccount,
-} from './input';
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Email, Pwd, CreateAccount } from "./input";
+import axios from "axios";
+import Cookies from "universal-cookie";
+import { useDispatch } from "react-redux";
+import jwt from 'jsonwebtoken';
+import { setUserDetails } from "../data/global/userDetail/slice/userReducer";
 
 const SignForm = () => {
-  const [selectedRole, setSelectedRole] = useState('Teacher');
+  const dispatch = useDispatch();
+  const [selectedRole, setSelectedRole] = useState("Teacher");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+  
+
 
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
+  };
+
+  useEffect(() => {
+    console.log(email);
+    console.log(password);
+    console.log(selectedRole);
+  }, [email, password]);
+
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      const payload = {
+        email: email,
+        password: password,
+        role: selectedRole.toLowerCase(),
+      };
+      console.log("Here in the function");
+      const response = await axios.post(
+        "http://localhost:7000/user/login",
+        payload,
+        { withCredentials: true }
+      );
+      console.log(response);
+      console.log(response.headers.accesstoken);
+      cookies.set("accesstoken",response.headers.accesstoken);
+      console.log(cookies.get("accesstoken"));
+      console.log(document.cookies);
+      const token = document.cookie.replace('accesstoken=', '');
+      dispatch(setUserDetails(jwt.decode(token)));
+
+      if (response.error) {
+        navigate("/blogs");
+      }
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+      const errMessage = error?.response?.data?.error;
+      setError(errMessage);
+    }
   };
 
   return (
@@ -21,22 +71,22 @@ const SignForm = () => {
           <div className="border-2 border-blue-500 rounded-md overflow-hidden">
             <button
               type="button"
-              onClick={() => handleRoleToggle('Teacher')}
+              onClick={() => handleRoleToggle("Teacher")}
               className={`${
-                selectedRole === 'Teacher'
-                  ? 'bg-indigo-500 text-white'
-                  : 'text-blue-500'
+                selectedRole === "Teacher"
+                  ? "bg-indigo-500 text-white"
+                  : "text-blue-500"
               } font-semibold px-4 py-2 rounded-l-md`}
             >
               Teacher
             </button>
             <button
               type="button"
-              onClick={() => handleRoleToggle('Student')}
+              onClick={() => handleRoleToggle("Student")}
               className={`${
-                selectedRole === 'Student'
-                  ? 'bg-indigo-500 text-white'
-                  : 'text-blue-500'
+                selectedRole === "Student"
+                  ? "bg-indigo-500 text-white"
+                  : "text-blue-500"
               } font-semibold px-4 py-2 rounded-r-md`}
             >
               Student
@@ -45,11 +95,22 @@ const SignForm = () => {
         </div>
         <hr className="my-6 border-gray-300 w-full" />
 
-        <form className="mt-10" action="#" method="POST">
-          <Email />
+        <form className="mt-10" onSubmit={handleLogin}>
+          <Email value={email} fn={setEmail} />
 
-          <Pwd />
+          <Pwd value={password} fn={setPassword} />
 
+          <div className="mt-2">
+            {error && (
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                role="alert"
+              >
+                <strong className="font-bold">Error:</strong>
+                <span className="block sm:inline ml-2">{error}</span>
+              </div>
+            )}
+          </div>
           <div className="text-right mt-2">
             <Link
               to="/forgotpwd"
@@ -59,13 +120,11 @@ const SignForm = () => {
             </Link>
           </div>
 
-          <button
+          <input
             type="submit"
-            className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
-              px-4 py-3 mt-6"
-          >
-            Log In
-          </button>
+            value="Log In"
+            className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
+          />
         </form>
 
         {/* <hr className="my-6 border-gray-300 w-full" /> */}
