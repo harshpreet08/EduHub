@@ -26,18 +26,19 @@ const Replies = ({ comment = {}, fetchComment }) => {
 
   const {
     userName = 'anonymous',
-    // parentId = '',
     replies = [],
     text: commentText = '',
     _id: docId = '',
-    answeredDate = new Date().valueOf(),
+    answeredDate = '',
   } = comment || {};
 
   const onAddNewComment = async () => {
     const payload = {
-      questionId: qId,
       parentId: comment?._id,
+      questionId: qId,
       text: replyText,
+      answeredDate: new Date().valueOf(),
+      userName: '',
     };
     await replyToComment(payload)
       .then((response) => {
@@ -104,10 +105,10 @@ const Replies = ({ comment = {}, fetchComment }) => {
           </div>
         )}
         <div className={styles.userDetailSection}>
-          {answeredDate !== 'Invalid date' && (
+          {moment(answeredDate).fromNow() !== 'Invalid date' && (
             <div className={styles.answeredDate}>
               <span>answered</span>
-              <span>{moment(answeredDate).format('MMMM Do YYYY, h:mm a')}</span>
+              <span>{moment(answeredDate).fromNow()}</span>
             </div>
           )}
           <div className={styles.answeredBy}>{userName}</div>

@@ -11,7 +11,7 @@ exports.getCommentByQid = async (req, res) => {
 } 
 
 exports.updateComment = async (req, res) => {
-  const { text, parentId, questionId } = req.body;
+  const { parentId, questionId, ...rest } = req.body;
 
   try {
     const document = await Comment.findOne({ qId: { $eq: questionId }});
@@ -24,10 +24,12 @@ exports.updateComment = async (req, res) => {
 
     const newComment = {
       _id: String(new Date().valueOf()),
-      text,
       parentId,
       replies: [],
+      ...rest,
     };
+
+    console.log({ newComment })
 
     parentComment.replies.push(newComment);
 
