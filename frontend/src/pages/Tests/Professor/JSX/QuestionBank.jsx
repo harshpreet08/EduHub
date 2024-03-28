@@ -4,7 +4,7 @@ import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import axios from 'axios';
 import { Button, Snackbar } from '@mui/material';
 import '../CSS/QuestionPage.css';
-import NavBar from '../../../../components/NavBar.jsx';
+import NavBar from '../../../../Components/NavBar.jsx';
 
 const QuestionBank = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);

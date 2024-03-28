@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/FinishTestScreen.css';
-import Navbar from '../../../../components/NavBar';
+import Navbar from '../../../../Components/NavBar';
 
 const FinishTestScreen = () => {
   const location = useLocation();

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../CSS/ResultList.css';
-import Navbar from '../../../../components/NavBar';
+import Navbar from '../../../../Components/NavBar';
 
 const ResultList = () => {
     const navigate = useNavigate();
