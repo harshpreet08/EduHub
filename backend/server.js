@@ -30,7 +30,7 @@ app.use('/community', communityRouter.routes)
 app.use('/api/blog', blogRouter);
 app.use('/', commentRouter.routes)
 
-
-app.listen(6002, () => {
+const port = process.env.PORT || 6002;
+app.listen(port, () => {
   console.log('server started')
 })
