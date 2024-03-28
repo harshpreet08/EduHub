@@ -25,6 +25,7 @@ const CommentContainer = () => {
     getCommentByQid({ qId })
       .then(({ data: allComments }) => {
         dispatch(setComment(allComments));
+        dispatch(setNewCommentText(''));
       })
       .catch((err) => {
         message.error(err);
@@ -36,6 +37,7 @@ const CommentContainer = () => {
       questionId: qId,
       parentId: comment?._id,
       text: newCommentText,
+      parentLvlCmt: true,
     };
     await replyToComment(payload)
       .then((response) => {

@@ -52,6 +52,7 @@ const ModalWrapper = ({
         if (response.statusText === 'OK') {
           onSubmit();
           resetData();
+          message.success('Your question has been posted.');
         }
       })
       .catch((err) => {

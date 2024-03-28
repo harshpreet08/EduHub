@@ -1,4 +1,6 @@
 const { Comment } = require('../models/comments');
+const { questionBank } = require('../models/questionBank');
+
 
 exports.getCommentByQid = async (req, res) => {
   try {
@@ -11,12 +13,11 @@ exports.getCommentByQid = async (req, res) => {
 } 
 
 exports.updateComment = async (req, res) => {
-  const { parentId, questionId, ...rest } = req.body;
-
+  const { parentId, questionId, parentLvlCmt, ...rest } = req.body;
   try {
     const document = await Comment.findOne({ qId: { $eq: questionId }});
     
-    const { parentComment } = findParentCommentId(document, parentId);
+    const { parentComment } = findParentComment(document, parentId);
 
     if (!parentComment) {
       return res.status(404).json({ error: 'Parent comment not found' });
@@ -34,6 +35,7 @@ exports.updateComment = async (req, res) => {
     parentComment.replies.push(newComment);
 
     await Comment.findOneAndUpdate({ qId: { $eq: questionId }}, document, { new: true });
+    await updateTotalAnswerByQid({ parentLvlCmt, questionId });
 
     return res.status(201).json({ message: 'Reply added successfully' });
   } catch (error) {
@@ -42,7 +44,7 @@ exports.updateComment = async (req, res) => {
   }
 };
 
-const findParentCommentId = (comment, commentId) => {
+const findParentComment = (comment, commentId) => {
   let foundComment;
   const recurFindComment = (currComment, targetId) => {
     console.log({ currId: currComment._id, targetId });
@@ -62,3 +64,16 @@ const findParentCommentId = (comment, commentId) => {
     parentComment: foundComment,
   };
 };
+
+const updateTotalAnswerByQid = async ({
+  parentLvlCmt,
+  questionId,
+}) => {
+  if(parentLvlCmt) {
+    await questionBank.findByIdAndUpdate(
+      questionId, 
+      { $inc: { totalAnswers: 1 } }, 
+      { new: true },
+    );
+  }
+}
