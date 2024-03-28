@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import SuccessPopup from '../../Components/SuccessPopup.jsx';
+import SuccessPopup from '../../../../Components/SuccessPopup.jsx';
 import axios from 'axios';
-import './AddQuestionPage.css';
-import NavBar from '../../Components/NavBar.jsx';
+import '../CSS/AddQuestionPage.css';
+import NavBar from '../../../../Components/NavBar.jsx';
 import { FaPlus, FaMinus } from 'react-icons/fa'; // Import icons
 
 const AddQuestion = () => {

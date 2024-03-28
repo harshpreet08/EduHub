@@ -3,8 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import axios from 'axios';
 import { Button, Snackbar } from '@mui/material';
-import '../Tests/QuestionPage.css';
-import NavBar from '../../Components/NavBar.jsx';
+import '../CSS/QuestionPage.css';
+import NavBar from '../../../../Components/NavBar.jsx';
 
 const QuestionBank = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);

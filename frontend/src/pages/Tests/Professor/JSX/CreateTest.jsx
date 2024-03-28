@@ -4,8 +4,8 @@ import { Button, Snackbar, Modal, CircularProgress } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
-import '../Tests/CreateTestPage.css';
-import NavBar from '../../Components/NavBar.jsx';
+import '../CSS/CreateTestPage.css';
+import NavBar from '../../../../Components/NavBar.jsx';
 
 const CreateTest = () => {
   const location = useLocation();
@@ -33,7 +33,7 @@ const CreateTest = () => {
   const deployedLink = `https://testbackend-sy5g.onrender.com`;
 
   useEffect(() => {
-    // Fetch already created tests
+
     axios.get(`${deployedLink}/tests/getAll/${userId}/${courseId}`)
       .then(response => {
         setCreatedTests({ data: response.data, loading: false });
@@ -230,10 +230,10 @@ const CreateTest = () => {
               <p style={{ fontWeight: 'bold' }}>{test.testName}</p>
               <div className="test-actions">
                 <Button onClick={() => handleEditTest(test.id)}>
-                  <EditIcon style={{ color: '#333' }} />
+                  <EditIcon style={{ color: '#FFFFFF' }} />
                 </Button>
                 <Button onClick={() => handleDeleteTest(test.id)}>
-                  <DeleteIcon style={{ color: '#333' }} />
+                  <DeleteIcon style={{ color: '#FFFFFF' }} />
                 </Button>
               </div>
             </div>

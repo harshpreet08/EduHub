@@ -5,7 +5,7 @@ import BlogFormPage from "../../Components/BlogFormPage";
 import BlogListPage from "../../Components/BlogListPage";
 import BlogDetailsPage from "../../Components/BlogDetails";
 import PricingPage from "../../Components/PricingPage";
-import QuestionBank from "../../pages/Tests/QuestionBank"; 
+import QuestionBank from "../../pages/Tests/Professor/JSX/QuestionBank"; 
 import "../../Components/Global.css";
 
 function App() {

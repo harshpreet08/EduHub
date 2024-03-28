@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import SuccessPopup from '../../Components/SuccessPopup.jsx';
-import '../Tests/EditQuestionPage.css';
+import SuccessPopup from '../../../../Components/SuccessPopup.jsx';
+import '../CSS/EditQuestionPage.css';
 import { FaPlus, FaMinus } from 'react-icons/fa'; 
-import NavBar from '../../Components/NavBar.jsx';
+import NavBar from '../../../../Components/NavBar.jsx';
 
 
 const EditQuestion = () => {
