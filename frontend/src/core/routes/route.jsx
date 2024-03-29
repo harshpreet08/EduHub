@@ -14,6 +14,16 @@ const PricingPage = lazy(() => import("../../Components/PricingPage"));
 const BlogList = lazy(() => import("../../Components/BlogListPage"));
 const BlogFormPage = lazy(() => import("../../Components/BlogFormPage"));
 const BlogDetailsPage = lazy(() => import("../../Components/BlogDetails"));
+const QuestionBank = lazy(() => import("../../pages/Tests/Professor/JSX/QuestionBank"));
+const AddQuestion = lazy(() => import("../../pages/Tests/Professor/JSX/AddQuestion"));
+const CreateTest = lazy(() => import("../../pages/Tests/Professor/JSX/CreateTest"));
+const EditQuestion = lazy(() => import("../../pages/Tests/Professor/JSX/EditQuestion"));
+const TestList = lazy(() => import("../../pages/Tests/Student/JSX/TestList"));
+const TestScreen = lazy(() => import("../../pages/Tests/Student/JSX/TestScreen"));
+const ResultList = lazy(() => import("../../pages/Tests/Student/JSX/ResultList"));
+const ResultDetailedView = lazy(() => import("../../pages/Tests/Student/JSX/ResultDetailedView"));
+const FinishTestScreen = lazy(() => import("../../pages/Tests/Student/JSX/FinishTestScreen"));
+
 const Questions = lazy(() =>
   import("../../Components/molecules/questions/Questions")
 );
@@ -47,6 +57,15 @@ const routes = {
   "/success": Success,
   "/cancel": Cancel,
   "/edit-blog/:id": EditBlog,
+  "/questionbank":QuestionBank,
+  "/createtest": CreateTest,
+  "/addquestion":AddQuestion,
+  "/editquestion":EditQuestion,
+  "/test-list":TestList,
+  "/start-test":TestScreen,
+  "/result-list":ResultList,
+  "/result-detailed-view":ResultDetailedView,
+  "/finish-test":FinishTestScreen,
 };
 
 function RouteConfig() {
