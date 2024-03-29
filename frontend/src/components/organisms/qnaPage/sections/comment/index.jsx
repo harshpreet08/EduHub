@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
-import { v4 as uuidv4 } from 'uuid';
 import Replies from './replies';
 import { getCommentByQid, replyToComment } from './comment.service';
 import { setComment, setNewCommentText, resetCommentData } from './slice/commentsSlice';
@@ -16,6 +15,13 @@ const CommentContainer = () => {
   const newCommentText = useSelector(state => state.qnaPageReducer.commentReducer.newCommentText);
 
   useEffect(() => {
+    fetchComment();
+    return () => {
+      dispatch(resetCommentData());
+    };
+  }, []);
+
+  const fetchComment = () => {
     getCommentByQid({ qId })
       .then(({ data: allComments }) => {
         dispatch(setComment(allComments));
@@ -23,17 +29,15 @@ const CommentContainer = () => {
       .catch((err) => {
         message.error(err);
       });
-    return () => dispatch(resetCommentData());
-  }, []);
+  };
 
-  const handlePostClick = () => {
-    if (!newCommentText.trim()) {
-      message.warning('Please enter a comment');
-      return;
-    }
-    const parentId = uuidv4();
-    const payload = { questionId: qId, parentId, text: newCommentText };
-    replyToComment(payload)
+  const onAddNewComment = async () => {
+    const payload = {
+      questionId: qId,
+      parentId: comment?._id,
+      text: newCommentText,
+    };
+    await replyToComment(payload)
       .then((response) => {
         dispatch(setComment(response.data));
       })
@@ -41,6 +45,11 @@ const CommentContainer = () => {
         const errorMessage = error.message || 'An error occurred';
         message.error(errorMessage);
       });
+  };
+
+  const onAddNewCommmentHandler = async () => {
+    await onAddNewComment();
+    fetchComment();
   };
 
   return (
@@ -60,7 +69,7 @@ const CommentContainer = () => {
         <button
           type="button"
           className={styles.answerButton}
-          onClick={handlePostClick}
+          onClick={onAddNewCommmentHandler}
           style={{ display: newCommentText !== '' ? 'block' : 'none' }}
         >
           Comment

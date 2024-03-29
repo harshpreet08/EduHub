@@ -16,9 +16,9 @@ import {
   faThumbsDown,
   faHeart,
   faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
-import Navbar from "./NavBar";
-import CircularProgress from "@mui/material/CircularProgress";
+} from '@fortawesome/free-solid-svg-icons';
+import Navbar from './NavBar';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function BlogDetailsPage() {
   const { id } = useParams();
@@ -27,14 +27,14 @@ function BlogDetailsPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:8000/api/blog/${id}`)
-      .then((response) => response.json())
+    fetch(`http://localhost:6002/api/blog/${id}`)
+      .then(response => response.json())
       .then((data) => {
         setBlog(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching blog details:", error);
+        console.error('Error fetching blog details:', error);
         setLoading(false);
       });
   }, [id]);

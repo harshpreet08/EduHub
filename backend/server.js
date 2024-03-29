@@ -41,7 +41,7 @@ app.use('/api/blog', blogRouter);
 app.use('/user',userRouter);
 app.use('/', commentRouter.routes)
 
-
-app.listen(7000, () => {
+const port = process.env.PORT || 6002;
+app.listen(port, () => {
   console.log('server started')
 })
