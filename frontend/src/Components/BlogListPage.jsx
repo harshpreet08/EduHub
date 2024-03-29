@@ -67,7 +67,7 @@ function BlogList() {
 
   return (
     <>
-      <Navbar />
+      <Navbar pages={["Login", "Logout", "My Courses"]} />
       {loading ? (
         <Box
           sx={{

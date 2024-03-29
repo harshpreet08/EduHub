@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Box,
   Typography,
@@ -16,32 +17,33 @@ import {
   faThumbsDown,
   faHeart,
   faArrowLeft,
-} from '@fortawesome/free-solid-svg-icons';
-import Navbar from './NavBar';
-import CircularProgress from '@mui/material/CircularProgress';
+} from "@fortawesome/free-solid-svg-icons";
+import Navbar from "./NavBar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function BlogDetailsPage() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+  const firstName = useSelector((state) => state.userSlice.firstName);
 
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:6002/api/blog/${id}`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((data) => {
         setBlog(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching blog details:', error);
+        console.error("Error fetching blog details:", error);
         setLoading(false);
       });
   }, [id]);
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar pages={["Login", "Logout", "My Courses"]}></Navbar>
       {loading ? (
         <Box
           sx={{
@@ -89,7 +91,7 @@ function BlogDetailsPage() {
                   paragraph
                   sx={{ textAlign: "center" }}
                 >
-                  by {blog.author}
+                  by {firstName}
                 </Typography>
               </CardContent>
               <CardMedia
