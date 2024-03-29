@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../assets/images/login-img.png';
-import { ForgotForm } from '../components/fogot-form';
+import { ForgotForm } from '../Components/fogot-form';
 
 const ForgotPwd = () => (
   <section className="flex justify-center items-center h-screen">
