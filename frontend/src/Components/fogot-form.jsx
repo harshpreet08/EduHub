@@ -25,7 +25,7 @@ export const ForgotForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:7000/user/forgotpwd",
+        "http://localhost:6002/user/forgotpwd",
         payload
       );
       

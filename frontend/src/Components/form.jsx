@@ -35,7 +35,7 @@ const SignForm = () => {
       };
       console.log("Here in the function");
       const response = await axios.post(
-        "http://localhost:7000/user/login",
+        "http://localhost:6002/user/login",
         payload,
         { withCredentials: true }
       );

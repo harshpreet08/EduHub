@@ -14,9 +14,6 @@
 // import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
 
-<<<<<<< HEAD
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-=======
 // const pages = ['Contact Us', 'FAQs', 'Register', 'Login'];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -189,9 +186,8 @@ import EduHubLogo from "../assets/images/EduHubLogo.png";
 
 const pages = ["Contact Us", "FAQs", "Register", "Login"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
->>>>>>> 70b394ff70f6dcf27d7a043cc08cbb250f7f6e21
 
-function Navbar({pages}) {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -275,7 +271,7 @@ function Navbar({pages}) {
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
-            noWraps
+            noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{

@@ -36,7 +36,7 @@ const SignUpForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:7000/user/signup",
+        "http://localhost:6002/user/signup",
         payload
       );
 
