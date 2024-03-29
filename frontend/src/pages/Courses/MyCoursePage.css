@@ -1,0 +1,245 @@
+.my-courses-page {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container for the search bar and filter section */
+.my-courses-filter-and-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 98%;
+  
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Search container */
+.search-container {
+  margin-bottom: 1rem;
+  margin-right: 2rem;
+  flex: 1;
+}
+
+/* Search bar */
+.search-bar {
+  width: 100%; 
+  border: 1px solid #ccc;
+  border-radius: 4rem;
+  font-size: 0.9rem;
+  outline: none;
+  padding: 0.5rem 1rem; /* Adjust padding */
+}
+
+
+/* Filter section */
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease-in-out;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+/* Label for filter dropdown */
+.filter-section label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #495057;
+  text-align: left;
+}
+
+/* Checkbox labels */
+.filter-section label input[type="checkbox"] {
+  margin-right: 0.25rem;
+  text-align: left;
+}
+
+/* Range input for rating filter */
+.filter-section input[type="range"] {
+  width: 100%;
+}
+
+/* Clear filters button */
+.filter-section button {
+  margin-top: 1rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Change button color on hover */
+.filter-section button:hover {
+  background-color: #c82333;
+}
+
+/* Search bar */
+.search-bar {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4rem;
+  font-size: 0.9rem;
+  outline: none;
+  padding: 0.5rem 1rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-label {
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.rating-filter input[type="range"] {
+  width: 8rem;
+  text-align: left;
+}
+
+/* Course container */
+.my-course-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Filter container */
+.filter-container {
+  width: 20%;
+  flex-direction: column;
+  height: auto;
+  padding: 20px;
+  background-color: #eeeeee;
+  text-align: left;
+  margin-right: 0.7rem;
+  margin-left: 1rem;
+}
+
+.course-container-2 {
+  width: 80%;
+}
+
+/* Course list */
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 2rem; /* Adjust gap between cards */
+  justify-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0;
+  grid-auto-flow: dense;
+
+}
+
+/* Course title */
+.course-list h1 {
+  padding: 1rem;
+  font-size: 1rem;
+  width: 100%;
+}
+.clear-button {
+  background-color: #ff6f61; /* Red */
+  border: none;
+  color: white;
+  padding: 10px 20px; /* Adjust height by changing padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Adjust font size */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.clear-button:hover {
+  background-color: #e05147; /* Darker red on hover */
+}
+
+/* @media screen and (max-width: 1200px) {
+  .filter-container {
+    width: 30%;
+  }
+} */
+
+@media screen and (max-width: 992px) {
+  .filter-container {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Adjust styles for tablets */
+  .my-courses-page {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .filter-and-search {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .filter-container {
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-right: 0; /* Remove margin-right for smaller screens */
+  }
+
+  .course-container-2 {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+  /* Adjust styles for mobile */
+  .filter-section {
+    padding: 0.5rem;
+    
+  }
+ 
+ 
+  .filter-container {
+    padding: 1rem;
+    width: 100%; /* Set width to 100% for smaller screens */
+    margin-right: 0; /* Remove margin-right for smaller screens */
+
+  }
+ 
+  .my-course-container {
+    flex-direction: column;
+    margin-right: 2rem;
+  }
+
+  .course-container-2 {
+    width: 100%;
+    
+  }
+
+  .course-list {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 0.5rem;
+   
+  }
+}
