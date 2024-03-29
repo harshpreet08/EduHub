@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CommentSchema = new Schema({
-  // _id: String,
-  // _id: mongoose.Types.ObjectId,
   text: String,
   parentId: {
     type: Schema.Types.Mixed,
@@ -12,6 +10,7 @@ const CommentSchema = new Schema({
   },
   qId: String,
   replies: [Object],
+  answeredDate: Number,
 });
 
 exports.Comment = mongoose.model('Comment', CommentSchema, 'nestedComment');

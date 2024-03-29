@@ -1,7 +1,8 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 /* external imports */
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
 import cx from 'classnames';
@@ -21,6 +22,7 @@ const Replies = ({ comment = {}, fetchComment }) => {
   const [replyText, setReplyText] = useState('');
   const [replyCardCollapse, setReplyCardCollapse] = useState(true);
   const [showReplyInput, setShowReplyInput] = useState(false);
+  const { userFullName = '' } = useSelector(state => state.userSlice);
 
   const {
     userName = 'anonymous',
@@ -37,7 +39,7 @@ const Replies = ({ comment = {}, fetchComment }) => {
       questionId: qId,
       text: replyText,
       answeredDate: new Date().valueOf(),
-      userName: '',
+      userName: userFullName,
     };
     await replyToComment(payload)
       .then((response) => {
@@ -147,10 +149,10 @@ const Replies = ({ comment = {}, fetchComment }) => {
                   <span
                     style={{
                       backgroundColor: QnAUtility.getColorForLetter(
-                        (userName.charAt(0) || '').toUpperCase(),
+                        (userFullName.charAt(0) || '').toUpperCase(),
                       ),
                     }}
-                  >{(userName.charAt(0) || '').toUpperCase()}
+                  >{(userFullName.charAt(0) || '').toUpperCase()}
                   </span>
                 </div>
                 <div className={styles.inputContainer}>

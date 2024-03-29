@@ -13,6 +13,7 @@ const CommentContainer = () => {
   const dispatch = useDispatch();
   const comment = useSelector(state => state.qnaPageReducer.commentReducer.comment);
   const newCommentText = useSelector(state => state.qnaPageReducer.commentReducer.newCommentText);
+  const { userFullName = '' } = useSelector(state => state.userSlice);
 
   useEffect(() => {
     fetchComment();
@@ -38,6 +39,8 @@ const CommentContainer = () => {
       parentId: comment?._id,
       text: newCommentText,
       parentLvlCmt: true,
+      userName: userFullName,
+      answeredDate: new Date().valueOf(),
     };
     await replyToComment(payload)
       .then((response) => {
