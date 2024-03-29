@@ -25,6 +25,7 @@ const ModalWrapper = ({
   const qTitle = useSelector(state => state.modalReducer.qTitle);
   const qDesc = useSelector(state => state.modalReducer.qDesc);
   const isModalVisible = useSelector(state => state.modalReducer.isModalVisible);
+  const { firstName = '', lastName = '' } = useSelector(state => state.userSlice);
   useEffect(() => {
     if (quill) {
       quill.on('text-change', () => {
@@ -45,7 +46,7 @@ const ModalWrapper = ({
     const payload = {
       qTitle,
       qDesc,
-      askedByUsername: 'disha',
+      askedByUsername: `${firstName}, ${lastName}`,
     };
     postQuestion(payload)
       .then((response) => {

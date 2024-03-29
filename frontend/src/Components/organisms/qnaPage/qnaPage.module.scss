@@ -86,6 +86,7 @@
           flex-direction: column;
           .nameDateContainer {
             display: flex;
+            align-items: baseline;
             gap: 0.5rem;
             .userName {
               color: #000;
