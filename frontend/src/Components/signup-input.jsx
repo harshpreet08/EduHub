@@ -2,13 +2,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const FirstName = () => (
+export const FirstName = ({value, fn}) => (
   <div className="mt-6">
     <label className="block text-gray-700 font-semibold">First Name</label>
     <input
       type="text"
       name="firstName"
       id="firstName"
+      value = {value}
+      onChange = {(e) => {fn(e.target.value)}}
       placeholder="Enter First Name"
       className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border border-gray-700 focus:border-blue-500
                 focus:bg-white focus:outline-none"
@@ -17,7 +19,7 @@ export const FirstName = () => (
   </div>
 );
 
-export const LastName = () => (
+export const LastName = ({value,fn}) => (
   <div className="mt-6">
     <label className="block text-gray-700 font-semibold">Last Name</label>
     <input
@@ -27,6 +29,8 @@ export const LastName = () => (
       placeholder="Enter Last Name"
       className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border border-gray-700 focus:border-blue-500
                 focus:bg-white focus:outline-none"
+      value = {value}
+      onChange= {(e) => {fn(e.target.value)}}
       required
     />
   </div>
