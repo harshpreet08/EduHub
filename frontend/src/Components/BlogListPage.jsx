@@ -96,7 +96,7 @@ function BlogList() {
           }}
         >
           <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
-            BLOG LIST
+            BLOGS
           </Typography>
           <Grid container spacing={2}>
             {blogs.map((blog) => (
