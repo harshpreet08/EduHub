@@ -19,11 +19,11 @@ const SignForm = () => {
     setSelectedRole(role);
   };
 
-  useEffect(() => {
-    console.log(email);
-    console.log(password);
-    console.log(selectedRole);
-  }, [email, password]);
+  // useEffect(() => {
+  //   console.log(email);
+  //   console.log(password);
+  //   console.log(selectedRole);
+  // }, [email, password]);
 
   const handleLogin = async (e) => {
     try {

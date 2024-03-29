@@ -4,6 +4,9 @@ import Loader from "../../Components/atom/loader";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import { setUserData } from "../../Components/slices/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 
 /* internal components */
 const SignUp = lazy(() => import("../../pages/Signup"));
@@ -63,13 +66,26 @@ const ErrorElement = () => {
 const ProtectedRoute = (props) => {
   try {
     const [authenticated, SetAuthenticated] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
       axios
         .post("http://localhost:6002/user/validate", null, {
           withCredentials: true,
         })
-        .then(() => SetAuthenticated(true))
+        .then((response) => {
+          SetAuthenticated(true);
+          const userData = response?.data?.data;
+          const userPayload = {
+            userId: userData._id,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: userData.email,
+            role: userData.role,
+          };
+    
+          dispatch(setUserData(userPayload));
+        })
         .catch((error) => {
           console.log(error);
           navigate("/login");

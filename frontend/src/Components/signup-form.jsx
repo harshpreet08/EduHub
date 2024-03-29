@@ -4,6 +4,10 @@ import { Email, Pwd } from "./input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { select } from "@material-tailwind/react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserData } from "./slices/userSlice";
+import Cookies from "universal-cookie";
+
 
 const SignUpForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -13,6 +17,9 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cookies = new Cookies();
+
 
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
@@ -39,6 +46,21 @@ const SignUpForm = () => {
         "http://localhost:6002/user/signup",
         payload
       );
+
+      cookies.set("accesstoken", response.headers.accesstoken);
+
+      const userData = response?.data?.data;
+      const userPayload = {
+        userId: userData._id,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        role: userData.role,
+      };
+
+      console.log("User Payload :", userPayload);
+      dispatch(setUserData(userPayload));
+
 
       console.log(response);
 

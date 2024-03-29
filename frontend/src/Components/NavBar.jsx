@@ -184,10 +184,10 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import EduHubLogo from "../assets/images/EduHubLogo.png";
 
-const pages = ["Contact Us", "FAQs", "Register", "Login"];
+// const pages = ["Contact Us", "FAQs", "Register", "Login"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function Navbar() {
+function Navbar({pages}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 

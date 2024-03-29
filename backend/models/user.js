@@ -52,7 +52,7 @@ userSchema.methods.isValidatePassword = async function (userPwd) {
 
 userSchema.methods.getJWTToken = async function () {
   return await jwt.sign(
-    { email: this.email, role: this.role },
+    { email: this.email, role: this.role, _id : this._id, firstName: this.firstName, lastName:this.lastName },
     process.env.JWT_SECRET_KEY,
     {
       expiresIn: process.env.JWT_EXPIRY,
