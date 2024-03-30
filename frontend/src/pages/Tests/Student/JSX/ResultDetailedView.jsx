@@ -22,11 +22,6 @@ const ResultDetailedView = () => {
   {
       studentId = useSelector((state) => state.userSlice.userId)
   }
-  if(userId == null)
-  {
-      userId = useSelector((state) => state.userSlice.userId)
-  }
-
   console.log(studentId, firstName, LastName)
 
   useEffect(() => {
