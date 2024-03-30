@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../../../../Components/NavBar.jsx';
 import '../CSS/ResultDetailedView.css';
+import { useSelector } from 'react-redux';
 
 const ResultDetailedView = () => {
   const location = useLocation();
@@ -14,6 +15,13 @@ const ResultDetailedView = () => {
   const [questionDetails, setQuestionDetails] = useState({});
   const navigate = useNavigate();
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(userId == null)
+  {
+      userId = useSelector((state) => state.userSlice.userId)
+  }
 
   useEffect(() => {
     const fetchAttempt = async () => {

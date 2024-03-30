@@ -5,6 +5,8 @@ import axios from 'axios';
 import '../CSS/AddQuestionPage.css';
 import NavBar from '../../../../Components/NavBar.jsx';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { useSelect } from '@material-tailwind/react';
 
 const AddQuestion = () => {
     const navigate = useNavigate();
@@ -13,6 +15,13 @@ const AddQuestion = () => {
     const userId = searchParams.get('userId')
     const courseId= searchParams.get('courseId')
     const deployedLink = `https://testbackend-sy5g.onrender.com`;
+    const firstName = useSelector((state) => state.userSlice.firstName);
+    const LastName = useSelector((state) => state.userSlice.lastName);
+    
+    if(userId == null)
+    {
+        userId = useSelector((state) => state.userSlice.userId)
+    }
  
     const [questionData, setQuestionData] = useState({
         userId,
@@ -100,7 +109,7 @@ const AddQuestion = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar pages = {["Login", "Logout", "My Courses"]}/>
             <div className="add-question-container">
                 <h1 className="add-question-heading">Add MCQ Question</h1>
                 {validationError && <div className="error-message">{validationError}</div>}

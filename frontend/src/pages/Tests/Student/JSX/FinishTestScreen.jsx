@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/FinishTestScreen.css';
 import Navbar from '../../../../Components/NavBar.jsx';
+import { useSelector } from 'react-redux';
 
 const FinishTestScreen = () => {
   const location = useLocation();
@@ -11,6 +12,13 @@ const FinishTestScreen = () => {
   const courseId = searchParams.get('courseId');
   const attemptId = searchParams.get('attemptId');
   const navigate = useNavigate();
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(userId == null)
+  {
+      userId = useSelector((state) => state.userSlice.userId)
+  }
 
   const [attemptDetails, setAttemptDetails] = useState(null);
 

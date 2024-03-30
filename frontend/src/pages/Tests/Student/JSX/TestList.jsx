@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/TestList.css';
 import Navbar from '../../../../Components/NavBar';
+import { useSelector } from 'react-redux';
 
 const TestList = () => {
   const navigate = useNavigate();
@@ -12,6 +13,13 @@ const TestList = () => {
   const courseId = searchParams.get('courseId');
   const [tests, setTests] = useState([]);
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(userId == null)
+  {
+      userId = useSelector((state) => state.userSlice.userId)
+  }
 
   useEffect(() => {
     const fetchData = async () => {

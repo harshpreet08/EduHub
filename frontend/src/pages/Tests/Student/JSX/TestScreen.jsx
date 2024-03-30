@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/TestScreen.css';
+import { useSelector } from 'react-redux';
 
 const TestScreen = () => {
   const navigate = useNavigate();
@@ -18,6 +19,14 @@ const TestScreen = () => {
   const [showNext, setShowNext] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [markedForReview, setMarkedForReview] = useState([]);
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(userId == null)
+  {
+      userId = useSelector((state) => state.userSlice.userId)
+  }
+  
 
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
 

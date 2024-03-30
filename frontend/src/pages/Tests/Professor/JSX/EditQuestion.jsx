@@ -4,6 +4,7 @@ import axios from 'axios';
 import SuccessPopup from '../../../../Components/SuccessPopup.jsx';
 import '../CSS/EditQuestionPage.css';
 import { FaPlus, FaMinus } from 'react-icons/fa'; 
+import { useSelector } from 'react-redux';
 import NavBar from '../../../../Components/NavBar.jsx';
 
 
@@ -15,6 +16,13 @@ const EditQuestion = () => {
     const courseId= searchParams.get('courseId')
     const questionId = searchParams.get('questionId')
     const deployedLink = `https://testbackend-sy5g.onrender.com`;
+    const firstName = useSelector((state) => state.userSlice.firstName);
+    const LastName = useSelector((state) => state.userSlice.lastName);
+    
+    if(userId == null)
+    {
+        userId = useSelector((state) => state.userSlice.userId)
+    }
 
     const [questionData, setQuestionData] = useState({
         userId: userId,
@@ -119,7 +127,8 @@ const EditQuestion = () => {
 
     return (
         <div>
-            <NavBar/>
+                  <NavBar pages = {["Login", "Logout", "My Courses"]} />
+
         
         <div className="edit-question-container">
             <h1 className="edit-question-heading">Edit MCQ Question</h1>

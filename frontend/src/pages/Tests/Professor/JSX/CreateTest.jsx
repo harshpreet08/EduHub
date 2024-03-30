@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import '../CSS/CreateTestPage.css';
+import { useSelector } from 'react-redux';
 import NavBar from '../../../../Components/NavBar.jsx';
 
 const CreateTest = () => {
@@ -31,6 +32,13 @@ const CreateTest = () => {
   const [selectedTestId, setSelectedTestId] = useState('');
   const [selectedTestDetails, setSelectedTestDetails] = useState({});
   const deployedLink = `https://testbackend-sy5g.onrender.com`;
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(userId == null)
+  {
+      userId = useSelector((state) => state.userSlice.userId)
+  }
 
   useEffect(() => {
 
@@ -166,7 +174,7 @@ const CreateTest = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar pages = {["Login", "Logout", "My Courses"]} />
       <div className="create-test-container">
         <h1>Create Test</h1>
         <div className="form">
