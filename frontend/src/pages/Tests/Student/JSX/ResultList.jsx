@@ -44,7 +44,7 @@ const ResultList = () => {
 
   return (
     <div>
-    <Navbar/>
+    <Navbar pages = {["My Courses", "Live Lectures", "Live Tests", "Results", "Community Forum"]}/>
     <div>
       <h1>Attempted tests</h1>
       {attempts.map((attempt) => (

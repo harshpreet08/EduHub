@@ -41,6 +41,11 @@ function Navbar({
 
   const routeMap = {
     "Community Forum": "questions",
+    "Question Bank": "questionbank",
+    "Tests": "createtest",
+    "Live Tests": "test-list",
+    "Results": "result-list",
+
   };
 
   const getRouteLink = ({ page = "" }) =>

@@ -44,7 +44,7 @@ const TestList = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar pages = {["My Courses", "Live Lectures", "Live Tests", "Results", "Community Forum"]}/>
       <div className="test-list">
 
         <h1>Available Tests</h1>

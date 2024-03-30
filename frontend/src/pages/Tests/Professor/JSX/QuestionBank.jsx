@@ -26,13 +26,12 @@ const QuestionBank = () => {
   const firstName = useSelector((state) => state.userSlice.firstName);
   const LastName = useSelector((state) => state.userSlice.lastName);
 
-  
   if(userId == null)
   {
       userId = useSelector((state) => state.userSlice.userId)
   }
-
   console.log(userId, firstName, LastName)
+  
   useEffect(() => {
 
     axios.get(`${deployedLink}/qb/getAllQuestions/${userId}/${courseId}`, {
@@ -92,7 +91,7 @@ const QuestionBank = () => {
 
   return (
     <div>
-      <NavBar pages = {["Login", "Logout", "My Courses"]}/>
+      <NavBar pages = {["My Courses", "Live Lectures", "Question Bank", "Tests", "Community Forum"]}/>
       <div className="question-bank-container">
         <h1 style={{ marginTop: "2rem" }}>Question Bank for {courseId}</h1>
         <input

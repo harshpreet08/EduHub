@@ -40,7 +40,7 @@ const FinishTestScreen = () => {
 
   return (
     <div>
-      <Navbar/>
+    <Navbar pages = {["My Courses", "Live Lectures", "Live Tests", "Results", "Community Forum"]}/>
     <div className="finish-test-container">
       <h1 className="finish-test-header">Thank you for completing the test!</h1>
       <h2 className="result-message">Your result is shown below</h2>

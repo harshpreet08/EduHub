@@ -112,7 +112,7 @@ const AddQuestion = () => {
 
     return (
         <div>
-            <NavBar pages = {["Login", "Logout", "My Courses"]}/>
+            <NavBar pages = {["My Courses", "Live Lectures", "Question Bank", "Tests", "Community Forum"]}/>
             <div className="add-question-container">
                 <h1 className="add-question-heading">Add MCQ Question</h1>
                 {validationError && <div className="error-message">{validationError}</div>}

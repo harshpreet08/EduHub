@@ -129,9 +129,7 @@ const EditQuestion = () => {
 
     return (
         <div>
-                  <NavBar pages = {["Login", "Logout", "My Courses"]} />
-
-        
+        <NavBar pages = {["My Courses", "Live Lectures", "Question Bank", "Tests", "Community Forum"]}/>
         <div className="edit-question-container">
             <h1 className="edit-question-heading">Edit MCQ Question</h1>
             {validationError && <div className="error-message">{validationError}</div>}
