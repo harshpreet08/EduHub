@@ -4,6 +4,8 @@ import { Email } from "./input";
 import BackLogo from "../assets/images/back-logo-1.webp";
 import { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ForgotForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -30,6 +32,7 @@ export const ForgotForm = () => {
       );
       
       console.log("response", response);
+      toast.success("Sent Reset password link! Check your mail :-)");
     }
     catch(error){
       console.log(error);

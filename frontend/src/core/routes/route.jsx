@@ -58,6 +58,8 @@ const Cancel = lazy(() => import("../../Components/molecules/payment/failure"));
 
 const UserProfile = lazy(() => import("../../Components/profilePage"));
 
+const ResetPwd = lazy(() => import("../../pages/ResetPwd"));
+
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
     <Error />
@@ -76,19 +78,13 @@ const ProtectedRoute = (props) => {
         })
         .then((response) => {
           SetAuthenticated(true);
-
-          console.log("datrrrrr", response.data.data);
           const id = response?.data?.data._id;
 
-          console.log("http://localhost:6002/user/" + id);
           axios
             .get("http://localhost:6002/user/" + id)
             .then((resp) => {
-              console.log("Response", resp);
 
               const userData = resp?.data?.data;
-
-              console.log("DATttttttt", userData);
 
               const userPayload = {
                 userId: userData._id,
@@ -185,6 +181,7 @@ const publicRoutes = {
   "/forgotpwd": ForgotPwd,
   "/contactus": Contactus,
   "/faqs": Faqs,
+  "/resetpwd/:forgotToken": ResetPwd
 };
 
 function RouteConfig() {

@@ -120,7 +120,7 @@ async function forgotPassword(req,res){
 
     await user.save({ validateBeforeSave: false });
 
-    const url =  process.env.HOST_PATH + "/" + "reset-password/"+forgotToken;
+    const url =  process.env.HOST_PATH + "/" + "reset-pwd/"+forgotToken;
 
     const subject = "Forgot password";
 
