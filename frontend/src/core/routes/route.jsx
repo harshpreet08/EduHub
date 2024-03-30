@@ -60,6 +60,8 @@ const UserProfile = lazy(() => import("../../Components/profilePage"));
 
 const ResetPwd = lazy(() => import("../../pages/ResetPwd"));
 
+const StreamClass = lazy(()=> import("../../pages/StreamClass"));
+
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
     <Error />
@@ -181,7 +183,8 @@ const publicRoutes = {
   "/forgotpwd": ForgotPwd,
   "/contactus": Contactus,
   "/faqs": Faqs,
-  "/resetpwd/:forgotToken": ResetPwd
+  "/resetpwd/:forgotToken": ResetPwd,
+  "/room/:roomId": StreamClass
 };
 
 function RouteConfig() {
