@@ -51,10 +51,10 @@ function ProfessorCourseCard({ course,  onEdit, onDelete}) {
        
           <div className="course-info-actions">
             <IconButton aria-label="edit" onClick={handleEdit}>
-              <EditIcon />
+              <EditIcon style={{ color: 'blue' }}  />
             </IconButton>
             <IconButton aria-label="delete" onClick={handleDelete}>
-              <DeleteIcon />
+              <DeleteIcon style={{ color: 'red' }} />
             </IconButton>
             <IconButton aria-label="manage" onClick={handleManage}> {/* Add the manage icon button */}
               <ManageIcon />

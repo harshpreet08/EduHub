@@ -7,6 +7,7 @@ import { Card, CardContent, Typography, Button, CardMedia } from '@mui/material'
 import './CourseCard.css'; 
 
 function CourseCard({ course }) {
+  course.rating = 3;
   return (
     <Card className="my-course-card">
       <CardMedia
@@ -24,9 +25,9 @@ function CourseCard({ course }) {
         <Typography className="my-course-info-instructor" variant="body2" color="text.secondary">
           Instructor: {course.instructor}
         </Typography>
-        <div className="rating">
+        <div className="rating" style={{ display: "flex", justifyContent: "center", padding: "10px" }}>
           {Array.from({ length: course.rating }).map((_, index) => (
-            <StarIcon key={index} />
+            <StarIcon key={index} style={{ color: "#FFD700" }} />
           ))}
         </div>
         {/* <Button component={Link} to={`/course-details/${course.id}`} className="btn" variant="contained">

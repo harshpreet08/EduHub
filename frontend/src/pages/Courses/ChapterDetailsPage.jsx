@@ -24,6 +24,11 @@ function ChapterDetailsPage() {
   const params = useParams();
   //console.log("params",params)
   const { id:courseId } = params;
+
+  // Set courseId in session storage
+  useEffect(() => {
+    sessionStorage.setItem("courseId", courseId);
+  }, [courseId]);
  
   // const decodedTitle = decodeURIComponent(title);
   const [chapters, setChapters] = useState([]);
@@ -32,11 +37,6 @@ function ChapterDetailsPage() {
   const [selectedSubchapter, setSelectedSubchapter] = useState(null);
   const [expandedAccordion, setExpandedAccordion] = useState(null);
   const [courseDescription, setCourseDescription] = useState("");
-
-
-  
-    
-
     useEffect(() => {
 
       const fetchCourseDetails = async () => {
@@ -68,81 +68,6 @@ function ChapterDetailsPage() {
       fetchCourseDetails();
       fetchChapters();
     }, []);
-
-
-  // const chapters = [
-  //   {
-  //     id: 1,
-  //     title: "Chapter 1: Introduction to Organic Chemistry",
-  //     subchapters: [
-  //       {
-  //         id: 1,
-  //         title: "Introduction to Organic Compounds",
-  //         description: "Description of Introduction to Organic Compounds",
-  //         contentUrl: "videoUrl1.mp4",
-  //       },
-  //       {
-  //         id: 2,
-  //         title: "Structure and Bonding in Organic Molecules",
-  //         description:
-  //           "Description of Structure and Bonding in Organic Molecules",
-  //         contentUrl: "videoUrl2.mp4",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Chapter 2: Alkanes and Cycloalkanes",
-  //     subchapters: [
-  //       {
-  //         id: 1,
-  //         title: "Structure and Nomenclature of Alkanes",
-  //         description: "Description of Structure and Nomenclature of Alkanes",
-  //         contentUrl: "pdfUrl1.pdf",
-  //       },
-  //       {
-  //         id: 2,
-  //         title: "Physical Properties of Alkanes",
-  //         description: "Description of Physical Properties of Alkanes",
-  //         contentUrl: "pdfUrl2.pdf",
-  //       },
-  //     ],
-  //   },
-
-  //   {
-  //     id: 3,
-  //     title: "Chapter 3: Alkanes and Cycloalkanes",
-  //     subchapters: [
-  //       {
-  //         id: 1,
-  //         title: "Structure and Nomenclature of Alkanes",
-  //         description: "Description of Structure and Nomenclature of Alkanes",
-  //         contentUrl: "pdfUrl1.pdf",
-  //       },
-  //       {
-  //         id: 2,
-  //         title: "Physical Properties of Alkanes",
-  //         description: "Description of Physical Properties of Alkanes",
-  //         contentUrl: "pdfUrl2.pdf",
-  //       },
-  //     ],
-  //   },
-  // ];
-
-  // const additionalData = [
-  //   {
-  //     id: 1,
-  //     title: "Chapter 1: Introduction to Organic Chemistry",
-  //     duration: "1 hour",
-  //     level: "Beginner",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Chapter 2: Alkanes and Cycloalkanes",
-  //     duration: "2 hours",
-  //     level: "Intermediate",
-  //   },
-  // ];
 
   const handleSubchapterClick = (chapterId, subchapterId) => {
     console.log("Clicked subchapter:", chapterId, subchapterId);
@@ -197,32 +122,7 @@ function ChapterDetailsPage() {
               <source src={extractedUrl} type={`video/${fileExtension}`} />
               Your browser does not support the video tag.
             </video>
-            {/* <div
-              style={{
-                position: "relative",
-                paddingBottom: "56.25%",
-                height: 0,
-              }}
-            >
-                
-              {/* <iframe
-                width="100%"
-                height="100%"
-                src={contentUrl}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-              ></iframe>
-             */}
-            {/* </div> */} 
+           
             <Typography variant="h5" gutterBottom style={{ textAlign: "left" }}>
               {subchapter.description}
             </Typography>
@@ -271,6 +171,7 @@ function ChapterDetailsPage() {
   return (
     <div>
       {/* <NavBar /> */}
+      <NavBar pages={["Login", "Logout"]} />
     <div className="chapter-details-page">
       <Container maxWidth="xl" className="chapter-details-container">
         <Grid container spacing={3}>
