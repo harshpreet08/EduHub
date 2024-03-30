@@ -102,8 +102,10 @@ function MyCoursesPage() {
       instructorFilter === "" ||
       course.instructor.toLowerCase() === instructorFilter.toLowerCase();
 
-    // Return true if the title matches and the instructor matches (or if no filters are applied)
-    return titleMatches && instructorMatches;
+      const ratingMatches =
+      ratingFilter === 0 || course.rating >= ratingFilter; 
+  
+    return titleMatches && instructorMatches && ratingMatches;
   });
 
   const handleSearchh = (term) => {
