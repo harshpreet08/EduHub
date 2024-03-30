@@ -37,6 +37,13 @@ function EditCoursePage() {
   const [showChapterModal, setShowChapterModal] = useState(false);
   const [showSubchapterModal, setShowSubchapterModal] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [selectedCourseId, setSelectedCourseId] = useState(""); // State to hold courseId
+
+  useEffect(() => {
+    sessionStorage.setItem("courseId", courseId); // Store courseId in session storage
+    setSelectedCourseId(courseId);
+  }, [courseId]);
+
 
   const [chapterData, setChapterData] = useState({
     title: "",
@@ -45,7 +52,7 @@ function EditCoursePage() {
   const [subchapterData, setSubchapterData] = useState({
     title: "",
     description: "",
-    file: null,
+    file: null, 
   });
   const [chapters, setChapters] = useState([]);
   const [subchapters, setSubchapters] = useState([]);
@@ -235,14 +242,6 @@ function EditCoursePage() {
             `https://webbackend-3087.onrender.com/api/courses/${courseId}/chapters/${chapters[selectedChapterIndex].id}/subchapters/${subchapterId}`,
             formData
           );
-
-          // const subchapterId =
-          //   chapters[selectedChapterIndex].subchapters[editedSubchapterIndex].id;
-
-          // const response = await axios.put(
-          //   `http://localhost:9090/api/courses/${courseId}/chapters/${chapters[selectedChapterIndex].id}/subchapters/${subchapterId}`,
-          //   formData
-          // );
           console.log("Subchapter updated successfully:", response.data);
 
           // Update subchapters state with the edited subchapter
@@ -355,17 +354,6 @@ function EditCoursePage() {
     }
   };
 
-  // const handleDeleteSubchapter = (index) => {
-  //   // Handle delete subchapter action
-  //   console.log("Delete subchapter:", index);
-  //   const updatedSubchapters = chapters[
-  //     selectedChapterIndex
-  //   ].subchapters.filter((subchapter, i) => i !== index);
-  //   const updatedChapters = [...chapters];
-  //   updatedChapters[selectedChapterIndex].subchapters = updatedSubchapters;
-  //   setChapters(updatedChapters);
-  // };
-
   const handleDeleteSubchapter = async (index) => {
     try {
       console.log("Deleting subchapter:", index);
@@ -433,7 +421,7 @@ function EditCoursePage() {
 
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar pages={["Login", "Logout"]} />
       <div className="edit-course-page">
         <div className="container">
           <div className="container-left">
@@ -487,14 +475,14 @@ function EditCoursePage() {
                         aria-label="edit"
                         onClick={() => handleEditChapter(index)}
                       >
-                        <EditIcon />
+                        <EditIcon style={{ color: 'blue' }}/>
                       </IconButton>
                       <IconButton
                         edge="end"
                         aria-label="delete"
                         onClick={() => handleDeleteChapter(index)}
                       >
-                        <DeleteIcon />
+                        <DeleteIcon style={{ color: 'red' }} />
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
@@ -554,14 +542,14 @@ function EditCoursePage() {
                           handleEditSubchapter(index);
                         }}
                       >
-                        <EditIcon />
+                        <EditIcon style={{ color: 'blue' }} />
                       </IconButton>
                       <IconButton
                         edge="end"
                         aria-label="delete"
                         onClick={() => handleDeleteSubchapter(index)}
                       >
-                        <DeleteIcon />
+                        <DeleteIcon  style={{ color: 'red' }}/>
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>

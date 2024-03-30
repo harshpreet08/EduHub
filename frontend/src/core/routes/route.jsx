@@ -168,12 +168,12 @@ const privateRoutes = {
   "/result-list": ResultList,
   "/result-detailed-view": ResultDetailedView,
   "/finish-test": FinishTestScreen,
-  // soa for routing by Freya on 29 March
-  "/professor/courses/:userId": ProfessorCoursePage,
-  "/edit-course/:id": EditCoursePage,
-  "/my-courses/:userId":MyCoursePage,
-  "/chapter-details/:id":ChapterDetailsPage,
-  // eoa for routing by Freya on 29 March
+    // soa for routing by Freya on 29 March
+    "/professor/courses": ProfessorCoursePage,
+    "/my-courses":  MyCoursePage,
+    "/edit-course/:id": EditCoursePage,
+    "/chapter-details/:id":ChapterDetailsPage,
+    // eoa for routing by Freya on 29 March
 };
 
 const publicRoutes = {
@@ -183,7 +183,6 @@ const publicRoutes = {
   "/forgotpwd": ForgotPwd,
   "/contactus": Contactus,
   "/faqs": Faqs,
-
 };
 
 function RouteConfig() {

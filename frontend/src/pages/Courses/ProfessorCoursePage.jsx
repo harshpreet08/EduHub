@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback  } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom"; 
 import ProfessorCourseCard from "./ProfessorCourseCard";
 import SearchBar from "./SearchBar";
 import StarIcon from "@mui/icons-material/Star";
 import { useParams } from "react-router-dom"; 
+import { useSelector } from "react-redux";
 
 import {
   Button,
@@ -16,18 +17,19 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-} from "@mui/material"; // Import Button, Modal, TextField, Box, and Typography components from Material-UI
+} from "@mui/material"; 
 import axios from "axios";
 import "./ProfessorCoursePage.css";
 import NavBar from "../../Components/NavBar.jsx";
 
 function ProfessorCoursePage() {
-  const { userId } = useParams(); 
+  // const { userId } = useParams(); 
+  const userId = useSelector((state) => state.userSlice.userId);
 
   console.log("userId====", userId);
 
   const [courses, setCourses] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState([]); // State to hold filtered courses
+  const [filteredCourses, setFilteredCourses] = useState([]); 
 
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -41,8 +43,22 @@ function ProfessorCoursePage() {
     category: "",
     image: null,
   });
-  const [isEdit, setIsEdit] = useState(false); // Flag to indicate edit operation
-  const [editCourseId, setEditCourseId] = useState(null); // ID of the course being edited
+  const [isEdit, setIsEdit] = useState(false); 
+  const [editCourseId, setEditCourseId] = useState(null); 
+  const [courseId, setCourseId] = useState(""); 
+
+  useEffect(() => {
+    const storedCourseId = sessionStorage.getItem("courseId");
+    if (storedCourseId) {
+      setCourseId(storedCourseId);
+    }
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("courseId", courseId);
+  }, [courseId]);
+
+
 
   useEffect(() => {
     const fetchCourses = async (userId) => {
@@ -61,7 +77,6 @@ function ProfessorCoursePage() {
 
   useEffect(() => {
     if (!showModal) {
-      // Reset newCourseData when modal is closed
       setNewCourseData({
         title: "",
         description: "",
@@ -85,7 +100,7 @@ function ProfessorCoursePage() {
     formData.append("category", newCourseData.category);
 
     if (newCourseData.image !== " ") {
-      formData.append("file", newCourseData.image); // Append the image file if present
+      formData.append("file", newCourseData.image); 
     }
 
     if (
@@ -107,7 +122,6 @@ function ProfessorCoursePage() {
           const updatedCourses = courses.map((course) => {
             if (course.id === editCourseId) {
               if (formData.get("file") != null || formData.get("file") != " ") {
-                // If a new image is provided, update the image URL with the new one
                 return {
                   ...updatedCourse,
                   image: formData.get("file") || course.image,
@@ -121,8 +135,6 @@ function ProfessorCoursePage() {
           });
           setCourses(updatedCourses);
           setSuccessMessage("Course updated successfully.");
-
-          // Reset new course data and flags
           setNewCourseData({
             title: "",
             description: "",
@@ -148,10 +160,9 @@ function ProfessorCoursePage() {
       axios
         .post(`https://webbackend-3087.onrender.com/api/courses/${userId}/create`, formData)
         .then((response) => {
-          // Add the new course to the list
+
           setCourses([...courses, response.data]);
           setSuccessMessage("Course added successfully.");
-          // Reset new course data and flags
           setNewCourseData({
             title: "",
             description: "",
@@ -270,7 +281,7 @@ function ProfessorCoursePage() {
 
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar pages={["Login", "Logout"]} />
       <div className="professor-courses-page">
         <div className="filter-and-search">
           <div className="search-container">
@@ -345,7 +356,7 @@ function ProfessorCoursePage() {
             <Button
               onClick={handleNewCourseSubmit}
               variant="contained"
-              style={{ backgroundColor: "rgba(0,0,0, 0.87)" }}
+              style={{ backgroundColor: "rgba(0,0,0, 0.87)" , margin: "15px 20px",}}
             >
               {isEdit ? "Save Changes" : "Add Course"}
               {/* Display appropriate button text */}
@@ -353,7 +364,7 @@ function ProfessorCoursePage() {
             <Button
               onClick={() => setShowModal(false)}
               variant="contained"
-              style={{ backgroundColor: 'rgba(0, 0, 0, 0.87)' }}
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0.87)', margin: "15px 20px", }}
             >
               Close
             </Button>
