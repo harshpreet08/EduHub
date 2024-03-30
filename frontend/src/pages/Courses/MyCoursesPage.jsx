@@ -121,6 +121,7 @@ function MyCoursesPage() {
   useEffect(() => {
     setSelectedCourseId("");
   }, [courses]);
+  // console.log("Filtered courses:", filteredCourses);
 
   return (
     <div>
@@ -187,7 +188,7 @@ function MyCoursesPage() {
                     </Link>
                   ))
                 : // Render all courses if there are no filtered courses
-                  courses.map((course) => (
+                  filteredCourses.map((course) => (
                     <Link
                       key={course.id}
                       to={`/chapter-details/${course.id}`}
