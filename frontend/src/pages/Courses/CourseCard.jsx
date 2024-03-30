@@ -1,12 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import StarIcon from '@mui/icons-material/Star';
-import { Link } from 'react-router-dom';
-import { Card, CardContent, Typography, Button, CardMedia } from '@mui/material';
+import React from "react";
+import PropTypes from "prop-types";
+import StarIcon from "@mui/icons-material/Star";
+import { Link } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardMedia,
+} from "@mui/material";
 
-import './CourseCard.css'; 
+import "./CourseCard.css";
 
 function CourseCard({ course }) {
+  const randomRating = Math.floor(Math.random() * 5) + 1;
   return (
     <Card className="my-course-card">
       <CardMedia
@@ -16,19 +23,29 @@ function CourseCard({ course }) {
         alt={course.title}
       />
       <CardContent>
-        <div className="my-course-info-title" >
-        <Typography gutterBottom variant="h5" component="div">
-          {course.title}
-        </Typography>
+        <div className="my-course-info-title">
+          <Typography gutterBottom variant="h5" component="div">
+            {course.title}
+          </Typography>
         </div>
-        <Typography className="my-course-info-instructor" variant="body2" color="text.secondary">
+        <Typography
+          className="my-course-info-instructor"
+          variant="body2"
+          color="text.secondary"
+        >
           Instructor: {course.instructor}
         </Typography>
-        <div className="rating">
+        {/* <div className="rating">
           {Array.from({ length: course.rating }).map((_, index) => (
             <StarIcon key={index} />
           ))}
+        </div> */}
+        <div className="rating" style={{ display: "flex", justifyContent: "center", padding: "15px" }}>
+          {Array.from({ length: randomRating }).map((_, index) => (
+            <StarIcon key={index} style={{ color: "#FFD700" }} />
+          ))}
         </div>
+        ;
         {/* <Button component={Link} to={`/course-details/${course.id}`} className="btn" variant="contained">
           View Details
         </Button> */}
@@ -42,8 +59,8 @@ CourseCard.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     instructor: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired 
-  }).isRequired
+    rating: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default CourseCard;

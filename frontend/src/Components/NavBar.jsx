@@ -136,7 +136,8 @@ function Navbar({
               <Button
                 key={page}
                 component={Link}
-                to={page === "Blogs" ? "/blogs" : `/${getRouteLink({ page })}`}
+                // to={page === "Blogs" ? "/blogs" : `/${getRouteLink({ page })}`}
+                to={page === "Blogs" ? "/blogs" : page === "My Courses" ? "/my-courses" : `/${getRouteLink({ page })}`}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -144,7 +145,7 @@ function Navbar({
               </Button>
             ))}
           </Box>
-
+          
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
