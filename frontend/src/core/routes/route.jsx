@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { setUserData } from "../../Components/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-
 /* internal components */
 const SignUp = lazy(() => import("../../pages/Signup"));
 const Login = lazy(() => import("../../pages/Login"));
@@ -57,6 +56,8 @@ const Success = lazy(() =>
 );
 const Cancel = lazy(() => import("../../Components/molecules/payment/failure"));
 
+const UserProfile = lazy(() => import("../../Components/profilePage"));
+
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
     <Error />
@@ -75,16 +76,33 @@ const ProtectedRoute = (props) => {
         })
         .then((response) => {
           SetAuthenticated(true);
-          const userData = response?.data?.data;
-          const userPayload = {
-            userId: userData._id,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            email: userData.email,
-            role: userData.role,
-          };
-    
-          dispatch(setUserData(userPayload));
+
+          console.log("datrrrrr", response.data.data);
+          const id = response?.data?.data._id;
+
+          console.log("http://localhost:6002/user/" + id);
+          axios
+            .get("http://localhost:6002/user/" + id)
+            .then((resp) => {
+              console.log("Response", resp);
+
+              const userData = resp?.data?.data;
+
+              console.log("DATttttttt", userData);
+
+              const userPayload = {
+                userId: userData._id,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email,
+                role: userData.role,
+              };
+              dispatch(setUserData(userPayload));
+            })
+            .catch((error) => {
+              console.log(error);
+              navigate("/login");
+            });
         })
         .catch((error) => {
           console.log(error);
@@ -157,6 +175,7 @@ const privateRoutes = {
   "/result-list": ResultList,
   "/result-detailed-view": ResultDetailedView,
   "/finish-test": FinishTestScreen,
+  "/profile": UserProfile,
 };
 
 const publicRoutes = {
