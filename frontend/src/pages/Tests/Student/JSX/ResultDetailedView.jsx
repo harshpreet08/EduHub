@@ -9,7 +9,7 @@ const ResultDetailedView = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const attemptId = searchParams.get('attemptId');
-  const studentId = searchParams.get('studentId');
+  let studentId = searchParams.get('studentId');
   const courseId = searchParams.get('courseId');
   const [attempt, setAttempt] = useState(null);
   const [questionDetails, setQuestionDetails] = useState({});
@@ -18,10 +18,16 @@ const ResultDetailedView = () => {
   const firstName = useSelector((state) => state.userSlice.firstName);
   const LastName = useSelector((state) => state.userSlice.lastName);
   
+  if(studentId == null)
+  {
+      studentId = useSelector((state) => state.userSlice.userId)
+  }
   if(userId == null)
   {
       userId = useSelector((state) => state.userSlice.userId)
   }
+
+  console.log(studentId, firstName, LastName)
 
   useEffect(() => {
     const fetchAttempt = async () => {

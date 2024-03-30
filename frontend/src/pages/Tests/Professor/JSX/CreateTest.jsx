@@ -11,7 +11,7 @@ import NavBar from '../../../../Components/NavBar.jsx';
 const CreateTest = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const userId = searchParams.get('userId');
+  let userId = searchParams.get('userId');
   const courseId = searchParams.get('courseId');
 
   const [difficulty, setDifficulty] = useState('');
@@ -39,6 +39,8 @@ const CreateTest = () => {
   {
       userId = useSelector((state) => state.userSlice.userId)
   }
+
+  console.log(userId, firstName, LastName)
 
   useEffect(() => {
 

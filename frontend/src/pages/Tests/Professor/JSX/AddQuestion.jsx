@@ -12,7 +12,7 @@ const AddQuestion = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const userId = searchParams.get('userId')
+    let userId = searchParams.get('userId')
     const courseId= searchParams.get('courseId')
     const deployedLink = `https://testbackend-sy5g.onrender.com`;
     const firstName = useSelector((state) => state.userSlice.firstName);
@@ -22,6 +22,9 @@ const AddQuestion = () => {
     {
         userId = useSelector((state) => state.userSlice.userId)
     }
+  
+    console.log(userId, firstName, LastName)
+    
  
     const [questionData, setQuestionData] = useState({
         userId,

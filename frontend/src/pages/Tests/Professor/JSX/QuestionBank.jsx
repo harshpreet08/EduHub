@@ -20,17 +20,19 @@ const QuestionBank = () => {
   const [allTopics, setAllTopics] = useState([]);
   const [allDifficulties, setAllDifficulties] = useState([]);
   const params = new URLSearchParams(location.search);
-  const userId = params.get('userId');
+  let userId = params.get('userId');
   const courseId = params.get('courseId');
   const deployedLink = `https://testbackend-sy5g.onrender.com`;
   const firstName = useSelector((state) => state.userSlice.firstName);
   const LastName = useSelector((state) => state.userSlice.lastName);
+
   
   if(userId == null)
   {
       userId = useSelector((state) => state.userSlice.userId)
   }
 
+  console.log(userId, firstName, LastName)
   useEffect(() => {
 
     axios.get(`${deployedLink}/qb/getAllQuestions/${userId}/${courseId}`, {

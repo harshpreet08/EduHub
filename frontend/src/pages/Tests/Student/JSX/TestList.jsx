@@ -9,18 +9,20 @@ const TestList = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const studentId = searchParams.get('studentId');
+  let studentId = searchParams.get('studentId');
   const courseId = searchParams.get('courseId');
   const [tests, setTests] = useState([]);
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
   const firstName = useSelector((state) => state.userSlice.firstName);
   const LastName = useSelector((state) => state.userSlice.lastName);
   
-  if(userId == null)
+  if(studentId == null)
   {
-      userId = useSelector((state) => state.userSlice.userId)
+      studentId = useSelector((state) => state.userSlice.userId)
   }
 
+  console.log(studentId, firstName, LastName)
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

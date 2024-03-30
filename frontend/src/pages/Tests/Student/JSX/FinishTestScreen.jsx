@@ -8,18 +8,20 @@ import { useSelector } from 'react-redux';
 const FinishTestScreen = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const studentId = searchParams.get('studentId');
+  let studentId = searchParams.get('studentId');
   const courseId = searchParams.get('courseId');
   const attemptId = searchParams.get('attemptId');
   const navigate = useNavigate();
   const firstName = useSelector((state) => state.userSlice.firstName);
   const LastName = useSelector((state) => state.userSlice.lastName);
   
-  if(userId == null)
+  if(studentId == null)
   {
-      userId = useSelector((state) => state.userSlice.userId)
+      studentId = useSelector((state) => state.userSlice.userId)
   }
 
+  console.log(studentId, firstName, LastName)
+  
   const [attemptDetails, setAttemptDetails] = useState(null);
 
   useEffect(() => {
