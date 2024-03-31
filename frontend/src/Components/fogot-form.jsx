@@ -108,7 +108,7 @@ export const ForgotForm = () => {
         </form>
         <div className="text-center mt-6">
           <Link
-            to="/"
+            to="/login"
             className="text-blue-500 hover:text-blue-700 font-semibold flex items-center justify-center"
           >
             <img src={BackLogo} alt="Back" className="h-5 w-5 mr-2" />
