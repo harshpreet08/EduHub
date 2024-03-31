@@ -474,6 +474,7 @@ function EditCoursePage() {
                         edge="end"
                         aria-label="edit"
                         onClick={() => handleEditChapter(index)}
+                        sx={{ marginRight: 0.5 }} 
                       >
                         <EditIcon style={{ color: 'blue' }}/>
                       </IconButton>
@@ -541,6 +542,7 @@ function EditCoursePage() {
                           setShowSubchapterModal(false); // Close the modal first
                           handleEditSubchapter(index);
                         }}
+                        sx={{ marginRight: 0.5 }} 
                       >
                         <EditIcon style={{ color: 'blue' }} />
                       </IconButton>
