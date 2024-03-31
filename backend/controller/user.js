@@ -30,14 +30,11 @@ async function createUser(req, res) {
       role: role,
     });
 
-    console.log(user);
-
     const token = await user.getJWTToken();
     user.password = undefined;
     SuccessResponse.message = "User created successfully";
     SuccessResponse.data = user;
 
-    console.log(token);
     res.cookie("token", token, options);
     res.header("accessToken", token);
 
@@ -119,7 +116,7 @@ async function forgotPassword(req,res){
 
     await user.save({ validateBeforeSave: false });
 
-    const url =  process.env.HOST_PATH + "/" + "reset-pwd/"+forgotToken;
+    const url =  "localhost:5173" + "/" + "resetpwd/"+forgotToken;
 
     const subject = "Forgot password";
 
