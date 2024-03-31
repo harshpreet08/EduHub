@@ -170,8 +170,7 @@ function ChapterDetailsPage() {
 
   return (
     <div>
-      {/* <NavBar /> */}
-      <NavBar pages={["Login", "Logout"]} />
+      <NavBar pages={["Chapters", "Live Tests","Results"]} />
     <div className="chapter-details-page">
       <Container maxWidth="xl" className="chapter-details-container">
         <Grid container spacing={3}>

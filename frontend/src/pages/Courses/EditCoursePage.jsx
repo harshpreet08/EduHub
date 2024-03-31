@@ -421,7 +421,7 @@ function EditCoursePage() {
 
   return (
     <div>
-      <NavBar pages={["Login", "Logout"]} />
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
       <div className="edit-course-page">
         <div className="container">
           <div className="container-left">

@@ -13,7 +13,7 @@ const EditQuestion = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     let userId = searchParams.get('userId')
-    const courseId= searchParams.get('courseId')
+    let courseId= searchParams.get('courseId')
     const questionId = searchParams.get('questionId')
     const deployedLink = `https://testbackend-sy5g.onrender.com`;
     const firstName = useSelector((state) => state.userSlice.firstName);
@@ -23,8 +23,14 @@ const EditQuestion = () => {
     {
         userId = useSelector((state) => state.userSlice.userId)
     }
-  
     console.log(userId, firstName, LastName)
+
+    if(courseId === null)
+    {
+      courseId = sessionStorage.getItem("courseId");
+    }
+    console.log("Course ID from session storage:", courseId);
+  
 
     const [questionData, setQuestionData] = useState({
         userId: userId,
@@ -129,7 +135,7 @@ const EditQuestion = () => {
 
     return (
         <div>
-        <NavBar pages = {["My Courses", "Live Lectures", "Question Bank", "Tests", "Community Forum"]}/>
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
         <div className="edit-question-container">
             <h1 className="edit-question-heading">Edit MCQ Question</h1>
             {validationError && <div className="error-message">{validationError}</div>}

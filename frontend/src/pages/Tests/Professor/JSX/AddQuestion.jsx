@@ -13,7 +13,7 @@ const AddQuestion = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     let userId = searchParams.get('userId')
-    const courseId= searchParams.get('courseId')
+    let courseId= searchParams.get('courseId')
     const deployedLink = `https://testbackend-sy5g.onrender.com`;
     const firstName = useSelector((state) => state.userSlice.firstName);
     const LastName = useSelector((state) => state.userSlice.lastName);
@@ -24,7 +24,12 @@ const AddQuestion = () => {
     }
   
     console.log(userId, firstName, LastName)
-    
+    if(courseId === null)
+    {
+      courseId = sessionStorage.getItem("courseId");
+    }
+    console.log("Course ID from session storage:", courseId);
+  
  
     const [questionData, setQuestionData] = useState({
         userId,
@@ -112,7 +117,7 @@ const AddQuestion = () => {
 
     return (
         <div>
-            <NavBar pages = {["My Courses", "Live Lectures", "Question Bank", "Tests", "Community Forum"]}/>
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
             <div className="add-question-container">
                 <h1 className="add-question-heading">Add MCQ Question</h1>
                 {validationError && <div className="error-message">{validationError}</div>}

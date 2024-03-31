@@ -17,6 +17,8 @@ import EduHubLogo from "../assets/images/EduHubLogo.png";
 
 // const pages = ["Contact Us", "FAQs", "Register", "Login"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const courseId = sessionStorage.getItem("courseId");
+console.log("Course ID from session storage:", courseId);
 
 function Navbar({
   pages = ["Login", "Logout", "My Courses", "Community Forum", "Blogs"],
@@ -45,11 +47,12 @@ function Navbar({
     "Tests": "createtest",
     "Live Tests": "test-list",
     "Results": "result-list",
-
+    "Content": `edit-course/${courseId}`,
+    "Chapters": `chapter-details/${courseId}`
   };
 
-  const getRouteLink = ({ page = "" }) =>
-    routeMap[page] || (page || "").toLowerCase();
+  const getRouteLink = ({ page = "" }) => 
+   routeMap[page] || (page || "").toLowerCase();
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#333333" }}>

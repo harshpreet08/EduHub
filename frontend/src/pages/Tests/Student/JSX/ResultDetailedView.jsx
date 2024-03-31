@@ -10,7 +10,7 @@ const ResultDetailedView = () => {
   const searchParams = new URLSearchParams(location.search);
   const attemptId = searchParams.get('attemptId');
   let studentId = searchParams.get('studentId');
-  const courseId = searchParams.get('courseId');
+  let courseId = searchParams.get('courseId');
   const [attempt, setAttempt] = useState(null);
   const [questionDetails, setQuestionDetails] = useState({});
   const navigate = useNavigate();
@@ -23,6 +23,11 @@ const ResultDetailedView = () => {
       studentId = useSelector((state) => state.userSlice.userId)
   }
   console.log(studentId, firstName, LastName)
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
 
   useEffect(() => {
     const fetchAttempt = async () => {
@@ -65,7 +70,7 @@ const ResultDetailedView = () => {
 
   return (
     <div>
-    <Navbar pages = {["My Courses", "Live Lectures", "Live Tests", "Results", "Community Forum"]}/>
+      <Navbar pages={["Chapters", "Live Tests","Results"]} />
     <div className="result-detailed-view-container">
       <div className="result-details">
         <h1>Attempt Detailed View</h1>

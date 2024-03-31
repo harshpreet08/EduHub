@@ -21,16 +21,22 @@ const QuestionBank = () => {
   const [allDifficulties, setAllDifficulties] = useState([]);
   const params = new URLSearchParams(location.search);
   let userId = params.get('userId');
-  const courseId = params.get('courseId');
+  let courseId = params.get('courseId');
   const deployedLink = `https://testbackend-sy5g.onrender.com`;
   const firstName = useSelector((state) => state.userSlice.firstName);
   const LastName = useSelector((state) => state.userSlice.lastName);
 
-  if(userId == null)
+  if(userId === null)
   {
       userId = useSelector((state) => state.userSlice.userId)
   }
   console.log(userId, firstName, LastName)
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
+
   
   useEffect(() => {
 
@@ -91,7 +97,7 @@ const QuestionBank = () => {
 
   return (
     <div>
-      <NavBar pages = {["My Courses", "Live Lectures", "Question Bank", "Tests", "Community Forum"]}/>
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
       <div className="question-bank-container">
         <h1 style={{ marginTop: "2rem" }}>Question Bank for {courseId}</h1>
         <input

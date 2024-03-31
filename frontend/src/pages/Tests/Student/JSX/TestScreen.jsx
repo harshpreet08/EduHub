@@ -81,7 +81,7 @@ const TestScreen = () => {
       attemptId: attemptId,
       attemptedQuestions: attemptedQuestions
     };
-  
+    
     try {
       const response = await axios.post(`${deployedLink}/finish-test`, finishTestRequest);
       if (response.status === 200) {

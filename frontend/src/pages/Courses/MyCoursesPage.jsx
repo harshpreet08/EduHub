@@ -37,7 +37,7 @@ function MyCoursesPage() {
           `https://webbackend-3087.onrender.com/api/courses/all/${userId}`
         );
         setCourses(response.data);
-        console.logs("courses=", response.data);
+        console.log("courses=", response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }

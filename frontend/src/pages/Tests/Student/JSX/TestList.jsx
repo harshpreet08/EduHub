@@ -10,7 +10,7 @@ const TestList = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   let studentId = searchParams.get('studentId');
-  const courseId = searchParams.get('courseId');
+  let courseId = searchParams.get('courseId');
   const [tests, setTests] = useState([]);
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
   const firstName = useSelector((state) => state.userSlice.firstName);
@@ -22,6 +22,11 @@ const TestList = () => {
   }
 
   console.log(studentId, firstName, LastName)
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +49,7 @@ const TestList = () => {
 
   return (
     <div>
-      <Navbar pages = {["My Courses", "Live Lectures", "Live Tests", "Results", "Community Forum"]}/>
+      <Navbar pages={["Chapters", "Live Tests","Results"]} />
       <div className="test-list">
 
         <h1>Available Tests</h1>

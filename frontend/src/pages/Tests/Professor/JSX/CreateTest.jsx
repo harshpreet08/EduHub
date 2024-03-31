@@ -12,7 +12,7 @@ const CreateTest = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   let userId = searchParams.get('userId');
-  const courseId = searchParams.get('courseId');
+  let courseId = searchParams.get('courseId');
 
   const [difficulty, setDifficulty] = useState('');
   const [chapterIds, setChapterIds] = useState('');
@@ -39,6 +39,12 @@ const CreateTest = () => {
   {
       userId = useSelector((state) => state.userSlice.userId)
   }
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
+
 
   console.log(userId, firstName, LastName)
 
@@ -176,7 +182,7 @@ const CreateTest = () => {
 
   return (
     <div>
-      <NavBar pages = {["My Courses", "Live Lectures", "Question Bank", "Tests", "Community Forum"]}/>
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
       <div className="create-test-container">
         <h1>Create Test</h1>
         <div className="form">
