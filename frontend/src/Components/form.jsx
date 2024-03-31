@@ -58,6 +58,10 @@ const SignForm = () => {
       if (response.error) {
         navigate("/blogs");
       }
+
+      if(selectedRole == "Teacher"){
+        navigate("/professor/courses");
+      }
       navigate("/dashboard");
     } catch (error) {
       console.log(error);

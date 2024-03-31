@@ -7,11 +7,14 @@ import { useEffect } from "react";
 const Logout = () => {
   const navigate = useNavigate();
 
+  console.log("In logout");
   useEffect(() => {
     const logout = async () => {
       try {
+        console.log("Helloooooo");
         const cookies = new Cookies();
         const response = await axios.get(userService.logout);
+        cookies.set("accesstoken", undefined);
         cookies.remove("accesstoken");
         navigate("/login");
       } catch (error) {

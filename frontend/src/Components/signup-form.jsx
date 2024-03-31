@@ -63,8 +63,11 @@ const SignUpForm = () => {
 
       console.log(response);
 
-      if (selectedRole == "Student") {
-        navigate("/dashboard");
+      if(selectedRole == "Teacher"){
+        navigate("/professor/courses");
+      }
+      else if(selectedRole == "Student"){
+      navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
