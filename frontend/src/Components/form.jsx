@@ -5,6 +5,8 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserData } from "./slices/userSlice";
+import {userService} from "../services/urls";
+
 
 const SignForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -19,11 +21,9 @@ const SignForm = () => {
     setSelectedRole(role);
   };
 
-  // useEffect(() => {
-  //   console.log(email);
-  //   console.log(password);
-  //   console.log(selectedRole);
-  // }, [email, password]);
+  useEffect(() => {
+    setError("");
+  }, [email, password, selectedRole]);
 
   const handleLogin = async (e) => {
     try {
@@ -35,7 +35,7 @@ const SignForm = () => {
       };
       console.log("Here in the function");
       const response = await axios.post(
-        "http://localhost:6002/user/login",
+        userService.login,
         payload,
         { withCredentials: true }
       );
@@ -52,20 +52,15 @@ const SignForm = () => {
 
       dispatch(setUserData(userPayload));
 
-      // const trialData = useSelector(
-      //   state => state.userSlice.firstName
-      // );
-
-      console.log("Here is trial data");
-
-      console.log(response.data.data);
-      console.log(response.headers.accesstoken);
       cookies.set("accesstoken", response.headers.accesstoken);
-      console.log(cookies.get("accesstoken"));
-      console.log(document.cookies);
+
 
       if (response.error) {
         navigate("/blogs");
+      }
+
+      if(selectedRole == "Teacher"){
+        navigate("/professor/courses");
       }
       navigate("/dashboard");
     } catch (error) {

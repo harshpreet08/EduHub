@@ -2,8 +2,10 @@
 import { Link } from "react-router-dom";
 import { Email } from "./input";
 import BackLogo from "../assets/images/back-logo-1.webp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ForgotForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -14,6 +16,10 @@ export const ForgotForm = () => {
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
   };
+
+  useEffect(()=>{
+    setError("");
+  }, [selectedRole, email]);
 
   const handleForgot = async (e) =>{
     try{
@@ -30,6 +36,7 @@ export const ForgotForm = () => {
       );
       
       console.log("response", response);
+      toast.success("Sent Reset password link! Check your mail :-)");
     }
     catch(error){
       console.log(error);
@@ -101,7 +108,7 @@ export const ForgotForm = () => {
         </form>
         <div className="text-center mt-6">
           <Link
-            to="/"
+            to="/login"
             className="text-blue-500 hover:text-blue-700 font-semibold flex items-center justify-center"
           >
             <img src={BackLogo} alt="Back" className="h-5 w-5 mr-2" />

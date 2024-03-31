@@ -30,14 +30,11 @@ async function createUser(req, res) {
       role: role,
     });
 
-    console.log(user);
-
     const token = await user.getJWTToken();
     user.password = undefined;
     SuccessResponse.message = "User created successfully";
     SuccessResponse.data = user;
 
-    console.log(token);
     res.cookie("token", token, options);
     res.header("accessToken", token);
 
@@ -93,7 +90,6 @@ async function logout(req,res){
 
         res.header("accessToken", null);
 
-
         SuccessResponse.message = "Successfully logged out!";
         SuccessResponse.data = "";
         return res.status(StatusCodes.OK).json(SuccessResponse);
@@ -120,7 +116,7 @@ async function forgotPassword(req,res){
 
     await user.save({ validateBeforeSave: false });
 
-    const url =  process.env.HOST_PATH + "/" + "reset-password/"+forgotToken;
+    const url =  "localhost:5173" + "/" + "resetpwd/"+forgotToken;
 
     const subject = "Forgot password";
 
@@ -210,6 +206,43 @@ async function isValidated(req,res){
   }
 }
 
+async function updateUser(req,res){
+  try{
+    const body = req.body;
+
+    const user = await User.findOneAndUpdate({_id : body._id}, body);
+
+    SuccessResponse.message = "Successfully updated the data";
+
+    SuccessResponse.data = user;
+
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  }
+  catch(error){
+    ErrorResponse.message = error.message;
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+  }
+}
+
+
+async function getUser(req,res){
+  try{
+    const id = req.params.id;
+
+    const user = await User.findOne({_id: id});
+
+    SuccessResponse.message = "Successfully fetched the user";
+
+    SuccessResponse.data = user;
+
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  }
+  catch(error){
+    ErrorResponse.message = error.message;
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+  }
+}
+
 
 
 module.exports = {
@@ -218,5 +251,7 @@ module.exports = {
   logout,
   forgotPassword,
   resetPassword,
-  isValidated
+  isValidated,
+  updateUser,
+  getUser
 };

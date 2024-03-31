@@ -31,7 +31,7 @@ export const Pwd = ({value, fn}) => (
       value = {value}
       onChange={(e)=>{fn(e.target.value)}}
       placeholder="Enter Password"
-      minLength="6"
+      minLength="8"
       className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border border-gray-700 focus:border-blue-500
                 focus:bg-white focus:outline-none"
       required

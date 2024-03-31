@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { setUserData } from "../../Components/slices/userSlice";
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 
 /* internal components */
 const SignUp = lazy(() => import("../../pages/Signup"));
@@ -68,6 +67,14 @@ const ChapterDetailsPage = lazy(() => import("../../pages/Courses/ChapterDetails
 
 // eoa for routing by Freya on 29 March
 
+const UserProfile = lazy(() => import("../../Components/profilePage"));
+
+const ResetPwd = lazy(() => import("../../pages/ResetPwd"));
+
+const StreamClass = lazy(()=> import("../../pages/StreamClass"));
+
+const Logout = lazy(() => import("../../Components/logout"));
+
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
     <Error />
@@ -86,16 +93,27 @@ const ProtectedRoute = (props) => {
         })
         .then((response) => {
           SetAuthenticated(true);
-          const userData = response?.data?.data;
-          const userPayload = {
-            userId: userData._id,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            email: userData.email,
-            role: userData.role,
-          };
-    
-          dispatch(setUserData(userPayload));
+          const id = response?.data?.data._id;
+
+          axios
+            .get("http://localhost:6002/user/" + id)
+            .then((resp) => {
+
+              const userData = resp?.data?.data;
+
+              const userPayload = {
+                userId: userData._id,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email,
+                role: userData.role,
+              };
+              dispatch(setUserData(userPayload));
+            })
+            .catch((error) => {
+              console.log(error);
+              navigate("/login");
+            });
         })
         .catch((error) => {
           console.log(error);
@@ -129,6 +147,7 @@ const PublicRoute = (props) => {
         })
         .then(() => SetAuthenticated(true))
         .catch((error) => {
+          console.log(error);
           setAllowAccess(true);
         });
     }, []);
@@ -174,6 +193,8 @@ const privateRoutes = {
     "/edit-course/:id": EditCoursePage,
     "/chapter-details/:id":ChapterDetailsPage,
     // eoa for routing by Freya on 29 March
+  "/profile": UserProfile,
+  "/logout": Logout
 };
 
 const publicRoutes = {
@@ -183,6 +204,8 @@ const publicRoutes = {
   "/forgotpwd": ForgotPwd,
   "/contactus": Contactus,
   "/faqs": Faqs,
+  "/resetpwd/:forgotToken": ResetPwd,
+  "/room/:roomId": StreamClass
 };
 
 function RouteConfig() {
