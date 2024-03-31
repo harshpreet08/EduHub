@@ -3,15 +3,30 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../CSS/ResultList.css';
 import Navbar from '../../../../Components/NavBar';
+import { useSelector } from 'react-redux';
 
 const ResultList = () => {
     const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const studentId = searchParams.get('studentId');
-  const courseId = searchParams.get('courseId');
+  let studentId = searchParams.get('studentId');
+  let courseId = searchParams.get('courseId');
   const [attempts, setAttempts] = useState([]);
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(studentId === null)
+  {
+      studentId = useSelector((state) => state.userSlice.userId)
+  }
+
+  console.log(studentId, firstName, LastName)
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
 
   useEffect(() => {
     const fetchAttempts = async () => {
@@ -34,7 +49,7 @@ const ResultList = () => {
 
   return (
     <div>
-    <Navbar/>
+      <Navbar pages={["Chapters", "Live Tests","Results"]} />
     <div>
       <h1>Attempted tests</h1>
       {attempts.map((attempt) => (

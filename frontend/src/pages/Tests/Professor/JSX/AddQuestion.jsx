@@ -5,14 +5,31 @@ import axios from 'axios';
 import '../CSS/AddQuestionPage.css';
 import NavBar from '../../../../Components/NavBar.jsx';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { useSelect } from '@material-tailwind/react';
 
 const AddQuestion = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const userId = searchParams.get('userId')
-    const courseId= searchParams.get('courseId')
+    let userId = searchParams.get('userId')
+    let courseId= searchParams.get('courseId')
     const deployedLink = `https://testbackend-sy5g.onrender.com`;
+    const firstName = useSelector((state) => state.userSlice.firstName);
+    const LastName = useSelector((state) => state.userSlice.lastName);
+    
+    if(userId == null)
+    {
+        userId = useSelector((state) => state.userSlice.userId)
+    }
+  
+    console.log(userId, firstName, LastName)
+    if(courseId === null)
+    {
+      courseId = sessionStorage.getItem("courseId");
+    }
+    console.log("Course ID from session storage:", courseId);
+  
  
     const [questionData, setQuestionData] = useState({
         userId,
@@ -100,7 +117,7 @@ const AddQuestion = () => {
 
     return (
         <div>
-            <NavBar />
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
             <div className="add-question-container">
                 <h1 className="add-question-heading">Add MCQ Question</h1>
                 {validationError && <div className="error-message">{validationError}</div>}

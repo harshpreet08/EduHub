@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { Button, Snackbar } from '@mui/material';
 import '../CSS/QuestionPage.css';
 import NavBar from '../../../../Components/NavBar.jsx';
@@ -19,10 +20,24 @@ const QuestionBank = () => {
   const [allTopics, setAllTopics] = useState([]);
   const [allDifficulties, setAllDifficulties] = useState([]);
   const params = new URLSearchParams(location.search);
-  const userId = params.get('userId');
-  const courseId = params.get('courseId');
+  let userId = params.get('userId');
+  let courseId = params.get('courseId');
   const deployedLink = `https://testbackend-sy5g.onrender.com`;
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
 
+  if(userId === null)
+  {
+      userId = useSelector((state) => state.userSlice.userId)
+  }
+  console.log(userId, firstName, LastName)
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
+
+  
   useEffect(() => {
 
     axios.get(`${deployedLink}/qb/getAllQuestions/${userId}/${courseId}`, {
@@ -82,7 +97,7 @@ const QuestionBank = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
       <div className="question-bank-container">
         <h1 style={{ marginTop: "2rem" }}>Question Bank for {courseId}</h1>
         <input

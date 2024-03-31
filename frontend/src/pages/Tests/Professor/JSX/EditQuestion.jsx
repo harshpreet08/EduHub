@@ -4,6 +4,7 @@ import axios from 'axios';
 import SuccessPopup from '../../../../Components/SuccessPopup.jsx';
 import '../CSS/EditQuestionPage.css';
 import { FaPlus, FaMinus } from 'react-icons/fa'; 
+import { useSelector } from 'react-redux';
 import NavBar from '../../../../Components/NavBar.jsx';
 
 
@@ -11,10 +12,25 @@ const EditQuestion = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const userId = searchParams.get('userId')
-    const courseId= searchParams.get('courseId')
+    let userId = searchParams.get('userId')
+    let courseId= searchParams.get('courseId')
     const questionId = searchParams.get('questionId')
     const deployedLink = `https://testbackend-sy5g.onrender.com`;
+    const firstName = useSelector((state) => state.userSlice.firstName);
+    const LastName = useSelector((state) => state.userSlice.lastName);
+    
+    if(userId == null)
+    {
+        userId = useSelector((state) => state.userSlice.userId)
+    }
+    console.log(userId, firstName, LastName)
+
+    if(courseId === null)
+    {
+      courseId = sessionStorage.getItem("courseId");
+    }
+    console.log("Course ID from session storage:", courseId);
+  
 
     const [questionData, setQuestionData] = useState({
         userId: userId,
@@ -119,8 +135,7 @@ const EditQuestion = () => {
 
     return (
         <div>
-            <NavBar/>
-        
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
         <div className="edit-question-container">
             <h1 className="edit-question-heading">Edit MCQ Question</h1>
             {validationError && <div className="error-message">{validationError}</div>}

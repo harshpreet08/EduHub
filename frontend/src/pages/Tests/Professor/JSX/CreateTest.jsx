@@ -5,13 +5,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import '../CSS/CreateTestPage.css';
+import { useSelector } from 'react-redux';
 import NavBar from '../../../../Components/NavBar.jsx';
 
 const CreateTest = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const userId = searchParams.get('userId');
-  const courseId = searchParams.get('courseId');
+  let userId = searchParams.get('userId');
+  let courseId = searchParams.get('courseId');
 
   const [difficulty, setDifficulty] = useState('');
   const [chapterIds, setChapterIds] = useState('');
@@ -31,6 +32,21 @@ const CreateTest = () => {
   const [selectedTestId, setSelectedTestId] = useState('');
   const [selectedTestDetails, setSelectedTestDetails] = useState({});
   const deployedLink = `https://testbackend-sy5g.onrender.com`;
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(userId == null)
+  {
+      userId = useSelector((state) => state.userSlice.userId)
+  }
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
+
+
+  console.log(userId, firstName, LastName)
 
   useEffect(() => {
 
@@ -166,7 +182,7 @@ const CreateTest = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
       <div className="create-test-container">
         <h1>Create Test</h1>
         <div className="form">

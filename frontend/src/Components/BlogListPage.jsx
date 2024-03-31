@@ -67,7 +67,7 @@ function BlogList() {
 
   return (
     <>
-      <Navbar />
+      <Navbar pages={["Login", "Logout", "My Courses"]} />
       {loading ? (
         <Box
           sx={{
@@ -93,6 +93,7 @@ function BlogList() {
             margin: "0 auto",
             paddingX: { xs: 0, md: "20px" },
             paddingY: "20px",
+            fontFamily: "'Roboto', sans-serif",
           }}
         >
           <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>

@@ -56,6 +56,17 @@ const Success = lazy(() =>
 );
 const Cancel = lazy(() => import("../../Components/molecules/payment/failure"));
 
+// soa for routing by Freya on 29 March
+const ProfessorCoursePage = lazy(() => import("../../pages/Courses/ProfessorCoursePage"));
+
+const EditCoursePage = lazy(() => import("../../pages/Courses/EditCoursePage"));
+
+const MyCoursePage =  lazy(() => import("../../pages/Courses/MyCoursesPage"));
+
+const ChapterDetailsPage = lazy(() => import("../../pages/Courses/ChapterDetailsPage"));
+
+// eoa for routing by Freya on 29 March
+
 const UserProfile = lazy(() => import("../../Components/profilePage"));
 
 const ResetPwd = lazy(() => import("../../pages/ResetPwd"));
@@ -176,6 +187,12 @@ const privateRoutes = {
   "/result-list": ResultList,
   "/result-detailed-view": ResultDetailedView,
   "/finish-test": FinishTestScreen,
+    // soa for routing by Freya on 29 March
+    "/professor/courses": ProfessorCoursePage,
+    "/my-courses":  MyCoursePage,
+    "/edit-course/:id": EditCoursePage,
+    "/chapter-details/:id":ChapterDetailsPage,
+    // eoa for routing by Freya on 29 March
   "/profile": UserProfile,
   "/logout": Logout
 };

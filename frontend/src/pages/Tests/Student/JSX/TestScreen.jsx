@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/TestScreen.css';
+import { useSelector } from 'react-redux';
 
 const TestScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const studentId = searchParams.get('studentId');
+  let studentId = searchParams.get('studentId');
   const testId = searchParams.get('testId');
   const [testInfo, setTestInfo] = useState({});
   const [questions, setQuestions] = useState([]);
@@ -18,6 +19,15 @@ const TestScreen = () => {
   const [showNext, setShowNext] = useState(true);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [markedForReview, setMarkedForReview] = useState([]);
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(studentId == null)
+  {
+      studentId = useSelector((state) => state.userSlice.userId)
+  }
+
+  console.log(studentId, firstName, LastName)
 
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
 
@@ -71,7 +81,7 @@ const TestScreen = () => {
       attemptId: attemptId,
       attemptedQuestions: attemptedQuestions
     };
-  
+    
     try {
       const response = await axios.post(`${deployedLink}/finish-test`, finishTestRequest);
       if (response.status === 200) {

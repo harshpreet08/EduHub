@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Box,
   Typography,
@@ -16,32 +17,90 @@ import {
   faThumbsDown,
   faHeart,
   faArrowLeft,
-} from '@fortawesome/free-solid-svg-icons';
-import Navbar from './NavBar';
-import CircularProgress from '@mui/material/CircularProgress';
+} from "@fortawesome/free-solid-svg-icons";
+import Navbar from "./NavBar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function BlogDetailsPage() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDisikes] = useState(0);
+  const [love, setLove] = useState(0);
 
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:6002/api/blog/${id}`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((data) => {
         setBlog(data);
+        setLikes(data.likes);
+        setDisikes(data.dislikes);
+        setLove(data.love);
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching blog details:', error);
+        console.error("Error fetching blog details:", error);
         setLoading(false);
       });
   }, [id]);
 
+  const handleLike = () => {
+    fetch(`http://localhost:6002/api/blog/${id}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLikes(data.likes);
+      })
+      .catch((error) => {
+        console.error("Error liking blog:", error);
+      });
+  };
+
+  const handleDislike = () => {
+    fetch(`http://localhost:6002/api/blog/${id}/dislike`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setDisikes(data.dislikes);
+      })
+      .catch((error) => {
+        console.error("Error disliking blog:", error);
+      });
+  };
+
+  const handleLove = () => {
+    fetch(`http://localhost:6002/api/blog/${id}/love`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLove(data.love);
+      })
+      .catch((error) => {
+        console.error("Error loving blog:", error);
+      });
+  };
+
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar pages={["Login", "Logout", "My Courses"]}></Navbar>
       {loading ? (
         <Box
           sx={{
@@ -61,6 +120,7 @@ function BlogDetailsPage() {
                 position: "relative",
                 border: "1px solid white",
                 boxShadow: "none",
+                fontFamily: "'Roboto', sans-serif",
               }}
             >
               <CardContent>
@@ -89,7 +149,7 @@ function BlogDetailsPage() {
                   paragraph
                   sx={{ textAlign: "center" }}
                 >
-                  by {blog.author}
+                  by {firstName}
                 </Typography>
               </CardContent>
               <CardMedia
@@ -125,21 +185,39 @@ function BlogDetailsPage() {
                   marginBottom: "8px",
                 }}
               >
-                <Grid container spacing={2}>
+                <Grid container spacing={2} alignItems="center">
                   <Grid item>
-                    <IconButton aria-label="thumbs-up">
+                    <IconButton aria-label="thumbs-up" onClick={handleLike}>
                       <FontAwesomeIcon icon={faThumbsUp} />
                     </IconButton>
                   </Grid>
                   <Grid item>
-                    <IconButton aria-label="thumbs-down">
+                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                      {likes}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      aria-label="thumbs-down"
+                      onClick={handleDislike}
+                    >
                       <FontAwesomeIcon icon={faThumbsDown} />
                     </IconButton>
                   </Grid>
                   <Grid item>
-                    <IconButton aria-label="heart">
+                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                      {dislikes}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <IconButton aria-label="heart" onClick={handleLove}>
                       <FontAwesomeIcon icon={faHeart} />
                     </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                      {love}
+                    </Typography>
                   </Grid>
                 </Grid>
               </Box>

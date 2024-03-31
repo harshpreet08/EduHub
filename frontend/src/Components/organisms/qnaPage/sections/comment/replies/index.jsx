@@ -1,53 +1,45 @@
-/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-shadow */
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+/* external imports */
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
+import cx from 'classnames';
 import moment from 'moment';
-import { getCommentByQid, replyToComment } from '../comment.service';
-import { setComment, resetCommentData } from '../slice/commentsSlice';
+import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
+/* service */
+import { replyToComment } from '../comment.service';
+/* slice */
+import { setComment } from '../slice/commentsSlice';
+/* styles */
 import styles from '../../../qnaPage.module.scss';
+import QnAUtility from '../../../utils';
 
-const Replies = ({ comment = {} }) => {
+const Replies = ({ comment = {}, fetchComment }) => {
   const { qId } = useParams();
-  const [replyText, setReplyText] = useState('');
-  const [commentCollapse, setCommentCollapse] = useState(true);
   const dispatch = useDispatch();
+  const [replyText, setReplyText] = useState('');
+  const [replyCardCollapse, setReplyCardCollapse] = useState(true);
+  const [showReplyInput, setShowReplyInput] = useState(false);
+  const { userFullName = '' } = useSelector(state => state.userSlice);
 
   const {
     userName = 'anonymous',
-    parentId = '',
+    parentId = '0',
     replies = [],
     text: commentText = '',
     _id: docId = '',
-    answeredDate = new Date().valueOf(),
+    answeredDate = '',
   } = comment || {};
-
-  useEffect(
-    () =>
-      () => dispatch(resetCommentData()),
-    [],
-  );
-
-  const fetchComment = () => {
-    getCommentByQid({ qId })
-      .then(({ data: allComments }) => {
-        dispatch(setComment(allComments));
-      })
-      .catch((err) => {
-        message.error(err);
-      });
-  };
 
   const onAddNewComment = async () => {
     const payload = {
-      questionId: qId,
       parentId: comment?._id,
+      questionId: qId,
       text: replyText,
+      answeredDate: new Date().valueOf(),
+      userName: userFullName,
     };
     await replyToComment(payload)
       .then((response) => {
@@ -59,57 +51,171 @@ const Replies = ({ comment = {} }) => {
       });
   };
 
-  const onReply = async () => {
+  const toggleReplyInputShow = () => {
+    setShowReplyInput(!showReplyInput);
+  };
+
+  const toggleReplyCardCollapse = () => {
+    setReplyCardCollapse(!replyCardCollapse);
+  };
+
+  const onPostReplyHandler = async () => {
+    if (!replyText.length) return;
     await onAddNewComment();
-    fetchComment();
+    await fetchComment();
+    setReplyText('');
+  };
+
+  const stopPropagation = (e) => {
+    e.stopPropagation();
   };
 
   if (parentId === '0') {
-    return (replies || []).map(reply => <Replies comment={reply} />);
+    return (replies || []).map(reply => (
+      <Replies
+        comment={reply}
+        fetchComment={fetchComment}
+      />
+    ));
   }
-  const formattedAnsweredDate = answeredDate !== 'Invalid date' ? moment(answeredDate).format('MMMM Do YYYY, h:mm a') : '';
 
   return (
-    <div className={styles.commentsContainer}>
+    <div className={styles.replyContainer}>
       <section
         role="button"
         tabIndex={0}
-        className={styles.commentCard}
+        className={cx(styles.replyCard, { [styles.collapsed]: replyCardCollapse })}
         key={docId}
-        onClick={() => setCommentCollapse(!commentCollapse)}
+        onClick={toggleReplyCardCollapse}
       >
-        <p className={styles.commentText}>{commentText}</p>
-        <div role="button" tabIndex={0}>
-          <input
-            type="text"
-            value={replyText}
-            onChange={e => setReplyText(e?.target.value)}
-          />
-          <button
-            type="button"
-            className={styles.replyButton}
-            onClick={e => onReply(e)}
-          >
-            <span className={styles.replyIcon}>💬</span>Reply
-          </button>
+        {/* Left Panel */}
+        <div
+          className={styles.leftPanel}
+          onClick={e => stopPropagation(e)}
+          role="button"
+          tabIndex={0}
+        >
+          <span
+            style={{
+              backgroundColor: QnAUtility.getColorForLetter(
+                (userName.charAt(0) || '').toUpperCase(),
+              ),
+            }}
+          >{(userName.charAt(0) || '').toUpperCase()}
+          </span>
         </div>
-        <div className={styles.userDetailSection}>
-          {answeredDate !== 'Invalid date' && (
-            <div className={styles.answeredDate}>
-              <span>answered</span>
-              <span>{formattedAnsweredDate}</span>
+        {/* Right Panel */}
+        <div
+          className={styles.rightPanel}
+          onClick={e => stopPropagation(e)}
+          role="button"
+          tabIndex={0}
+        >
+          {/* 1. Comment Part */}
+          <div className={styles.commentPart}>
+            <div className={styles.nameDateContainer}>
+              <div className={styles.userName}>
+                {userName}
+              </div>
+              {(moment(answeredDate).fromNow() !== 'Invalid date') && (
+                <div className={styles.date}>
+                  {moment(answeredDate).fromNow()}
+                </div>
+              )}
+            </div>
+            <div className={styles.replyText}>
+              {commentText}
+            </div>
+          </div>
+          {/* 2. Reply Part */}
+          <div
+            className={cx(
+              styles.replyPart,
+              showReplyInput ? styles.replyPartBackground : '',
+            )}
+          >
+            {!showReplyInput && (
+              <button
+                type="button"
+                className={styles.replyBtn}
+                onClick={toggleReplyInputShow}
+              >
+                <span>Reply</span>
+              </button>
+            )}
+            {showReplyInput && (
+              <section className={styles.replyInputSection}>
+                <div className={styles.replyingUserLogo}>
+                  <span
+                    style={{
+                      backgroundColor: QnAUtility.getColorForLetter(
+                        (userFullName.charAt(0) || '').toUpperCase(),
+                      ),
+                    }}
+                  >{(userFullName.charAt(0) || '').toUpperCase()}
+                  </span>
+                </div>
+                <div className={styles.inputContainer}>
+                  <input
+                    type="text"
+                    value={replyText}
+                    className={styles.inputBox}
+                    onChange={e => setReplyText(e.target.value)}
+                    placeholder="Add a reply..."
+                  />
+                  <div className={styles.actionBtns}>
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      onClick={toggleReplyInputShow}
+                    >
+                      Cancel
+                    </span>
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      style={{
+                        backgroundColor: replyText.length ? '#065fd4' : '#f2f2f2',
+                        color: replyText.length ? '#fff' : '#909090',
+                        borderRadius: '3rem',
+                      }}
+                      onClick={onPostReplyHandler}
+                    >
+                      Reply
+                    </span>
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
+          {/* 3. Show More */}
+          {(replies.length !== 0) && (
+            <div
+              className={styles.showMorePart}
+              onClick={toggleReplyCardCollapse}
+              role="button"
+              tabIndex={0}
+            >
+              {replyCardCollapse && <CaretDownOutlined />}
+              {!replyCardCollapse && <CaretUpOutlined />}
+              <span className={styles.seeMoreReplies}>
+                {replies.length} replies
+              </span>
             </div>
           )}
-          <div className={styles.answeredBy}>{userName}</div>
         </div>
-        {replies.length && commentCollapse ? (
-          <span className={styles.seeMoreReplies}>
-            {replies.length} more replies
-          </span>
-        ) : null}
       </section>
-      {!commentCollapse
-        && (replies || []).map(reply => <Replies comment={reply} />)}
+      {!replyCardCollapse && (
+        <div className={styles.recurRepliesContainer}>
+          {(replies || []).map(reply => (
+            <Replies
+              key={reply._id}
+              comment={reply}
+              fetchComment={fetchComment}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

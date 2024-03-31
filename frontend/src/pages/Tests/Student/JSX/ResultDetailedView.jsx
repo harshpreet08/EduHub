@@ -3,17 +3,31 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../../../../Components/NavBar.jsx';
 import '../CSS/ResultDetailedView.css';
+import { useSelector } from 'react-redux';
 
 const ResultDetailedView = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const attemptId = searchParams.get('attemptId');
-  const studentId = searchParams.get('studentId');
-  const courseId = searchParams.get('courseId');
+  let studentId = searchParams.get('studentId');
+  let courseId = searchParams.get('courseId');
   const [attempt, setAttempt] = useState(null);
   const [questionDetails, setQuestionDetails] = useState({});
   const navigate = useNavigate();
   const deployedLink = 'https://testbackend-sy5g.onrender.com';
+  const firstName = useSelector((state) => state.userSlice.firstName);
+  const LastName = useSelector((state) => state.userSlice.lastName);
+  
+  if(studentId == null)
+  {
+      studentId = useSelector((state) => state.userSlice.userId)
+  }
+  console.log(studentId, firstName, LastName)
+  if(courseId === null)
+  {
+    courseId = sessionStorage.getItem("courseId");
+  }
+  console.log("Course ID from session storage:", courseId);
 
   useEffect(() => {
     const fetchAttempt = async () => {
@@ -56,7 +70,7 @@ const ResultDetailedView = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar pages={["Chapters", "Live Tests","Results"]} />
     <div className="result-detailed-view-container">
       <div className="result-details">
         <h1>Attempt Detailed View</h1>
