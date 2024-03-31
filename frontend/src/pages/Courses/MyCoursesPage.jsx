@@ -128,7 +128,7 @@ function MyCoursesPage() {
   return (
     <div>
       {/* <NavBar /> */}
-      <NavBar pages={["Login", "Logout"]} />
+      <NavBar pages={["My Courses", "Community Forum", "Blogs"]} />
 
       <div className="my-courses-page">
         <div className="my-courses-filter-and-search">
