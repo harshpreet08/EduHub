@@ -93,7 +93,6 @@ async function logout(req,res){
 
         res.header("accessToken", null);
 
-
         SuccessResponse.message = "Successfully logged out!";
         SuccessResponse.data = "";
         return res.status(StatusCodes.OK).json(SuccessResponse);

@@ -13,3 +13,11 @@ export const commentService = {
   getCommentsByQid: commentUrl,
   postReplyToComment: `${commentUrl}/replyToComment`,
 };
+
+export const userService = {
+  signup: `${baseURL}/user/signup`,
+  login: `${baseURL}/user/login`,
+  forgotpwd: `${baseURL}/user/forgotpwd`,
+  resetpwd: `${baseURL}/user/reset-password`,
+  logout: `${baseURL}/user/logout`
+}

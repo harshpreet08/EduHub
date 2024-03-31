@@ -28,7 +28,6 @@ const UserProfile = () => {
 
     }
     catch(error){
-        console.log("hfsjdfksjdbfkdsfj");
         console.log(error);
         toast.error("error occured");
 

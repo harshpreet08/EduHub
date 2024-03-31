@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
   };
   return (
     <>
-    <Navbar></Navbar>
+    <Navbar pages = {["Contact Us", "FAQs", "Register", "Logout"]}></Navbar>
       <div
         style={{
           marginTop: "10px",

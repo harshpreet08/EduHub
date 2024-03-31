@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { Email } from "./input";
 import BackLogo from "../assets/images/back-logo-1.webp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,10 @@ export const ForgotForm = () => {
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
   };
+
+  useEffect(()=>{
+    setError("");
+  }, [selectedRole, email]);
 
   const handleForgot = async (e) =>{
     try{

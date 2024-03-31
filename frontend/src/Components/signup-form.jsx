@@ -7,6 +7,7 @@ import { select } from "@material-tailwind/react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserData } from "./slices/userSlice";
 import Cookies from "universal-cookie";
+import {userService} from "../services/urls";
 
 
 const SignUpForm = () => {
@@ -26,10 +27,8 @@ const SignUpForm = () => {
   };
 
   useEffect(()=>{
-    console.log(lastName);
-    console.log(firstName);
-    console.log(selectedRole);
-  }, [lastName,firstName]);
+    setError("");
+  }, [email, selectedRole]);
 
   const handleSignUp = async (e) => {
     try {
@@ -43,7 +42,7 @@ const SignUpForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:6002/user/signup",
+        userService.signup,
         payload
       );
 
@@ -70,6 +69,7 @@ const SignUpForm = () => {
     } catch (error) {
       console.log(error);
       setError(error?.response?.data?.error);
+      navigate("/register");
     }
   };
 

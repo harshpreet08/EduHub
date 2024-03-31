@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { setUserData } from "../../Components/slices/userSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 /* internal components */
 const SignUp = lazy(() => import("../../pages/Signup"));
@@ -61,6 +61,8 @@ const UserProfile = lazy(() => import("../../Components/profilePage"));
 const ResetPwd = lazy(() => import("../../pages/ResetPwd"));
 
 const StreamClass = lazy(()=> import("../../pages/StreamClass"));
+
+const Logout = lazy(() => import("../../Components/logout"));
 
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
@@ -134,6 +136,7 @@ const PublicRoute = (props) => {
         })
         .then(() => SetAuthenticated(true))
         .catch((error) => {
+          console.log(error);
           setAllowAccess(true);
         });
     }, []);
@@ -174,6 +177,7 @@ const privateRoutes = {
   "/result-detailed-view": ResultDetailedView,
   "/finish-test": FinishTestScreen,
   "/profile": UserProfile,
+  "/logout": Logout
 };
 
 const publicRoutes = {
