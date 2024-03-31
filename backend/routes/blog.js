@@ -80,4 +80,54 @@ router.put('/:id', async (req, res) => {
 });
 
 
+// Liking a blog post
+router.post('/:id/like', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blogPost = await BlogPost.findById(id);
+    if (!blogPost) {
+      return res.status(404).json({ message: 'Blog post not found' });
+    }
+    blogPost.likes++;
+    const updatedPost = await blogPost.save();
+    res.status(200).json({ likes: updatedPost.likes });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Disliking a blog post
+router.post('/:id/dislike', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blogPost = await BlogPost.findById(id);
+    if (!blogPost) {
+      return res.status(404).json({ message: 'Blog post not found' });
+    }
+    blogPost.dislikes++;
+    const updatedPost = await blogPost.save();
+    res.status(200).json({ dislikes: updatedPost.dislikes });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Loving a blog post
+router.post('/:id/love', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blogPost = await BlogPost.findById(id);
+    if (!blogPost) {
+      return res.status(404).json({ message: 'Blog post not found' });
+    }
+    blogPost.love++;
+    const updatedPost = await blogPost.save();
+    res.status(200).json({ love: updatedPost.love });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
 module.exports = router;

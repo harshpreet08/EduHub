@@ -11,6 +11,18 @@ const blogPostSchema = new Schema({
   image: {
     type: String
   },
+  likes: {
+    type: Number, 
+    default: 0,
+  },
+  dislikes: {
+    type: Number, 
+    default: 0,
+  },
+  love: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
