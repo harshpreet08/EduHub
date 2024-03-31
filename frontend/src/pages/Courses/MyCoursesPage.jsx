@@ -31,13 +31,14 @@ function MyCoursesPage() {
   const [selectedCourseId, setSelectedCourseId] = useState(""); // State to hold courseId
 
   useEffect(() => {
+   
     const fetchCourses = async (userId) => {
       try {
         const response = await axios.get(
           `https://webbackend-3087.onrender.com/api/courses/all/${userId}`
         );
         setCourses(response.data);
-        console.log("courses=", response.data);
+        console.log("courses======", response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
@@ -102,10 +103,12 @@ function MyCoursesPage() {
       instructorFilter === "" ||
       course.instructor.toLowerCase() === instructorFilter.toLowerCase();
 
-      const ratingMatches =
-      ratingFilter === 0 || course.rating >= ratingFilter; 
+      // const ratingMatches =
+      // ratingFilter === 0 || course.rating >= ratingFilter; 
   
-    return titleMatches && instructorMatches && ratingMatches;
+    // return titleMatches && instructorMatches && ratingMatches;
+    
+    return titleMatches && instructorMatches;
   });
 
   const handleSearchh = (term) => {
@@ -178,7 +181,7 @@ function MyCoursesPage() {
           <div className="course-container-2">
             <div className="course-list">
               {console.log("Courses:", courses)}
-              {console.log("Filtered Courses:", filteredCourses)}
+              {console.log("Filtered Courses=========", filteredCourses)}
               {filteredCourses.length > 0
                 ? filteredCourses.map((course) => (
                     <Link
