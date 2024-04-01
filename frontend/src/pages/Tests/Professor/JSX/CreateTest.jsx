@@ -182,7 +182,7 @@ const CreateTest = () => {
 
   return (
     <div>
-      <NavBar pages = {["Content","Question Bank", "Tests"]}/>
+      <NavBar pages = {["Courses Dashboard", "Content", "Question Bank", "Tests"]}/>
       <div className="create-test-container">
         <h1>Create Test</h1>
         <div className="form">

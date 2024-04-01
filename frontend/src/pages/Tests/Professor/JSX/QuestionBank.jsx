@@ -25,6 +25,8 @@ const QuestionBank = () => {
   const deployedLink = `https://testbackend-sy5g.onrender.com`;
   const firstName = useSelector((state) => state.userSlice.firstName);
   const LastName = useSelector((state) => state.userSlice.lastName);
+  const courseName = sessionStorage.getItem("courseTitle");
+  console.log("cpurse name is",courseName)
 
   if(userId === null)
   {
@@ -97,9 +99,9 @@ const QuestionBank = () => {
 
   return (
     <div>
-      <NavBar pages = {["Content", "Question Bank", "Tests"]}/>
+      <NavBar pages = {["Courses Dashboard", "Content", "Question Bank", "Tests"]}/>
       <div className="question-bank-container">
-        <h1 style={{ marginTop: "2rem" }}>Question Bank for {courseId}</h1>
+        <h1 style={{ marginTop: "2rem" }}>Question Bank for {courseName}</h1>
         <input
           type="text"
           placeholder="Search questions..."

@@ -70,7 +70,7 @@ const ResultDetailedView = () => {
 
   return (
     <div>
-      <Navbar pages={["Chapters", "Live Tests","Results"]} />
+      <Navbar pages={["My Courses", "Chapters", "Live Tests","Results"]} />
     <div className="result-detailed-view-container">
       <div className="result-details">
         <h1>Attempt Detailed View</h1>

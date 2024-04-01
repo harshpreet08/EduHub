@@ -49,7 +49,7 @@ const TestList = () => {
 
   return (
     <div>
-      <Navbar pages={["Chapters", "Live Tests","Results"]} />
+      <Navbar pages={["My Courses", "Chapters", "Live Tests","Results"]} />
       <div className="test-list">
 
         <h1>Available Tests</h1>
