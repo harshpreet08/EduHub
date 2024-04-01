@@ -5,8 +5,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserData } from "./slices/userSlice";
-import {userService} from "../services/urls";
-
+import { userService } from "../services/urls";
 
 const SignForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -34,11 +33,9 @@ const SignForm = () => {
         role: selectedRole.toLowerCase(),
       };
       console.log("Here in the function");
-      const response = await axios.post(
-        userService.login,
-        payload,
-        { withCredentials: true }
-      );
+      const response = await axios.post(userService.login, payload, {
+        withCredentials: true,
+      });
 
       const userData = response?.data?.data;
 
@@ -54,15 +51,15 @@ const SignForm = () => {
 
       cookies.set("accesstoken", response.headers.accesstoken);
 
-
       if (response.error) {
         navigate("/blogs");
       }
 
-      if(selectedRole == "Teacher"){
+      if (selectedRole == "Teacher") {
         navigate("/professor/courses");
+      } else if (selectedRole == "Student") {
+        navigate("/dashboard");
       }
-      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       const errMessage = error?.response?.data?.error;
