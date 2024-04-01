@@ -48,7 +48,8 @@ function Navbar({
     "Live Tests": "test-list",
     "Results": "result-list",
     "Content": `edit-course/${courseId}`,
-    "Chapters": `chapter-details/${courseId}`
+    "Chapters": `chapter-details/${courseId}`,
+    "Courses Dashboard": `professor/courses`
   };
 
   const getRouteLink = ({ page = "" }) => 

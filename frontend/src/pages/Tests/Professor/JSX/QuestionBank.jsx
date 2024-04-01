@@ -97,7 +97,7 @@ const QuestionBank = () => {
 
   return (
     <div>
-      <NavBar pages = {["Content", "Live Lectures", "Question Bank", "Tests"]}/>
+      <NavBar pages = {["Content", "Question Bank", "Tests"]}/>
       <div className="question-bank-container">
         <h1 style={{ marginTop: "2rem" }}>Question Bank for {courseId}</h1>
         <input
