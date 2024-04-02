@@ -14,6 +14,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import EduHubLogo from "../assets/images/EduHubLogo.png";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // const pages = ["Contact Us", "FAQs", "Register", "Login"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -41,6 +43,21 @@ function Navbar({
     setAnchorElUser(null);
   };
 
+  const navigate = useNavigate();
+
+  const selectedRole = useSelector(state => state.userSlice.role);
+
+  const handleDashboardClick = () =>{
+    console.log("select role: ", selectedRole);
+    if (selectedRole.toLowerCase() === "teacher"){
+      console.log("I am here buddyyy");
+      navigate("/professor/courses");
+    }
+    else{
+      navigate("/dashboard");
+    }
+  }
+
   const routeMap = {
     "Community Forum": "questions",
     "Question Bank": "questionbank",
@@ -63,7 +80,6 @@ function Navbar({
             variant="h6"
             noWrap
             component={Link}
-            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -78,6 +94,7 @@ function Navbar({
               src={EduHubLogo}
               alt="EduHub Logo"
               style={{ height: "50px", opacity: 1 }}
+              onClick= {handleDashboardClick}
             />
           </Typography>
 
@@ -138,6 +155,7 @@ function Navbar({
               src={EduHubLogo}
               alt="EduHub Logo"
               style={{ height: "30px", opacity: 0.7 }}
+              onClick= {handleDashboardClick}
             />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

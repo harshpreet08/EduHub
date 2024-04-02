@@ -13,9 +13,9 @@ const Logout = () => {
       try {
         console.log("Helloooooo");
         const cookies = new Cookies();
+        cookies.remove('accesstoken', { path: '/' });
+
         const response = await axios.get(userService.logout);
-        cookies.set("accesstoken", undefined);
-        cookies.remove("accesstoken");
         navigate("/login");
       } catch (error) {
         console.log(error);
@@ -24,7 +24,7 @@ const Logout = () => {
     };
 
     logout(); 
-  }); 
+  }, []); 
 
   return null;
 };
