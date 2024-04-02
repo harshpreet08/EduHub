@@ -12,26 +12,11 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Button as AntdButton } from "antd";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { CheckableTag } = Tag;
 const { Search } = Input;
-const courses = [
-  {
-    id: 1,
-    name: "Course 1",
-    description: "Description for Course 1",
-    price: "$19.99",
-    imageUrl: ReactLogo,
-  },
-  {
-    id: 2,
-    name: "Course 2",
-    description: "Description for Course 2",
-    price: "$29.99",
-    imageUrl: BannerImage,
-  },
-  // Add more courses as needed
-];
 
 const suffix = (
   <AudioOutlined
@@ -114,16 +99,23 @@ const Dashboard: React.FC = () => {
   const enrollCourse = async (courseID) => {
     try {
       // Make an API call to store the course ID in the database
-      const response = await axios.post("http://localhost:6002/dashboard/trending-courses/enroll", { courseID });
+      const response = await axios.post(
+        "http://localhost:6002/dashboard/trending-courses/enroll",
+        { courseID }
+      );
+      toast.success("Course enrolled successfully");
       console.log("Course enrolled successfully:", response.data);
     } catch (error) {
+      toast.error("Failed to enroll")
       console.error("Error enrolling course:", error);
     }
   };
 
   return (
     <>
-    <Navbar pages = {["Contact Us", "FAQs", "Register", "Logout"]}></Navbar>
+      <Navbar
+        pages={["Contact Us", "My Courses", "FAQs", "Logout"]}
+      ></Navbar>
       <div
         style={{
           marginTop: "10px",
