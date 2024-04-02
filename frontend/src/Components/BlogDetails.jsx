@@ -26,8 +26,9 @@ function BlogDetailsPage() {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const firstName = useSelector((state) => state.userSlice.firstName);
+  const role = useSelector((state) => state.userSlice.role);
   const [likes, setLikes] = useState(0);
-  const [dislikes, setDisikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
   const [love, setLove] = useState(0);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function BlogDetailsPage() {
       .then((data) => {
         setBlog(data);
         setLikes(data.likes);
-        setDisikes(data.dislikes);
+        setDislikes(data.dislikes);
         setLove(data.love);
         setLoading(false);
       })
@@ -74,7 +75,7 @@ function BlogDetailsPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setDisikes(data.dislikes);
+        setDislikes(data.dislikes);
       })
       .catch((error) => {
         console.error("Error disliking blog:", error);
@@ -100,7 +101,16 @@ function BlogDetailsPage() {
 
   return (
     <>
-      <Navbar pages={["Login", "Logout", "My Courses"]}></Navbar>
+      {role === "teacher" && (
+        <Navbar
+          pages={["Courses Dashboard", "Community Forum", "Blogs", "Pricing"]}
+        ></Navbar>
+      )}
+      {role === "student" && (
+        <Navbar
+          pages={["Dahsboard", "My Courses", "Community Forum", "Blogs"]}
+        ></Navbar>
+      )}
       {loading ? (
         <Box
           sx={{

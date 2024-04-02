@@ -15,12 +15,14 @@ import Navbar from "./NavBar";
 import CircularProgress from "@mui/material/CircularProgress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useSelector } from "react-redux";
 
 function BlogList() {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+  const role = useSelector((state) => state.userSlice.role);
 
   useEffect(() => {
     fetch("http://localhost:6002/api/blog")
@@ -67,7 +69,16 @@ function BlogList() {
 
   return (
     <>
-      <Navbar pages={["Login", "Logout", "My Courses"]} />
+      {role === "teacher" && (
+        <Navbar
+          pages={["Courses Dashboard", "Community Forum", "Blogs", "Pricing"]}
+        ></Navbar>
+      )}
+      {role === "student" && (
+        <Navbar
+          pages={["Dahsboard", "My Courses", "Community Forum", "Blogs"]}
+        ></Navbar>
+      )}
       {loading ? (
         <Box
           sx={{

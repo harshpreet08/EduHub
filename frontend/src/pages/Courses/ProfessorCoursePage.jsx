@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback  } from "react";
-import { Link } from "react-router-dom"; 
+import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import ProfessorCourseCard from "./ProfessorCourseCard";
 import SearchBar from "./SearchBar";
 import StarIcon from "@mui/icons-material/Star";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import {
@@ -17,19 +17,19 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-} from "@mui/material"; 
+} from "@mui/material";
 import axios from "axios";
 import "./ProfessorCoursePage.css";
 import NavBar from "../../Components/NavBar.jsx";
 
 function ProfessorCoursePage() {
-  // const { userId } = useParams(); 
+  // const { userId } = useParams();
   const userId = useSelector((state) => state.userSlice.userId);
 
   console.log("userId====", userId);
 
   const [courses, setCourses] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState([]); 
+  const [filteredCourses, setFilteredCourses] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -43,9 +43,9 @@ function ProfessorCoursePage() {
     category: "",
     image: null,
   });
-  const [isEdit, setIsEdit] = useState(false); 
-  const [editCourseId, setEditCourseId] = useState(null); 
-  const [courseId, setCourseId] = useState(""); 
+  const [isEdit, setIsEdit] = useState(false);
+  const [editCourseId, setEditCourseId] = useState(null);
+  const [courseId, setCourseId] = useState("");
 
   useEffect(() => {
     const storedCourseId = sessionStorage.getItem("courseId");
@@ -58,13 +58,11 @@ function ProfessorCoursePage() {
     sessionStorage.setItem("courseId", courseId);
   }, [courseId]);
 
-
-
   useEffect(() => {
     const fetchCourses = async (userId) => {
       try {
         const response = await axios.get(
-          `https://webbackend-3087.onrender.com/api/courses/all/${userId}` 
+          `https://webbackend-3087.onrender.com/api/courses/all/${userId}`
         );
         setCourses(response.data);
       } catch (error) {
@@ -89,8 +87,6 @@ function ProfessorCoursePage() {
     }
   }, [showModal]);
 
-
-  
   const handleNewCourseSubmit = () => {
     const formData = new FormData();
     //formData.append('file', newCourseData.image); // Append the image file
@@ -100,7 +96,7 @@ function ProfessorCoursePage() {
     formData.append("category", newCourseData.category);
 
     if (newCourseData.image !== " ") {
-      formData.append("file", newCourseData.image); 
+      formData.append("file", newCourseData.image);
     }
 
     if (
@@ -116,7 +112,10 @@ function ProfessorCoursePage() {
     if (isEdit) {
       // Update existing course
       axios
-        .put(`https://webbackend-3087.onrender.com/api/courses/edit/${userId}/${editCourseId}`, formData)
+        .put(
+          `https://webbackend-3087.onrender.com/api/courses/edit/${userId}/${editCourseId}`,
+          formData
+        )
         .then((response) => {
           const updatedCourse = response.data;
           const updatedCourses = courses.map((course) => {
@@ -158,9 +157,11 @@ function ProfessorCoursePage() {
       }
       // Add new course
       axios
-        .post(`https://webbackend-3087.onrender.com/api/courses/${userId}/create`, formData)
+        .post(
+          `https://webbackend-3087.onrender.com/api/courses/${userId}/create`,
+          formData
+        )
         .then((response) => {
-
           setCourses([...courses, response.data]);
           setSuccessMessage("Course added successfully.");
           setNewCourseData({
@@ -215,7 +216,9 @@ function ProfessorCoursePage() {
     setCourses(updatedCourses);
 
     axios
-      .delete(`https://webbackend-3087.onrender.com/api/courses/delete/${courseId}`)
+      .delete(
+        `https://webbackend-3087.onrender.com/api/courses/delete/${courseId}`
+      )
       .then((response) => {
         setSuccessMessage("Course deleted successfully.");
         if (response.status === 404) {
@@ -259,7 +262,7 @@ function ProfessorCoursePage() {
 
   const handleCloseErrorDialog = useCallback(() => {
     setError(null);
-  }, []); 
+  }, []);
   const handleCloseDialog = useCallback(() => {
     setSuccessMessage(null);
   }, []);
@@ -272,7 +275,6 @@ function ProfessorCoursePage() {
     setFilteredCourses(filtered);
   }, [searchTerm, courses]);
 
-
   // Function to handle search term change
   const handleSearchh = (term) => {
     console.log("Search term:", term);
@@ -281,7 +283,9 @@ function ProfessorCoursePage() {
 
   return (
     <div>
-      <NavBar pages={["Courses Dashboard", "Community Forum", "Blogs"]} />
+      <NavBar
+        pages={["Courses Dashboard", "Community Forum", "Blogs", "Pricing"]}
+      />
       <div className="professor-courses-page">
         <div className="filter-and-search">
           <div className="search-container">
@@ -305,7 +309,7 @@ function ProfessorCoursePage() {
             <ProfessorCourseCard
               key={course.id}
               course={course}
-              onEdit={handleEdit} 
+              onEdit={handleEdit}
               onDelete={handleDelete}
             />
           ))}
@@ -356,7 +360,10 @@ function ProfessorCoursePage() {
             <Button
               onClick={handleNewCourseSubmit}
               variant="contained"
-              style={{ backgroundColor: "rgba(0,0,0, 0.87)" , margin: "15px 20px",}}
+              style={{
+                backgroundColor: "rgba(0,0,0, 0.87)",
+                margin: "15px 20px",
+              }}
             >
               {isEdit ? "Save Changes" : "Add Course"}
               {/* Display appropriate button text */}
@@ -364,15 +371,16 @@ function ProfessorCoursePage() {
             <Button
               onClick={() => setShowModal(false)}
               variant="contained"
-              style={{ backgroundColor: 'rgba(0, 0, 0, 0.87)', margin: "15px 20px", }}
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.87)",
+                margin: "15px 20px",
+              }}
             >
               Close
             </Button>
           </Box>
         </Modal>
         <Dialog open={!!error} onClose={handleCloseErrorDialog}>
-     
-
           <DialogTitle>Error</DialogTitle>
           <DialogContent>
             <DialogContentText>{error}</DialogContentText>
