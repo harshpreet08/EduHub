@@ -99,19 +99,20 @@ const EditQuestion = () => {
 
     const handleCheckboxChange = (index) => {
         const updatedCorrectOptions = [...questionData.correctOptions]; // Create a copy of correctOptions
-        const optionIndex = updatedCorrectOptions.indexOf(index); // Check if the current option index exists in correctOptions
+        const optionIndex = updatedCorrectOptions.indexOf(questionData.options[index]); // Check if the current option value exists in correctOptions
     
         if (optionIndex !== -1) {
-            // If the option index is found, remove it from the array
+            // If the option value is found, remove it from the array
             updatedCorrectOptions.splice(optionIndex, 1);
         } else {
             // If not found, add it to the array
-            updatedCorrectOptions.push(index);
+            updatedCorrectOptions.push(questionData.options[index]);
         }
     
         // Update the state with the new correctOptions array
         setQuestionData({ ...questionData, correctOptions: updatedCorrectOptions });
     };
+    
     
 
     const handleAddOption = () => {

@@ -9,7 +9,13 @@
   padding: 20px;
   font-size: medium;
   font-weight: bold;
+}
 
+.result-detailed-view-container h1 {
+  color: #282C34;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .loading {
@@ -48,6 +54,11 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  align-content: center;
 }
 
 .back-button:hover {

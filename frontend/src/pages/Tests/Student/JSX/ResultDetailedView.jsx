@@ -34,7 +34,6 @@ const ResultDetailedView = () => {
       try {
         const response = await axios.get(`${deployedLink}/getAttempt/${attemptId}`);
         setAttempt(response.data);
-        // Fetch question details for each attempted question
         await Promise.all(response.data.attemptedQuestions.map(async (question) => {
           const questionDetailsResponse = await axios.get(`${deployedLink}/qb/getQuestion/${question.questionId}`);
           setQuestionDetails(prevDetails => ({
@@ -71,34 +70,34 @@ const ResultDetailedView = () => {
   return (
     <div>
       <Navbar pages={["My Courses", "Chapters", "Live Tests","Results"]} />
-    <div className="result-detailed-view-container">
-      <div className="result-details">
-        <h1>Attempt Detailed View</h1>
-        <p>Attempt ID: {attempt.attemptId}</p>
-        <p>Total Marks: {attempt.totalMarks}</p>
-        <p>Obtained Marks: {attempt.obtainedMarks}</p>
-        <p>Result: {attempt.result}</p>
-        <h2>Questions</h2>
-        {attempt.attemptedQuestions.map((question) => (
-          <div key={question.questionId} className="question-details">
-            <h3>Question:</h3>
-            <h3>{questionDetails[question.questionId]?.question}</h3>
-            <h4>Options:</h4>
-            <ul>
-              {questionDetails[question.questionId]?.options.map((option, index) => (
-                <li key={index}>{option}</li>
-              ))}
-            </ul>
-            <p>Correct Options: {questionDetails[question.questionId]?.correctOptions.join(', ')}</p>
-            <p>Selected Options: {questionDetails[question.questionId]?.selectedOptions.join(', ')}</p>
-            <p>Positive Marks: {questionDetails[question.questionId]?.positiveMarks}</p>
-            <p>Negative Marks: {questionDetails[question.questionId]?.negativeMarks}</p>
-            <p>Solution Description: {questionDetails[question.questionId]?.solutionDescription}</p>
-          </div>
-        ))}
+      <div className="result-detailed-view-container">
+      <h1>Attempt Detailed View</h1>
+        <div className="result-details">
+          <p>Attempt ID: {attempt.attemptId}</p>
+          <p>Total Marks: {attempt.totalMarks}</p>
+          <p>Obtained Marks: {attempt.obtainedMarks}</p>
+          <p>Result: {attempt.result}</p>
+          <h2>Questions</h2>
+          {attempt.attemptedQuestions.map((question) => (
+            <div key={question.questionId} className="question-details">
+              <h3>Question:</h3>
+              <h3>{questionDetails[question.questionId]?.question}</h3>
+              <h4>Options:</h4>
+              <ul>
+                {questionDetails[question.questionId]?.options.map((option, index) => (
+                  <li key={index}>{option}</li>
+                ))}
+              </ul>
+              <p>Correct Options: {questionDetails[question.questionId]?.correctOptions.join(', ')}</p>
+              <p>Selected Options: {questionDetails[question.questionId]?.selectedOptions.join(', ')}</p>
+              <p>Positive Marks: {questionDetails[question.questionId]?.positiveMarks}</p>
+              <p>Negative Marks: {questionDetails[question.questionId]?.negativeMarks}</p>
+              <p>Solution Description: {questionDetails[question.questionId]?.solutionDescription}</p>
+            </div>
+          ))}
+        </div>
         <button className="back-button" onClick={handleBackToList}>Back to Attempt List</button>
       </div>
-    </div>
     </div>
   );
 };

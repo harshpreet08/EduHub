@@ -184,6 +184,7 @@ const CreateTest = () => {
     <div>
       <NavBar pages = {["Courses Dashboard", "Content", "Question Bank", "Tests"]}/>
       <div className="create-test-container">
+        <h1> Handle your test here {firstName}</h1>
         <h1>Create Test</h1>
         <div className="form">
           <div className="form-row">
@@ -246,10 +247,10 @@ const CreateTest = () => {
               <p style={{ fontWeight: 'bold' }}>{test.testName}</p>
               <div className="test-actions">
                 <Button onClick={() => handleEditTest(test.id)}>
-                  <EditIcon style={{ color: '#FFFFFF' }} />
+                  <EditIcon style={{ color: '#282C34' }} />
                 </Button>
                 <Button onClick={() => handleDeleteTest(test.id)}>
-                  <DeleteIcon style={{ color: '#FFFFFF' }} />
+                  <DeleteIcon style={{ color: '#282C34' }} />
                 </Button>
               </div>
             </div>
