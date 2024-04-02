@@ -39,7 +39,19 @@ function Navbar({
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (event) => {
+    const { target } = event;
+    const setting = target.textContent;
+  
+    // If the user clicks on "Logout", redirect to "/logout"
+    if (setting === "Logout") {
+      navigate("/logout");
+    }
+
+    if(setting == "Profile"){
+      navigate("/profile");
+    }
+  
     setAnchorElUser(null);
   };
 
