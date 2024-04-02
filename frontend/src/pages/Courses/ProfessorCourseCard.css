@@ -2,8 +2,8 @@
     position: relative;
     width: 15rem;
     height: 22rem;
-    border: 0.0625rem solid #ccc;
-    border-radius: 3rem;
+    /* border: 0.0625rem solid #ccc; */
+    /* border-radius: 3rem; */
     padding: 0.4rem;
     margin: 0;
     background-color: #f9f9f9;
@@ -32,7 +32,7 @@
   .course-info h2,
   .course-info p {
     color: #333; 
-    font-size: 0.5rem;
+    font-size: 0.9rem;
     margin-bottom: 0.3125rem; 
     overflow-wrap: break-word;
   }
