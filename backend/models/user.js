@@ -36,6 +36,9 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  enrolledCoursesId: {
+    type: Array,
+  }
 });
 
 userSchema.pre("save", async function (next) {

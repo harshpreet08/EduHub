@@ -14,6 +14,7 @@ const communityRouter = require('./routes/communityForum')
 const blogRouter = require('./routes/blog');
 const commentRouter = require('./routes/comments')
 const userRouter = require('./routes/user');
+const dashboardRouter = require('./routes/dashboard')
 
 const dbURL = process.env.DB_URL
 
@@ -40,6 +41,7 @@ app.use('/community', communityRouter.routes)
 app.use('/api/blog', blogRouter);
 app.use('/user',userRouter);
 app.use('/', commentRouter.routes)
+app.use('/dashboard', dashboardRouter.routes);
 
 const port = process.env.PORT || 6002;
 app.listen(port, () => {
