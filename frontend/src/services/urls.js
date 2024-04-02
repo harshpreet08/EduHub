@@ -1,4 +1,4 @@
-export const baseURL = 'http://localhost:6002';
+export const baseURL = 'https://eduhub-node-backend.onrender.com';
 
 const questionUrl = `${baseURL}/community`;
 const commentUrl = `${baseURL}/comments`;
