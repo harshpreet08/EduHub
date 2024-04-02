@@ -49,20 +49,30 @@ const TestList = () => {
 
   return (
     <div>
-      <Navbar pages={["Chapters", "Live Tests","Results"]} />
+      <Navbar pages={["My Courses", "Chapters", "Live Tests","Results"]} />
       <div className="test-list">
-
-        <h1>Available Tests</h1>
-        {tests.map((test) => (
-          <div className="test-item" key={test.id}>
-            <h3>{test.testName}</h3>
-            <p>Chapters: {test.chapterIds.join(', ')}</p>
-            <p>Difficulty: {test.difficultyLevel}</p>
-            <p>Number of Questions: {test.numberOfQuestions}</p>
-            <p>Time Limit: {test.testTime} minutes</p>
-            <button onClick={() => handleStartTest(test)}>Start Test</button>
-          </div>
-        ))}
+        <h1 className="test-list-heading">Available Tests for {firstName}</h1>
+        <div className="test-items-container">
+          {tests.map((test) => (
+            <div className="test-item" key={test.id}>
+              <div className="test-name-column">
+                <h3>{test.testName}</h3>
+              </div>
+              <div className="test-details-column">
+                <p>Chapters: {test.chapterIds.join(', ')}</p>
+                <p>Subchapters: {test.subchapterIds.join(', ')}</p>
+                <p>Difficulty: {test.difficultyLevel}</p>
+              </div>
+              <div className="test-other-details-column">
+                <p>Number of Questions: {test.numberOfQuestions}</p>
+                <p>Time Limit: {test.testTime} minutes</p>
+              </div>
+              <div className="test-start-button-column">
+                <button className="start-test-btn" onClick={() => handleStartTest(test)}>Start Test</button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

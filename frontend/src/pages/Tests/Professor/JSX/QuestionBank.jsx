@@ -37,7 +37,6 @@ const QuestionBank = () => {
   }
   console.log("Course ID from session storage:", courseId);
 
-  
   useEffect(() => {
 
     axios.get(`${deployedLink}/qb/getAllQuestions/${userId}/${courseId}`, {
@@ -97,9 +96,9 @@ const QuestionBank = () => {
 
   return (
     <div>
-      <NavBar pages = {["Content", "Question Bank", "Tests"]}/>
+      <NavBar pages = {["Courses Dashboard", "Content", "Question Bank", "Tests"]}/>
       <div className="question-bank-container">
-        <h1 style={{ marginTop: "2rem" }}>Question Bank for {courseId}</h1>
+      <h1 style={{ marginTop: "2rem" }}>Hi {firstName}, this is Question Bank for this course</h1>
         <input
           type="text"
           placeholder="Search questions..."

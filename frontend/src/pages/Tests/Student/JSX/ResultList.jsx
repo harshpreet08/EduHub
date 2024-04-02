@@ -6,7 +6,7 @@ import Navbar from '../../../../Components/NavBar';
 import { useSelector } from 'react-redux';
 
 const ResultList = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   let studentId = searchParams.get('studentId');
@@ -49,20 +49,23 @@ const ResultList = () => {
 
   return (
     <div>
-      <Navbar pages={["Chapters", "Live Tests","Results"]} />
-    <div>
-      <h1>Attempted tests</h1>
-      {attempts.map((attempt) => (
-        <div className="result-item" key={attempt.attemptId}>
-          <h3>Attempt ID: {attempt.attemptId}</h3>
-          <p>Total Marks: {attempt.totalMarks}</p>
-          <p>Obtained Marks: {attempt.obtainedMarks}</p>
-          <p>Result: {attempt.result}</p>
-          <button onClick={() => handleDetailView(attempt.attemptId)}>Detailed View</button>
-          <hr />
-        </div>
-      ))}
-    </div>
+      <Navbar pages={["My Courses", "Chapters", "Live Tests","Results"]} />
+      <div className="result-list">
+        <h1>Attempted tests for {firstName}</h1>
+        {attempts.map((attempt) => (
+          <div className="result-item" key={attempt.attemptId}>
+            <div className="attempt-info">
+              <h3>Attempt ID: {attempt.attemptId}</h3>
+              <p>Total Marks: {attempt.totalMarks}</p>
+              <p>Obtained Marks: {attempt.obtainedMarks}</p>
+              <p>Result: {attempt.result}</p>
+            </div>
+            <div className="view-button">
+              <button onClick={() => handleDetailView(attempt.attemptId)}>Detailed View</button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
