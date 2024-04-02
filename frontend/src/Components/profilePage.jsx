@@ -48,7 +48,7 @@ const UserProfile = () => {
                     className="rounded-full w-48 h-48"
                   />
                   <div className="mt-3">
-                    <h4 className="text-gray-800">John Doe</h4>
+                    <h4 className="text-gray-800">{firstName +" " + lastName}</h4>
                   </div>
                 </div>
               </div>

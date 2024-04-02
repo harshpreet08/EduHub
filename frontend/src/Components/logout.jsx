@@ -11,7 +11,6 @@ const Logout = () => {
   useEffect(() => {
     const logout = async () => {
       try {
-        console.log("Helloooooo");
         const cookies = new Cookies();
         cookies.remove('accesstoken', { path: '/' });
 
