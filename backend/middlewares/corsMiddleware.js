@@ -7,7 +7,7 @@ const corsMiddleware = (req, res, next) => {
     optionSuccessStatus: 200,
     exposedHeaders: ["accessToken"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE",
-    allowedHeaders: "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+    allowedHeaders: "Content-Type, Authorization, accesstoken, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
     maxAge: 7200
   };
 
