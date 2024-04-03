@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 /* internal components */
 import Navbar from '../../NavBar';
 import Question from './sections/question';
