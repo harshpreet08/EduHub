@@ -15,15 +15,10 @@ const blogRouter = require('./routes/blog');
 const commentRouter = require('./routes/comments')
 const userRouter = require('./routes/user');
 const dashboardRouter = require('./routes/dashboard')
+/* middleware */
+const corsMiddleware = require('./middlewares/corsMiddleware');
 
 const dbURL = process.env.DB_URL
-
-const corsOptions = {
-  origin: process.env.FRONTEND_URL, 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200,
-  exposedHeaders: ["accessToken"]
-}
 
 mongoose.connect(dbURL).then(() => { 
   console.log('connected to db');
@@ -31,7 +26,7 @@ mongoose.connect(dbURL).then(() => {
   console.log('Error', e);
 })
 
-app.use(cors(corsOptions));
+app.use(corsMiddleware);
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());
