@@ -6,7 +6,7 @@ import Comment from './sections/comment';
 
 const QnAPage = () => (
   <div>
-    <Navbar />
+    <Navbar pages={["My Courses", "Community Forum", "Blogs"]} />
     <Question />
     <Comment />
   </div>
