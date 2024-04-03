@@ -1,4 +1,3 @@
-<br><br>
 # EduHub
 
 <p align="center">
