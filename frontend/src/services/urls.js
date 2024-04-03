@@ -19,5 +19,5 @@ export const userService = {
   login: `${baseURL}/user/login`,
   forgotpwd: `${baseURL}/user/forgotpwd`,
   resetpwd: `${baseURL}/user/reset-password`,
-  logout: `${baseURL}/user/logout`
-}
+  logout: `${baseURL}/user/logout`,
+};

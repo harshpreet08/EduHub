@@ -4,7 +4,7 @@ const { Comment } = require('../models/comments');
 const { questionBank } = require('../models/questionBank');
 
 exports.getAllQuestions = async (_, resp) => {
-  const allQuestions = await questionBank.find();
+  const allQuestions = await questionBank.find().sort({ timeStamp: -1 });
   resp.send(allQuestions || []);
 };
 
