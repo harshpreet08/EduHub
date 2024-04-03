@@ -18,8 +18,8 @@ const dashboardRouter = require('./routes/dashboard')
 
 const dbURL = process.env.DB_URL
 
-const corsOptions ={
-  origin:'http://localhost:5173', 
+const corsOptions = {
+  origin: process.env.FRONTEND_URL, 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200,
   exposedHeaders: ["accessToken"]

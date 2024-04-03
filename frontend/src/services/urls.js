@@ -1,4 +1,4 @@
-export const baseURL = 'https://eduhub-node-backend.onrender.com';
+export const baseURL = import.meta.env.VITE_BACKEND_URL;
 
 const questionUrl = `${baseURL}/community`;
 const commentUrl = `${baseURL}/comments`;
