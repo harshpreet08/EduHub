@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Import useParams hook
+import { useParams } from "react-router-dom"; 
 
 import {
   Button,
@@ -14,7 +14,7 @@ import {
   ListItemSecondaryAction,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import "./EditCoursePage.css"; // Import CSS file for styling
+import "./EditCoursePage.css";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ViewListIcon from "@mui/icons-material/ViewList";
@@ -24,7 +24,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-} from "@mui/material"; // Import Dialog from @mui/material
+} from "@mui/material"; 
 
 import axios from "axios";
 
@@ -37,10 +37,10 @@ function EditCoursePage() {
   const [showChapterModal, setShowChapterModal] = useState(false);
   const [showSubchapterModal, setShowSubchapterModal] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [selectedCourseId, setSelectedCourseId] = useState(""); // State to hold courseId
+  const [selectedCourseId, setSelectedCourseId] = useState(""); 
 
   useEffect(() => {
-    sessionStorage.setItem("courseId", courseId); // Store courseId in session storage
+    sessionStorage.setItem("courseId", courseId); 
     setSelectedCourseId(courseId);
   }, [courseId]);
 
@@ -57,7 +57,7 @@ function EditCoursePage() {
   const [chapters, setChapters] = useState([]);
   const [subchapters, setSubchapters] = useState([]);
   const [modalTitle, setModalTitle] = useState("Add New Chapter");
-  const [errorMessage, setErrorMessage] = useState(""); // State to hold error message
+  const [errorMessage, setErrorMessage] = useState(""); 
 
   const [editedChapterIndex, setEditedChapterIndex] = useState(-1);
   const [modalSubchapterTitle, setModalSubchapterTitle] =
@@ -73,7 +73,6 @@ function EditCoursePage() {
 
   useEffect(() => {
     if (!showChapterModal) {
-      // Reset chapterData when modal is closed
       setChapterData({ title: "", description: "" });
       setModalTitle("Add New Chapter");
       setEditedChapterIndex(-1);
@@ -82,7 +81,6 @@ function EditCoursePage() {
 
   useEffect(() => {
     if (!showSubchapterModal) {
-      // Reset subchapterData when modal is closed
       setSubchapterData({ title: "", description: "", file: null });
       setModalSubchapterTitle("Add New Subchapter");
       setEditedSubchapterIndex(-1);
@@ -108,8 +106,7 @@ function EditCoursePage() {
         (response) => response.data
       );
       setSubchapters(subchaptersData);
-      // console.log("Chapters:", response.data);
-      // console.log("Subchapters:", subchaptersData);
+
     } catch (error) {
       console.error("Error fetching chapters:", error);
     }
@@ -135,7 +132,7 @@ function EditCoursePage() {
 
         const updatedChapters = chapters.map((chapter, index) => {
           if (index === editedChapterIndex) {
-            return { ...chapter, ...chapterData }; // Merge the existing chapter data with the updated data
+            return { ...chapter, ...chapterData }; 
           }
           return chapter;
         });
@@ -143,8 +140,8 @@ function EditCoursePage() {
       }
       setChapterData({ title: "", description: "" });
       setShowChapterModal(false);
-      setModalTitle("Add New Chapter"); // Reset modal title after submission
-      setEditedChapterIndex(-1); // Reset edited chapter index
+      setModalTitle("Add New Chapter"); 
+      setEditedChapterIndex(-1); 
     } catch (error) {
       console.error("Error submitting chapter:", error);
     }
@@ -155,7 +152,6 @@ function EditCoursePage() {
       return;
     }
     if (chapters.length === 0) {
-      // Show error dialog if no chapter exists
       console.log("Error");
       setErrorMessage("No chapter exists to add subchapter.");
       setErrorDialogOpen(true);
@@ -177,7 +173,7 @@ function EditCoursePage() {
         console.error(`Selected chapter or its subchapters not found.`);
         return;
       }
-      // Reset the upload progress
+ 
       setUploadProgress(0);
       const subchaptersArray = selectedChapter.subchapters;
       if (modalSubchapterTitle === "Add New Subchapter") {
@@ -191,7 +187,6 @@ function EditCoursePage() {
           formData,
           {
             onUploadProgress: (progressEvent) => {
-              // Update upload progress
               const progress = Math.round(
                 (progressEvent.loaded / progressEvent.total) * 100
               );
@@ -204,12 +199,11 @@ function EditCoursePage() {
         console.log("Subchapter created successfully:", response.data);
         // alert("Subchapter saved successfully");
 
-        // Update subchapters state with the new subchapter
+
         const updatedSubchapters = [...subchapters];
         updatedSubchapters[selectedChapterIndex].push(response.data);
         setSubchapters(updatedSubchapters);
       } else {
-        // Editing an existing subchapter
         const formData = new FormData();
         formData.append("newContent", subchapterData.file);
         formData.append("newTitle", subchapterData.title);
@@ -217,8 +211,6 @@ function EditCoursePage() {
 
         console.log("selectedChapterIndex==" + selectedChapterIndex);
         console.log("editedSubchapterIndex==" + editedSubchapterIndex);
-
-        // Add null or undefined check here
 
         chapters.forEach((chapter, index) => {
           console.log(`Chapter ${index + 1}:`, chapter);
@@ -231,7 +223,7 @@ function EditCoursePage() {
         console.log("Subchapter:", subchapter);
 
         if (subchapter) {
-          const subchapterId = subchapter.id; // Access 'id' property if subchapter exists
+          const subchapterId = subchapter.id; 
           console.log("subchapterId=====" + subchapterId);
           console.log(
             "chapters[selectedChapterIndex].id=====" +
@@ -243,8 +235,6 @@ function EditCoursePage() {
             formData
           );
           console.log("Subchapter updated successfully:", response.data);
-
-          // Update subchapters state with the edited subchapter
           const updatedSubchapters = [...subchapters];
           updatedSubchapters[selectedChapterIndex][editedSubchapterIndex] =
             response.data;
@@ -253,20 +243,18 @@ function EditCoursePage() {
           console.error(
             `Subchapter not found at index ${editedSubchapterIndex}`
           );
-          return; // Exit the function if subchapter is undefined
+          return; 
         }
       }
 
       setSubchapterData({ title: "", description: "", file: null });
       setShowSubchapterModal(false);
-      setModalSubchapterTitle("Add New Subchapter"); // Reset modal title after submission
-      setEditedSubchapterIndex(-1); // Reset edited subchapter index
+      setModalSubchapterTitle("Add New Subchapter"); 
+      setEditedSubchapterIndex(-1); 
     } catch (error) {
       console.error("Error submitting subchapter:", error);
-      setErrorMessage("Error submitting subchapter:");
-       setErrorDialogOpen(true);
-
-      // Handle error gracefully (e.g., display error message)
+      setErrorMessage("Submitted subchapter");
+      setErrorDialogOpen(true);
     }
   };
 
@@ -286,21 +274,15 @@ function EditCoursePage() {
   };
 
   const handleEditChapter = (index) => {
-    // Handle edit chapter action
     const chapterToEdit = chapters[index];
-
-    // Set the chapter data to edit
     setChapterData(chapterToEdit);
-
-    // Open the chapter modal
     setShowChapterModal(true);
-    setModalTitle("Edit Chapter"); // Set modal title to "Edit Chapter" for editing
-    setEditedChapterIndex(index); // Set edited chapter index
+    setModalTitle("Edit Chapter"); 
+    setEditedChapterIndex(index); 
     console.log("Edit chapter:", index);
   };
 
   const handleDeleteChapter = async (index) => {
-    // Handle delete chapter action
     console.log("Delete chapter:", index);
     try {
       const chapterToDelete = chapters[index];
@@ -329,13 +311,11 @@ function EditCoursePage() {
       if (index >= 0 && index < selectedChapterSubchapters.length) {
         const subchapterToEdit = selectedChapterSubchapters[index];
 
-        // Verify if the subchapter to edit exists
         if (subchapterToEdit) {
-          // Set the subchapter data to prefill the fields in the modal
           setSubchapterData({
             title: subchapterToEdit.title,
             description: subchapterToEdit.description,
-            file: null, // Assuming the file input should not be prefilled
+            file: null, 
           });
 
           setShowSubchapterModal(true);
@@ -374,15 +354,12 @@ function EditCoursePage() {
 
         if (index >= 0 && index < selectedChapterSubchapters.length) {
           const subchapterToDelete = selectedChapterSubchapters[index];
-
-          // Verify if the subchapter to delete exists
           if (subchapterToDelete) {
             const response = await axios.delete(
               `https://webbackend-3087.onrender.com/api/courses/${courseId}/chapters/${chapters[selectedChapterIndex].id}/subchapters/${subchapterToDelete.id}`
             );
 
             if (response.status === 204) {
-              // Subchapter deleted successfully
               console.log("Subchapter deleted successfully");
               const updatedSubchapters = selectedChapterSubchapters.filter(
                 (_, i) => i !== index
@@ -410,7 +387,6 @@ function EditCoursePage() {
   };
 
   const handleViewSubchapters = (index) => {
-    // Handle view subchapters action
     console.log("View subchapters:", index);
     setSelectedChapterIndex(index);
   };
@@ -509,8 +485,8 @@ function EditCoursePage() {
               <Button
                 onClick={() => {
                   setShowSubchapterModal(true);
-                  setModalSubchapterTitle("Add New Subchapter"); // Reset modal title
-                  setEditedSubchapterIndex(-1); // Reset edited subchapter index
+                  setModalSubchapterTitle("Add New Subchapter"); 
+                  setEditedSubchapterIndex(-1); 
                 }}
                 variant="contained"
                 color="primary"
@@ -539,7 +515,7 @@ function EditCoursePage() {
                         edge="end"
                         aria-label="edit"
                         onClick={() => {
-                          setShowSubchapterModal(false); // Close the modal first
+                          setShowSubchapterModal(false); 
                           handleEditSubchapter(index);
                         }}
                         sx={{ marginRight: 0.5 }} 
