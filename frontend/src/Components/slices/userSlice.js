@@ -6,6 +6,7 @@ const initialState = {
   lastName: null,
   email: null,
   role: null,
+  enrolledCourses: []
 };
 
 export const userSlice = createSlice({
@@ -13,11 +14,15 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserData: (state, { payload }) => {
-      const { firstName = '', lastName = '', ...rest } = payload;
+      const { firstName = state.firstName, lastName = state.lastName, email = state.email, role = state.role, userId = state, enrolledCourses = [] } = payload;
+
       const userFullName = `${firstName} ${lastName}`;
       return {
         ...state,
-        ...rest,
+        email,
+        role,
+        userId, 
+        enrolledCourses: [...state.enrolledCourses, enrolledCourses], // Update enrolledCourses
         firstName,
         lastName,
         userFullName,
