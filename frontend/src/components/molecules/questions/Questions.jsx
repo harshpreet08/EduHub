@@ -56,7 +56,7 @@ const Questions = () => {
 
   return (
     <div>
-      <Navbar page={["My Courses", "Community Forum", "Blogs"]} />
+      <Navbar pages={["My Courses", "Community Forum", "Blogs"]} />
       <div className={styles.container}>
         <CustomBtn
           title="Ask a Question"

@@ -110,7 +110,6 @@ function ProfessorCoursePage() {
     }
 
     if (isEdit) {
-      // Update existing course
       axios
         .put(
           `https://webbackend-3087.onrender.com/api/courses/edit/${userId}/${editCourseId}`,
@@ -143,7 +142,6 @@ function ProfessorCoursePage() {
           });
           setIsEdit(false);
           setEditCourseId(null);
-          // Close the modal
           setShowModal(false);
         })
         .catch((error) => {
@@ -155,7 +153,6 @@ function ProfessorCoursePage() {
         setError("Please fill in all required fields");
         return;
       }
-      // Add new course
       axios
         .post(
           `https://webbackend-3087.onrender.com/api/courses/${userId}/create`,
@@ -173,7 +170,6 @@ function ProfessorCoursePage() {
           });
           setIsEdit(false);
           setEditCourseId(null);
-          // Close the modal
           setShowModal(false);
         })
         .catch((error) => {
@@ -181,7 +177,7 @@ function ProfessorCoursePage() {
           setError("Error adding new course. Please try again.");
         });
     }
-    // Reset new course data and flags
+
     setNewCourseData({
       title: "",
       description: "",
@@ -191,21 +187,16 @@ function ProfessorCoursePage() {
     });
     setIsEdit(false);
     setEditCourseId(null);
-    // Close the modal
     setShowModal(false);
   };
 
   const handleEdit = (courseId) => {
-    // Find the course with the given ID
+
     const courseToEdit = courses.find((course) => course.id === courseId);
     if (courseToEdit) {
-      // Populate modal with course details
       setNewCourseData({ ...courseToEdit });
-      // Set isEdit flag to true
       setIsEdit(true);
-      // Set the ID of the course being edited
       setEditCourseId(courseId);
-      // Show the modal
       setShowModal(true);
     } else {
       console.error(`Course with ID ${courseId} not found.`);
@@ -222,31 +213,25 @@ function ProfessorCoursePage() {
       .then((response) => {
         setSuccessMessage("Course deleted successfully.");
         if (response.status === 404) {
-          // Filter out the deleted course from the courses state
           const updatedCourses = courses.filter(
             (course) => course.id !== courseId
           );
-          // Update the courses state with the updated list
           setCourses(updatedCourses);
           setSuccessMessage("Course deleted successfully.");
         }
 
-        // Check if the deletion was successful (status code 204)
+
         if (response.status === 204) {
-          // Filter out the deleted course from the courses state
           const updatedCourses = courses.filter(
             (course) => course.id !== courseId
           );
-          // Update the courses state with the updated list
           setCourses(updatedCourses);
           setSuccessMessage("Course deleted successfully.");
         } else {
-          // Handle other status codes if necessary
           console.error("Unexpected status code:", response.status);
         }
       })
       .catch((error) => {
-        // Handle errors if the deletion request fails
         console.error("Error deleting course:", error);
       });
   };
@@ -267,7 +252,6 @@ function ProfessorCoursePage() {
     setSuccessMessage(null);
   }, []);
 
-  // Filter courses when the search term changes
   useEffect(() => {
     const filtered = courses.filter((course) =>
       course.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -275,7 +259,6 @@ function ProfessorCoursePage() {
     setFilteredCourses(filtered);
   }, [searchTerm, courses]);
 
-  // Function to handle search term change
   const handleSearchh = (term) => {
     console.log("Search term:", term);
     setSearchTerm(term);

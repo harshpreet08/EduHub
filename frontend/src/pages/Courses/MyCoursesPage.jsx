@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom"; 
 import CourseCard from "./CourseCard";
 import SearchBar from "./SearchBar";
 import StarIcon from "@mui/icons-material/Star";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
-import { IconButton } from "@mui/material"; // Import IconButton
+import { IconButton } from "@mui/material"; 
 import { useParams } from "react-router-dom";
 import NavBar from "../../Components/NavBar.jsx";
 import { useSelector } from "react-redux";
@@ -25,10 +25,10 @@ function MyCoursesPage() {
   const [ratingFilter, setRatingFilter] = useState(0);
   const [priceFilter, setPriceFilter] = useState("");
   const [instructors, setInstructors] = useState([]);
-  const [instructorFilter, setInstructorFilter] = useState(""); // Define instructorFilter state
+  const [instructorFilter, setInstructorFilter] = useState(""); 
   const [uniqueRatings, setUniqueRatings] = useState([]);
   const [uniqueInstructors, setUniqueInstructors] = useState([]);
-  const [selectedCourseId, setSelectedCourseId] = useState(""); // State to hold courseId
+  const [selectedCourseId, setSelectedCourseId] = useState(""); 
 
   useEffect(() => {
    
