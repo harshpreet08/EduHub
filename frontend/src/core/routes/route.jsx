@@ -75,6 +75,10 @@ const StreamClass = lazy(()=> import("../../pages/StreamClass"));
 
 const Logout = lazy(() => import("../../Components/logout"));
 
+const Meeting = lazy(() => import("../../pages/Meeting/Meeting.tsx"));
+
+const StudentMeeting = lazy(() => import("../../pages/Meeting/StudentMeeting.tsx"));
+
 const ErrorElement = () => {
   <Suspense fallback={<Loader />}>
     <Error />
@@ -194,7 +198,10 @@ const privateRoutes = {
     "/chapter-details/:id":ChapterDetailsPage,
     // eoa for routing by Freya on 29 March
   "/profile": UserProfile,
-  "/logout": Logout
+  "/logout": Logout,
+  "/meeting": Meeting,
+  "/room/:roomId": StreamClass,
+  "/session": StudentMeeting,
 };
 
 const publicRoutes = {
@@ -205,7 +212,8 @@ const publicRoutes = {
   "/contactus": Contactus,
   "/faqs": Faqs,
   "/resetpwd/:forgotToken": ResetPwd,
-  "/room/:roomId": StreamClass
+  // "/room/:roomId": StreamClass,
+  // "/meeting": Meeting
 };
 
 function RouteConfig() {

@@ -56,7 +56,7 @@ const Dashboard: React.FC = () => {
     try {
       // Fetch data from the /trending-courses API endpoint
       const response = await axios.get(
-        "http://localhost:6002/dashboard/trending-courses",
+        "https://eduhub-node-backend.onrender.com/dashboard/trending-courses",
         {
           headers: {
             "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
     try {
       // Make an API call to store the course ID in the database
       const response = await axios.post(
-        "http://localhost:6002/dashboard/trending-courses/enroll",
+        "https://eduhub-node-backend.onrender.com/dashboard/trending-courses/enroll",
         { courseID }
       );
 
@@ -121,7 +121,7 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Navbar
-        pages={["Contact Us", "My Courses", "FAQs", "Logout"]}
+        pages={["Contact Us", "My Courses","Session", "FAQs", "Logout"]}
       ></Navbar>
       <div
         style={{
@@ -175,7 +175,7 @@ const Dashboard: React.FC = () => {
                   <img
                     style={{ height: 150, objectFit: "cover" }}
                     alt={course.name}
-                    src={`data:image/jpeg;base64,${course.image}`}
+                    src={BannerImage}
                   />
                 }
               >
