@@ -15,7 +15,7 @@ import styles from './Questions.module.scss';
 import { getAllQuestions } from './Questions.service';
 /* internal components */
 import CustomBtn from '../../button';
-import ModalWrapper from '../modalWrapper/index';
+import ModalWrapper from '../modalWrapper';
 import { setquestionData } from './slice/questionSlice';
 import { setModalVisible } from '../modalWrapper/slice/modalSlice';
 import Navbar from '../../NavBar';

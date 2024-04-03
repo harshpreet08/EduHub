@@ -36,24 +36,13 @@ const QnAPage = lazy(() => import('../../Components/organisms/qnaPage'));
 const EditBlog = lazy(() => import('../../Components/EditBlog'));
 const Success = lazy(() => import('../../Components/molecules/payment/success'));
 const Cancel = lazy(() => import('../../Components/molecules/payment/failure'));
-
-// soa for routing by Freya on 29 March
 const ProfessorCoursePage = lazy(() => import('../../pages/Courses/ProfessorCoursePage'));
-
 const EditCoursePage = lazy(() => import('../../pages/Courses/EditCoursePage'));
-
 const MyCoursePage = lazy(() => import('../../pages/Courses/MyCoursesPage'));
-
 const ChapterDetailsPage = lazy(() => import('../../pages/Courses/ChapterDetailsPage'));
-
-// eoa for routing by Freya on 29 March
-
 const UserProfile = lazy(() => import('../../Components/profilePage'));
-
 const ResetPwd = lazy(() => import('../../pages/ResetPwd'));
-
 const StreamClass = lazy(() => import('../../pages/StreamClass'));
-
 const Logout = lazy(() => import('../../Components/logout'));
 
 const Meeting = lazy(() => import("../../pages/Meeting/Meeting.tsx"));
