@@ -29,7 +29,7 @@ function SearchBar({  onSearch }) {
       onChange={handleChange}
       variant="outlined"
       InputProps={{
-        style: { fontSize: 'inherit', padding: '0' }, // Adjust padding and font size
+        style: { fontSize: 'inherit', padding: '0' }, 
         endAdornment: (
           <InputAdornment position="end">
             <IconButton size="small">
