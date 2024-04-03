@@ -37,8 +37,10 @@ function MyCoursesPage() {
         const response = await axios.get(
           `https://webbackend-3087.onrender.com/api/courses/all/${userId}`
         );
-        setCourses(response.data);
-        console.log("courses======", response.data);
+        // setCourses(response.data);
+        const updatedCourses = response.data.map(course => ({ ...course, rating: 3 }));
+        setCourses(updatedCourses);
+        // console.log("courses======", response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
@@ -103,12 +105,12 @@ function MyCoursesPage() {
       instructorFilter === "" ||
       course.instructor.toLowerCase() === instructorFilter.toLowerCase();
 
-      // const ratingMatches =
-      // ratingFilter === 0 || course.rating >= ratingFilter; 
+      const ratingMatches =
+       course.rating >= ratingFilter; 
   
-    // return titleMatches && instructorMatches && ratingMatches;
+    return titleMatches && instructorMatches && ratingMatches;
     
-    return titleMatches && instructorMatches;
+    // return titleMatches && instructorMatches;
   });
 
   const handleSearchh = (term) => {
