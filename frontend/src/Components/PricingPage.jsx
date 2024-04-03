@@ -5,6 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import Navbar from "./NavBar";
 
 const PricingPage = () => {
+  const BACKEND_URL = "https://eduhub-node-backend.onrender.com";
   const handlePayment = async (productDetails) => {
     const stripe = await loadStripe(String(import.meta.env.VITE_PUBLIC_KEY));
 
@@ -15,14 +16,11 @@ const PricingPage = () => {
       product: productDetails,
     };
 
-    const response = await fetch(
-      "http://localhost:6002/api/create-checkout-session",
-      {
-        method: "POST",
-        headers,
-        body: JSON.stringify(body),
-      }
-    );
+    const response = await fetch(BACKEND_URL + "/api/create-checkout-session", {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
 
     const { session = {} } = await response.json();
 

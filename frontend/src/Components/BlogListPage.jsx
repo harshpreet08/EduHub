@@ -23,9 +23,10 @@ function BlogList() {
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const role = useSelector((state) => state.userSlice.role);
+  const BACKEND_URL = "https://eduhub-node-backend.onrender.com";
 
   useEffect(() => {
-    fetch("http://localhost:6002/api/blog")
+    fetch(BACKEND_URL + "/api/blog")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data);
@@ -54,7 +55,7 @@ function BlogList() {
   const handleDelete = async (blogId, event) => {
     try {
       event.stopPropagation();
-      const response = await fetch(`http://localhost:6002/api/blog/${blogId}`, {
+      const response = await fetch(BACKEND_URL + `/api/blog/${blogId}`, {
         method: "DELETE",
       });
       if (response.ok) {

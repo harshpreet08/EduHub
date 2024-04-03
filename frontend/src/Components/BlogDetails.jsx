@@ -30,10 +30,11 @@ function BlogDetailsPage() {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [love, setLove] = useState(0);
+  const BACKEND_URL = "https://eduhub-node-backend.onrender.com";
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:6002/api/blog/${id}`)
+    fetch(BACKEND_URL + `/api/blog/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setBlog(data);
@@ -49,7 +50,7 @@ function BlogDetailsPage() {
   }, [id]);
 
   const handleLike = () => {
-    fetch(`http://localhost:6002/api/blog/${id}/like`, {
+    fetch(BACKEND_URL + `/api/blog/${id}/like`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +67,7 @@ function BlogDetailsPage() {
   };
 
   const handleDislike = () => {
-    fetch(`http://localhost:6002/api/blog/${id}/dislike`, {
+    fetch(BACKEND_URL + `/api/blog/${id}/dislike`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +84,7 @@ function BlogDetailsPage() {
   };
 
   const handleLove = () => {
-    fetch(`http://localhost:6002/api/blog/${id}/love`, {
+    fetch(BACKEND_URL + `/api/blog/${id}/love`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
