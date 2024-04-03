@@ -22,7 +22,7 @@ const UserProfile = () => {
         _id : userId
     };
 
-    const response = await axios.post("http://localhost:6002/user/update", payload);
+    const response = await axios.post("https://eduhub-node-backend.onrender.com/user/update", payload);
 
     toast.success("Data saved successfully!");
 

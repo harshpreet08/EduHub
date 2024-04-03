@@ -24,7 +24,7 @@ const ResetPwd = () => {
     };
 
     const response = await axios.post(
-      "http://localhost:6002/user/reset-password/" + forgotToken,
+      "https://eduhub-node-backend.onrender.com/user/reset-password/" + forgotToken,
       payload
     );
     toast.success("Successfully reset the password.");

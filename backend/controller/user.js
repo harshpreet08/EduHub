@@ -116,7 +116,7 @@ async function forgotPassword(req,res){
 
     await user.save({ validateBeforeSave: false });
 
-    const url =  "localhost:5173" + "/" + "resetpwd/"+forgotToken;
+    const url =  "https://eduhub-react-frontend.vercel.app/" + "resetpwd/"+forgotToken;
 
     const subject = "Forgot password";
 
