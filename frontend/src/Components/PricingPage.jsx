@@ -1,29 +1,26 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import {
-  Grid, Typography, Button, Paper,
-} from '@mui/material';
-import { loadStripe } from '@stripe/stripe-js';
+import React from "react";
+import { Grid, Typography, Button, Paper } from "@mui/material";
+import { loadStripe } from "@stripe/stripe-js";
+import Navbar from "./NavBar";
 
 const PricingPage = () => {
+  const BACKEND_URL = "https://eduhub-node-backend.onrender.com";
   const handlePayment = async (productDetails) => {
     const stripe = await loadStripe(String(import.meta.env.VITE_PUBLIC_KEY));
 
     const headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     };
     const body = {
       product: productDetails,
     };
 
-    const response = await fetch(
-      'http://localhost:6002/api/create-checkout-session',
-      {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(body),
-      },
-    );
+    const response = await fetch(BACKEND_URL + "/api/create-checkout-session", {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
 
     const { session = {} } = await response.json();
 
@@ -38,50 +35,55 @@ const PricingPage = () => {
   };
 
   return (
-    <Grid container spacing={2} justifyContent="center" marginTop={4}>
-      <Grid item xs={12}>
-        <Typography variant="h2" align="center" gutterBottom>
-          Features
-        </Typography>
-        <Grid container justifyContent="center">
-          <Grid item>
-            <Typography variant="h5" color="textSecondary">
-              <CheckMark /> Custom domain for your website
-            </Typography>
-            <Typography variant="h5" color="textSecondary">
-              <CheckMark /> Stripe payment gateway
-            </Typography>
-            <Typography variant="h5" color="textSecondary">
-              <CheckMark /> Host 3 live sessions at the same time
-            </Typography>
+    <div>
+      <Navbar
+        pages={["Courses Dashboard", "Community Forum", "Blogs", "Pricing"]}
+      />
+      <Grid container spacing={2} justifyContent="center" marginTop={4}>
+        <Grid item xs={12}>
+          <Typography variant="h2" align="center" gutterBottom>
+            Features
+          </Typography>
+          <Grid container justifyContent="center">
+            <Grid item>
+              <Typography variant="h5" color="textSecondary">
+                <CheckMark /> Custom domain for your website
+              </Typography>
+              <Typography variant="h5" color="textSecondary">
+                <CheckMark /> Stripe payment gateway
+              </Typography>
+              <Typography variant="h5" color="textSecondary">
+                <CheckMark /> Host 3 live sessions at the same time
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item style={{ marginTop: "20px" }} xs={12}>
+          <Grid container justifyContent="center" spacing={4}>
+            <Grid item xs={12} sm={6} md={3}>
+              <PricingBox
+                title="Basic"
+                amount="399"
+                sale="10% sale"
+                description="Best choice to start your business"
+                color="#007bff"
+                handlePayment={handlePayment}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <PricingBox
+                title="Pro"
+                amount="1099"
+                sale="3% sale"
+                description="Best for established creators"
+                color="#28a745"
+                handlePayment={handlePayment}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item style={{ marginTop: '20px' }} xs={12}>
-        <Grid container justifyContent="center" spacing={4}>
-          <Grid item xs={12} sm={6} md={3}>
-            <PricingBox
-              title="Basic"
-              amount="399"
-              sale="10% sale"
-              description="Best choice to start your business"
-              color="#007bff"
-              handlePayment={handlePayment}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <PricingBox
-              title="Pro"
-              amount="1099"
-              sale="3% sale"
-              description="Best for established creators"
-              color="#28a745"
-              handlePayment={handlePayment}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 
@@ -102,14 +104,14 @@ const PricingBox = ({
   <Paper
     sx={{
       padding: 4,
-      backgroundColor: '#fff',
+      backgroundColor: "#fff",
       borderColor: color,
       borderWidth: 2,
-      borderStyle: 'solid',
-      transition: 'transform 0.3s, box-shadow 0.3s',
-      '&:hover': {
-        transform: 'translateY(-2px)',
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+      borderStyle: "solid",
+      transition: "transform 0.3s, box-shadow 0.3s",
+      "&:hover": {
+        transform: "translateY(-2px)",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       },
     }}
   >
@@ -135,14 +137,16 @@ const PricingBox = ({
       fullWidth
       color="primary"
       style={{ backgroundColor: color }}
-      onClick={() => handlePayment([
-        {
-          title,
-          amount,
-          sale,
-          description,
-        },
-      ])}
+      onClick={() =>
+        handlePayment([
+          {
+            title,
+            amount,
+            sale,
+            description,
+          },
+        ])
+      }
     >
       Buy now
     </Button>

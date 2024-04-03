@@ -32,6 +32,7 @@ function SimpleForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [titleError, setTitleError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
+  const BACKEND_URL = "https://eduhub-node-backend.onrender.com";
 
   const fileInputRef = useRef(null);
 
@@ -73,7 +74,7 @@ function SimpleForm() {
         formDataToSend.image = await convertToBase64(formData.image);
       }
 
-      const response = await fetch("http://localhost:6002/api/blog/create", {
+      const response = await fetch(BACKEND_URL + "/api/blog/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

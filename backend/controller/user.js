@@ -116,7 +116,7 @@ async function forgotPassword(req,res){
 
     await user.save({ validateBeforeSave: false });
 
-    const url =  "localhost:5173" + "/" + "resetpwd/"+forgotToken;
+    const url =  "https://eduhub-react-frontend.vercel.app/" + "resetpwd/"+forgotToken;
 
     const subject = "Forgot password";
 
@@ -182,9 +182,13 @@ async function resetPassword(req,res){
 
 async function isValidated(req,res){
   try{
-    console.log(req.cookies);
-    const token = req.cookies?.accesstoken;
-    console.log(token);
+
+    console.log("Headers", req.headers);
+    console.log("Cookies" , req.cookies);
+
+
+    const token = req.headers?.accesstoken;
+    console.log("Received token from header", token);
 
     if(!token){
       ErrorResponse.error = "You are not allowed to view this page, please sign in!";

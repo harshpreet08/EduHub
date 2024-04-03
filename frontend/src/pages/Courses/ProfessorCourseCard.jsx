@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import StarIcon from '@mui/icons-material/Star';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Button, CardMedia, IconButton } from '@mui/material';
-import ManageIcon from '@mui/icons-material/Settings'; // Import the manage icon
+import ManageIcon from '@mui/icons-material/Settings'; 
 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,13 +13,11 @@ import './ProfessorCourseCard.css';
 function ProfessorCourseCard({ course,  onEdit, onDelete}) {
   const navigate = useNavigate();
   const handleEdit = () => {
-    // Call the onEdit function with the course ID when edit button is clicked
     onEdit(course.id);
    
   };
 
   const handleDelete = () => {
-    // Call the onDelete function with the course ID when delete button is clicked
     onDelete(course.id);
   };
 
@@ -72,10 +70,10 @@ ProfessorCourseCard.propTypes = {
     title: PropTypes.string.isRequired,
     instructor: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    image: PropTypes.arrayOf(PropTypes.number).isRequired // Assuming image is a byte array
+    image: PropTypes.arrayOf(PropTypes.number).isRequired
   }).isRequired,
   onEdit: PropTypes.func.isRequired, 
-  onDelete: PropTypes.func.isRequired // Define onDelete prop as function
+  onDelete: PropTypes.func.isRequired 
 };
 
 export default ProfessorCourseCard;

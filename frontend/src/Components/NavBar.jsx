@@ -42,47 +42,47 @@ function Navbar({
   const handleCloseUserMenu = (event) => {
     const { target } = event;
     const setting = target.textContent;
-  
+
     // If the user clicks on "Logout", redirect to "/logout"
     if (setting === "Logout") {
       navigate("/logout");
     }
 
-    if(setting == "Profile"){
+    if (setting == "Profile") {
       navigate("/profile");
     }
-  
+
     setAnchorElUser(null);
   };
 
   const navigate = useNavigate();
 
-  const selectedRole = useSelector(state => state.userSlice.role);
+  const selectedRole = useSelector((state) => state.userSlice.role);
 
-  const handleDashboardClick = () =>{
+  const handleDashboardClick = () => {
     console.log("select role: ", selectedRole);
-    if (selectedRole.toLowerCase() === "teacher"){
+    if (selectedRole.toLowerCase() === "teacher") {
       console.log("I am here buddyyy");
       navigate("/professor/courses");
-    }
-    else{
+    } else {
       navigate("/dashboard");
     }
-  }
+  };
 
   const routeMap = {
     "Community Forum": "questions",
     "Question Bank": "questionbank",
-    "Tests": "createtest",
+    Tests: "createtest",
     "Live Tests": "test-list",
-    "Results": "result-list",
-    "Content": `edit-course/${courseId}`,
-    "Chapters": `chapter-details/${courseId}`,
-    "Courses Dashboard": `professor/courses`
+    Results: "result-list",
+    Content: `edit-course/${courseId}`,
+    Chapters: `chapter-details/${courseId}`,
+    "Courses Dashboard": `professor/courses`,
+    Pricing: `pricing`,
   };
 
-  const getRouteLink = ({ page = "" }) => 
-   routeMap[page] || (page || "").toLowerCase();
+  const getRouteLink = ({ page = "" }) =>
+    routeMap[page] || (page || "").toLowerCase();
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#333333" }}>
@@ -106,7 +106,7 @@ function Navbar({
               src={EduHubLogo}
               alt="EduHub Logo"
               style={{ height: "50px", opacity: 1 }}
-              onClick= {handleDashboardClick}
+              onClick={handleDashboardClick}
             />
           </Typography>
 
@@ -167,7 +167,7 @@ function Navbar({
               src={EduHubLogo}
               alt="EduHub Logo"
               style={{ height: "30px", opacity: 0.7 }}
-              onClick= {handleDashboardClick}
+              onClick={handleDashboardClick}
             />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -176,7 +176,13 @@ function Navbar({
                 key={page}
                 component={Link}
                 // to={page === "Blogs" ? "/blogs" : `/${getRouteLink({ page })}`}
-                to={page === "Blogs" ? "/blogs" : page === "My Courses" ? "/my-courses" : `/${getRouteLink({ page })}`}
+                to={
+                  page === "Blogs"
+                    ? "/blogs"
+                    : page === "My Courses"
+                    ? "/my-courses"
+                    : `/${getRouteLink({ page })}`
+                }
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -184,7 +190,7 @@ function Navbar({
               </Button>
             ))}
           </Box>
-          
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
