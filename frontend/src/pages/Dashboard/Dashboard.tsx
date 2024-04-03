@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import { Button as AntdButton } from "antd";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setUserData } from "../../Components/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const { CheckableTag } = Tag;
 const { Search } = Input;
@@ -33,6 +35,7 @@ const Dashboard: React.FC = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [originalCourses, setOriginalCourses] = useState([]);
   const [currentBatchIndex, setCurrentBatchIndex] = useState(0);
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchTrendingCourses();
   }, []);
@@ -103,9 +106,13 @@ const Dashboard: React.FC = () => {
         "http://localhost:6002/dashboard/trending-courses/enroll",
         { courseID }
       );
+
+      console.log("setting the data", courseID);
+      dispatch(setUserData({enrolledCourses: courseID}));
       toast.success("Course enrolled successfully");
       console.log("Course enrolled successfully:", response.data);
     } catch (error) {
+      console.log(error);
       toast.error("Failed to enroll")
       console.error("Error enrolling course:", error);
     }
