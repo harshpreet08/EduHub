@@ -31,6 +31,10 @@ const Questions = () => {
   const isModalVisible = useSelector(
     state => state.modalReducer.isModalVisible,
   );
+  const userRole = useSelector((state) => state.userSlice.role);
+
+  const navbarStudentPage = ["Dashboard", "My Courses", "Community Forum", "Blogs"];
+  const navbarTeacherPage = ["Courses Dashboard", "Community Forum", "Blogs", "Pricing"];
 
   useEffect(() => {
     fetchQuestionData();
@@ -56,7 +60,7 @@ const Questions = () => {
 
   return (
     <div>
-      <Navbar pages={["My Courses", "Community Forum", "Blogs"]} />
+      <Navbar pages={userRole === 'teacher' ? navbarTeacherPage : navbarStudentPage} />
       <div className={styles.container}>
         <CustomBtn
           title="Ask a Question"

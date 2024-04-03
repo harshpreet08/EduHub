@@ -109,7 +109,7 @@ function BlogDetailsPage() {
       )}
       {role === "student" && (
         <Navbar
-          pages={["Dahsboard", "My Courses", "Community Forum", "Blogs"]}
+          pages={["Dashboard", "My Courses", "Community Forum", "Blogs"]}
         ></Navbar>
       )}
       {loading ? (
