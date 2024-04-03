@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import Loader from '../../Components/atom/loader';
 import { setUserData } from '../../Components/slices/userSlice';
+import Cookies from 'universal-cookie';
 
 /* internal components */
 const SignUp = lazy(() => import('../../pages/Signup'));
@@ -65,11 +66,15 @@ const ProtectedRoute = (props) => {
   try {
     const [authenticated, SetAuthenticated] = useState(false);
     const dispatch = useDispatch();
+    const cookies = new Cookies();
 
     useEffect(() => {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/user/validate`, null, {
           withCredentials: true,
+          headers: {
+            'accesstoken': cookies.get('accesstoken')
+          }
         })
         .then((response) => {
           SetAuthenticated(true);
@@ -118,11 +123,15 @@ const PublicRoute = (props) => {
   try {
     const [authenticated, SetAuthenticated] = useState(false);
     const [allowAccess, setAllowAccess] = useState(false);
+    const cookies = new Cookies();
 
     useEffect(() => {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/user/validate`, null, {
           withCredentials: true,
+          headers: {
+            'accesstoken': cookies.get('accesstoken')
+          }
         })
         .then(() => SetAuthenticated(true))
         .catch((error) => {

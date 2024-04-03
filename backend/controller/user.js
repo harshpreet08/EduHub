@@ -182,9 +182,13 @@ async function resetPassword(req,res){
 
 async function isValidated(req,res){
   try{
-    console.log(req.cookies);
-    const token = req.cookies?.accesstoken;
-    console.log(token);
+
+    console.log("Headers", req.headers);
+    console.log("Cookies" , req.cookies);
+
+
+    const token = req.headers?.accesstoken;
+    console.log("Received token from header", token);
 
     if(!token){
       ErrorResponse.error = "You are not allowed to view this page, please sign in!";
