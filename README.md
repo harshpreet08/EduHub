@@ -24,6 +24,26 @@
 * [Springboot](https://spring.io/guides/gs/spring-boot) - Java-based framework for building our web application
 
 
+## Prerequisites
+
+To have this project up and running on your local machine, you will first need to install the following softwares.
+
+
+Node.js(v20.11.0)
+
+See the following section for detailed step-by-step instructions on how to install this software.
+
+## Installing
+
+Download and Install Node.js for your Operating System from https://nodejs.org/en/download.
+
+Check if Node.js is successfully installed by checking it's version on the terminal.
+
+node --version
+
+
+Confirm if the version is the same as the one downloaded.
+
 
 ## In order to run it locally :
 - Clone the project using git clone.
