@@ -179,6 +179,8 @@ const privateRoutes = {
   "/meeting": Meeting,
   "/room/:roomId": StreamClass,
   "/session": StudentMeeting,
+  "/contact": Contactus,
+  "/faqs": Faqs,
 };
 
 const publicRoutes = {
@@ -186,7 +188,7 @@ const publicRoutes = {
   '/login': Login,
   '/register': SignUp,
   '/forgotpwd': ForgotPwd,
-  '/contactus': Contactus,
+  '/contact': Contactus,
   '/faqs': Faqs,
   '/resetpwd/:forgotToken': ResetPwd,
   // '/room/:roomId': StreamClass,
