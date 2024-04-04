@@ -1,3 +1,4 @@
+// Rahul Goswami
 import { Box } from "@mui/material";
 import Faq from "react-faq-component";
 import faqimage from "../../Assests/faq.svg";
