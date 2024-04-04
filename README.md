@@ -112,6 +112,26 @@ To deploy our project environment, we utilized Render. Here's a summary of the d
 - Configuring Environment Variables
 - Continuous Deployment
 
+## Application Architecture
+The application architecture includes the following components:
+- Router: It is responsible for handling client requests and re-direct to respective
+middleware for pre-validations.
+- Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine, used for
+server-side scripting.
+- Models: It contains the structure of the application's data.
+- React.js: A JavaScript library used for building user interfaces.
+- Components: It is a reusable piece of code in React.js that controls the rendering and
+behaviour of a part of the UI.
+- Express.js: A framework that runs on top of Node.js, making it more efficient for web
+applications.
+- Middlewares: It is used for handling validations and performing operations before the
+request reaches the controller.
+- Controllers: It is responsible for handling client requests and returning appropriate
+responses.
+- Repository: It is used for abstracting the database operations.
+- MongoDB: A NoSQL document-oriented database used for storing application data.
+- SpringBoot: Java-based framework for building our web application.
+
 ## Folder Structure
 ### Backend
 As we are using NodeJS for backend, so there
