@@ -193,6 +193,32 @@ we are using and helps others to get started with the project.
     ***For more details re-direct to***: https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/dev_kunal/backend
 
 
+## Feature: Payment using stripe
+**Backend file Path:** csci_5709_b00954473/Assignments/Assignment3/backend/controller/payment.js
+
+**Frontend file Path:** csci_5709_b00954473/Assignments/Assignment3/frontend/src/Components/PricingPage.jsx
+
+**Tasks included**
+1. create a payment gateway to tutors using stripe integration.
+
+## Feature: Community forum
+**Backend file paths:** csci_5709_b00954473/Assignments/Assignment3/backend/controller/communityForum.js
+
+csci_5709_b00954473/Assignments/Assignment3/backend/controller/comments.js
+
+**Frontend file paths:** csci_5709_b00954473/Assignments/Assignment3/frontend/src/Components/organisms/qnaPage
+
+csci_5709_b00954473/Assignments/Assignment3/frontend/src/Components/molecules/questions
+
+**Tasks included**
+1. Student and tutors both able to view the questionnarium page that consists of the interactions or the questions being asked
+
+2. Students are able to even post a question which are then sorted with date and time
+
+3. Once a particular question is clicked, a person can either answer to the question using the comment option or even reply to it
+
+
+
 ## License
 
 EduHub is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
