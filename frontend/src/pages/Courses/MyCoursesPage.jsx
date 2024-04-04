@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom"; 
 import CourseCard from "./CourseCard";
 import SearchBar from "./SearchBar";
 import StarIcon from "@mui/icons-material/Star";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
-import { IconButton } from "@mui/material"; // Import IconButton
+import { IconButton } from "@mui/material"; 
 import { useParams } from "react-router-dom";
 import NavBar from "../../Components/NavBar.jsx";
 import { useSelector } from "react-redux";
@@ -25,10 +25,10 @@ function MyCoursesPage() {
   const [ratingFilter, setRatingFilter] = useState(0);
   const [priceFilter, setPriceFilter] = useState("");
   const [instructors, setInstructors] = useState([]);
-  const [instructorFilter, setInstructorFilter] = useState(""); // Define instructorFilter state
+  const [instructorFilter, setInstructorFilter] = useState(""); 
   const [uniqueRatings, setUniqueRatings] = useState([]);
   const [uniqueInstructors, setUniqueInstructors] = useState([]);
-  const [selectedCourseId, setSelectedCourseId] = useState(""); // State to hold courseId
+  const [selectedCourseId, setSelectedCourseId] = useState(""); 
 
   useEffect(() => {
    
@@ -37,8 +37,10 @@ function MyCoursesPage() {
         const response = await axios.get(
           `https://webbackend-3087.onrender.com/api/courses/all/${userId}`
         );
-        setCourses(response.data);
-        console.log("courses======", response.data);
+        // setCourses(response.data);
+        const updatedCourses = response.data.map(course => ({ ...course, rating: 3 }));
+        setCourses(updatedCourses);
+        // console.log("courses======", response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
@@ -103,12 +105,12 @@ function MyCoursesPage() {
       instructorFilter === "" ||
       course.instructor.toLowerCase() === instructorFilter.toLowerCase();
 
-      // const ratingMatches =
-      // ratingFilter === 0 || course.rating >= ratingFilter; 
+      const ratingMatches =
+       course.rating >= ratingFilter; 
   
-    // return titleMatches && instructorMatches && ratingMatches;
+    return titleMatches && instructorMatches && ratingMatches;
     
-    return titleMatches && instructorMatches;
+    // return titleMatches && instructorMatches;
   });
 
   const handleSearchh = (term) => {

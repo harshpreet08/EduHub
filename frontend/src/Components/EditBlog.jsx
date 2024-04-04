@@ -21,9 +21,10 @@ function EditBlog() {
     image: null,
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const BACKEND_URL = "https://eduhub-node-backend.onrender.com";
 
   useEffect(() => {
-    fetch(`http://localhost:6002/api/blog/${id}`)
+    fetch(BACKEND_URL + `/api/blog/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setFormData(data);
@@ -48,7 +49,7 @@ function EditBlog() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:6002/api/blog/${id}`, {
+      const response = await fetch(BACKEND_URL + `/api/blog/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

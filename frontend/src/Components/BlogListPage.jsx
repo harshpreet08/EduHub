@@ -15,15 +15,18 @@ import Navbar from "./NavBar";
 import CircularProgress from "@mui/material/CircularProgress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useSelector } from "react-redux";
 
 function BlogList() {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+  const role = useSelector((state) => state.userSlice.role);
+  const BACKEND_URL = "https://eduhub-node-backend.onrender.com";
 
   useEffect(() => {
-    fetch("http://localhost:6002/api/blog")
+    fetch(BACKEND_URL + "/api/blog")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data);
@@ -52,7 +55,7 @@ function BlogList() {
   const handleDelete = async (blogId, event) => {
     try {
       event.stopPropagation();
-      const response = await fetch(`http://localhost:6002/api/blog/${blogId}`, {
+      const response = await fetch(BACKEND_URL + `/api/blog/${blogId}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -67,7 +70,16 @@ function BlogList() {
 
   return (
     <>
-      <Navbar pages={["Login", "Logout", "My Courses"]} />
+      {role === "teacher" && (
+        <Navbar
+          pages={["Courses Dashboard", "Community Forum", "Blogs", "Pricing"]}
+        ></Navbar>
+      )}
+      {role === "student" && (
+        <Navbar
+          pages={["Dahsboard", "My Courses", "Community Forum", "Blogs"]}
+        ></Navbar>
+      )}
       {loading ? (
         <Box
           sx={{

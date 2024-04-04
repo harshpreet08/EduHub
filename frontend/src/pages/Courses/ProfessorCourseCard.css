@@ -1,9 +1,9 @@
 .course-card {
     position: relative;
     width: 15rem;
-    height: 22rem;
-    border: 0.0625rem solid #ccc;
-    border-radius: 3rem;
+    height: 20rem;
+    /* border: 0.0625rem solid #ccc; */
+    /* border-radius: 3rem; */
     padding: 0.4rem;
     margin: 0;
     background-color: #f9f9f9;
@@ -32,7 +32,7 @@
   .course-info h2,
   .course-info p {
     color: #333; 
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     margin-bottom: 0.3125rem; 
     overflow-wrap: break-word;
   }

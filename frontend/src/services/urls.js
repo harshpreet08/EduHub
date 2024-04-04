@@ -1,4 +1,4 @@
-export const baseURL = 'http://localhost:6002';
+export const baseURL = import.meta.env.VITE_BACKEND_URL;
 
 const questionUrl = `${baseURL}/community`;
 const commentUrl = `${baseURL}/comments`;
@@ -19,5 +19,5 @@ export const userService = {
   login: `${baseURL}/user/login`,
   forgotpwd: `${baseURL}/user/forgotpwd`,
   resetpwd: `${baseURL}/user/reset-password`,
-  logout: `${baseURL}/user/logout`
-}
+  logout: `${baseURL}/user/logout`,
+};
