@@ -190,6 +190,10 @@ we are using and helps others to get started with the project.
     **5.** **Logout:**
     - Logged-in users will be able to logout from the application by clicking on logout which will clear the accesstoken cookie on the client side.
 
+
+    **Backend file Path:** csci_5709_grp-06\backend\controller\user.js
+
+
     ***For more details re-direct to***: https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/dev_kunal/backend
 
 
