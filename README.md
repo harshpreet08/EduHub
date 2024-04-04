@@ -10,7 +10,7 @@
 * [Disha Anand]()
 * [Rahul Goswami]()
 * [Freya Vora](fr793929@dal.ca)
-* [Disha Anand]()
+* [Harshpreet Singh]()
 
 
 ## Built With
@@ -225,11 +225,13 @@ csci_5709_b00954473/Assignments/Assignment3/frontend/src/Components/molecules/qu
 
 ### Feature: Course Creation and Edit
 
+Backend code available at - https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/freya_dev2?ref_type=heads
+
 **Backend File Path:** 
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Controller/CourseController`
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course`
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository`
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Controller/CourseController.java`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course.java`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository.java`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService.java`
 
 Here, similar files are created for Chapters and Subchapters creation and editing.
 
@@ -249,16 +251,19 @@ Here, similar files are created for Chapters and Subchapters creation and editin
 ### Feature: Course View
 
 **Backend File Path:** 
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Controller/CourseController`
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course`
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository`
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService`
+
+Backend code available at - https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/freya_dev2?ref_type=heads
+
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Controller/CourseController.java`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course.java`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository.java`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService.java`
 
 Here, similar files are created for Chapters and Subchapters view.
 
 **Frontend File Path:** 
 - `frontend/src/pages/Courses/MyCoursePage.jsx`
-- `frontend/src/pages/Courses/ChapterDetailsPage.js`
+- `frontend/src/pages/Courses/ChapterDetailsPage.jsx`
 
 **Tasks Included:**
 1. **Course Listing:**
@@ -277,8 +282,29 @@ Here, similar files are created for Chapters and Subchapters view.
 
 
 ## Feature: Pricing Model for Professor
+
 **Tasks included**
 1. Subscribing to the platform
+
+## Feature: Blog Creation and Edit
+**Tasks included**
+1. Blog Creation:
+
+Users can create new blog posts by providing necessary details such as title, content, etc.
+Upon creation, the blog post details will be stored in the database.
+
+2. Blog Editing:
+
+Users can edit existing blog posts by modifying the blog details such as title, content, etc.
+Upon editing, the modified blog post details will be updated in the database.
+
+## Feature: Blog View
+**Tasks included**
+
+1. Blog Listing:
+
+Users can view a list of available blog posts.
+The blog posts will be fetched from the backend and displayed in the frontend.
 
 
 ## License
