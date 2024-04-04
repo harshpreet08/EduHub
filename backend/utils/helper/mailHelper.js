@@ -1,32 +1,27 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
+async function sendMail(sendTo, subject, msg) {
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'eduhub74@gmail.com',
+      pass: process.env.MAIL_PWD
+    }
+  });
 
-async function sendMail(sendTo, subject, msg){
-    var transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-          user: "2a7d9c965d8602",
-          pass: "f7df988a25313d"
-        }
-      });
+  var mailOptions = {
+    from: 'eduhub74@gmail.com',
+    to: sendTo,
+    subject: subject,
+    text: msg
+  };
 
-var mailOptions = {
-  from: 'kunalmakwana18@gnu.ac.in',
-  to: sendTo,
-  subject: subject,
-  text: msg
-};
-
-await transport.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
+  try {
+    let info = await transporter.sendMail(mailOptions);
     console.log('Email sent: ' + info.response);
+  } catch (error) {
+    console.log('Error sending email: ' + error);
   }
-});
 }
 
 module.exports = sendMail;
-
-

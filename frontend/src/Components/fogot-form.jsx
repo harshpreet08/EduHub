@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {userService} from "../services/urls";
+
 
 export const ForgotForm = () => {
   const [selectedRole, setSelectedRole] = useState("Teacher");
@@ -31,7 +33,7 @@ export const ForgotForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:6002/user/forgotpwd",
+        userService.forgotpwd,
         payload
       );
       
@@ -103,7 +105,7 @@ export const ForgotForm = () => {
             className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
               px-4 py-3 mt-6"
           >
-            Send OTP
+            Send Reset Link
           </button>
         </form>
         <div className="text-center mt-6">
