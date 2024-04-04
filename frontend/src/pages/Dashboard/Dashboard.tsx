@@ -1,3 +1,4 @@
+// Rahul Goswami
 import React, { useEffect } from "react";
 import { Card, Input, Space, Tag, Typography } from "antd";
 import { useState } from "react";
@@ -28,10 +29,9 @@ const suffix = (
     }}
   />
 );
-const tagsData = ["#Movies", "#Books", "#Music", "#Sports"];
 
 const Dashboard: React.FC = () => {
-  const [selectedTags, setSelectedTags] = useState<string[]>(["Books"]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [originalCourses, setOriginalCourses] = useState([]);
   const [currentBatchIndex, setCurrentBatchIndex] = useState(0);
@@ -76,6 +76,14 @@ const Dashboard: React.FC = () => {
       : selectedTags.filter((t) => t !== tag);
     console.log("You are interested in: ", nextSelectedTags);
     setSelectedTags(nextSelectedTags);
+    const filteredCourses = originalCourses.filter((course) => {
+      if (nextSelectedTags.length === 0) return true; // If no tags selected, show all courses
+      return nextSelectedTags.some((selectedTag) =>
+        course.category.includes(selectedTag)
+      );
+    });
+
+    setTrendingCourses(filteredCourses);
   };
 
   const transformTextToHashtags = (text: string) => {
@@ -108,20 +116,20 @@ const Dashboard: React.FC = () => {
       );
 
       console.log("setting the data", courseID);
-      dispatch(setUserData({enrolledCourses: courseID}));
+      dispatch(setUserData({ enrolledCourses: courseID }));
       toast.success("Course enrolled successfully");
       console.log("Course enrolled successfully:", response.data);
     } catch (error) {
       console.log(error);
-      toast.error("Failed to enroll")
+      toast.error("Failed to enroll");
       console.error("Error enrolling course:", error);
     }
   };
-
+  const tagsData = ["Photography", "Devops", "Programming", "Sports"];
   return (
     <>
       <Navbar
-        pages={["Contact", "My Courses","Session", "Community Forum" ,"FAQs", "Logout"]}
+        pages={["Contact", "My Courses", "Session", "Community Forum" ,"FAQs", "Logout"]}
       ></Navbar>
       <div
         style={{
