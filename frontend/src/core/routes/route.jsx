@@ -203,6 +203,7 @@ const privateRoutes = {
   "/room/:roomId": StreamClass,
   "/session": StudentMeeting,
   "/contact": Contactus,
+  "/faqs": Faqs,
 };
 
 const publicRoutes = {
