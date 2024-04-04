@@ -226,10 +226,11 @@ csci_5709_b00954473/Assignments/Assignment3/frontend/src/Components/molecules/qu
 ### Feature: Course Creation and Edit
 
 **Backend File Path:** 
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Conntroller/CourseController`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Controller/CourseController`
 - `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course`
 - `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository`
 - `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService`
+
 Here, similar files are created for Chapters and Subchapters creation and editing.
 
 **Frontend File Path:** 
@@ -248,7 +249,7 @@ Here, similar files are created for Chapters and Subchapters creation and editin
 ### Feature: Course View
 
 **Backend File Path:** 
-- `springbootBackend/WebBackend/testBackend/src/main/java/com/Conntroller/CourseController`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Controller/CourseController`
 - `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course`
 - `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository`
 - `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService`
