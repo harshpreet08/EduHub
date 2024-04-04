@@ -73,3 +73,33 @@ baseURL = 'localhost:6002'  //changing url to local backend
 
 - Now you are all set to run and test the application. Wohooo!!
 
+
+## Feature : User Authentication (Account Management)
+- **Overview**: This feature is intended to provide functionality for user authentication and account management. It allows users to securely sign up, log in, and manage their accounts within the application. **The whole authentication is implement using JWT tokens**.
+
+    **1.** **Sign Up for an Account**
+    - Users can create new accounts by providing necessary details such as firstName, lastName, role (Student or Teacher), email, and password.
+
+    - Password has been encrypted using bcrypt and the JWT token has been sent to the user in the header from backend and it has been stored in the cookie with the expiry time of 2 days.
+
+    **2.** **Login to an existing Account:**
+    - Registered users can log in to their accounts using their credentials. Authentication mechanisms is implemented using JSON Web Tokens to securely manage user sessions.
+
+    **3.** **Forgot Password:**
+    - In case users forget their passwords, the system will provide a mechanism for password reset. Our system will send a link over mail to reset the password with the expiry time of 20 minutes. 
+
+    **4.** **Profile page:**
+    - Logged-in users will be able to see the account details including firstname, lastname, email and will be able to update the same. 
+
+    - So basically, i am displaying the details of the user from the userSlice which i am maintaining it using Redux. 
+
+    **5.** **Logout:**
+    - Logged-in users will be able to logout from the application by clicking on logout which will clear the accesstoken cookie on the client side.
+
+    ***For more details re-direct to***: https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/dev_kunal/backend
+
+
+## License
+
+EduHub is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
