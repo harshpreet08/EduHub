@@ -112,6 +112,23 @@ To deploy our project environment, we utilized Render. Here's a summary of the d
 - Configuring Environment Variables
 - Continuous Deployment
 
+## Folder Structure
+### Backend
+As we are using NodeJS for backend, so there
+are package.json and package-lock.json for maintaining the dependencies of the project.
+- Constant: This folder will have all the constants which are defined in entire NodeJS code.
+For ex. Static url.
+- Controller: This folder will have all the controllers of the features. It is the place where all
+the business logic of the application will be maintained.
+- Models: This folder will have schema for all the features. It is responsible for defining the
+shape of the data, as well as any validation rules or business logic associated with it.
+- Routes: This folder will have routes for all the http request made by the user or react
+application.
+- .env: This file have all the secret key values, and this file won’t be deployed to any
+platform in order to secure the credentials.
+- Server.js: This file is the entry point of node.js where express server has initialised.
+- Middlewares: This folder will have middlewares for all the features which will pre-validate
+and handle the request body.
 
 
 ## Feature : User Authentication (Account Management)
