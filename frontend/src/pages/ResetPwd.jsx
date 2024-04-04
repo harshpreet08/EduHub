@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { userService } from "../services/urls";
 
 const ResetPwd = () => {
   const [password, setPassword] = useState("");
@@ -24,7 +25,7 @@ const ResetPwd = () => {
     };
 
     const response = await axios.post(
-      "https://eduhub-node-backend.onrender.com/user/reset-password/" + forgotToken,
+      userService.resetpwd + forgotToken,
       payload
     );
     toast.success("Successfully reset the password.");

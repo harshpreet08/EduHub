@@ -33,7 +33,7 @@ export const ForgotForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:6002/user/forgotpwd",
+        userService.forgotpwd,
         payload
       );
       
