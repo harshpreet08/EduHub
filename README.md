@@ -96,9 +96,9 @@ baseURL = 'localhost:6002'  //changing url to local backend
 ## Deployment
 ### Frontend
 
-To deploy our project environment, we utilized Netlify. Here's a summary of the deployment process we followed:
+To deploy our project environment, we utilized Vercel. Here's a summary of the deployment process we followed:
 
-- Setting Up the Netlify Account
+- Setting Up the Vercel Account
 - Connecting to Github Repository
 - Configuring Build Settings
 - Continuous Deployment
