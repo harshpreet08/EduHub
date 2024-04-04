@@ -222,10 +222,52 @@ csci_5709_b00954473/Assignments/Assignment3/frontend/src/Components/molecules/qu
 3. Once a particular question is clicked, a person can either answer to the question using the comment option or even reply to it
 
 
-## Feature: Course view and study feature for students.
-**Tasks included**
-1. View My Courses list
-2. View Course Content
+
+### Feature: Course Creation and Edit
+
+**Backend File Path:** 
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Conntroller/CourseController`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService`
+Here, similar files are created for Chapters and Subchapters creation and editing.
+
+**Frontend File Path:** 
+- `frontend/src/pages/Courses/ProfessorCoursePage.jsx`
+- `frontend/src/pages/Courses/EditCoursePage.jsx`
+
+**Tasks Included:**
+1. **Course Creation:**
+   - Users (likely teachers) can create new courses by providing necessary details such as course name, description, course image, etc.
+   - Upon creation, the course details will be stored in the database.
+
+2. **Course Editing:**
+   - Users (teachers) can edit existing courses by modifying the course details such as name, description, course image , etc.
+   - Upon editing, the modified course details will be updated in the database.
+
+### Feature: Course View
+
+**Backend File Path:** 
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Conntroller/CourseController`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Entity/Course`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Repository/CourseRepository`
+- `springbootBackend/WebBackend/testBackend/src/main/java/com/Service/CourseService`
+
+Here, similar files are created for Chapters and Subchapters view.
+
+**Frontend File Path:** 
+- `frontend/src/pages/Courses/MyCoursePage.jsx`
+- `frontend/src/pages/Courses/ChapterDetailsPage.js`
+
+**Tasks Included:**
+1. **Course Listing:**
+   - Users (students) can view a list of available courses.
+   - The courses will be fetched from the backend and displayed in the frontend.
+   
+2. **Course Details:**
+   - Users (students) can view detailed information about each course.
+   - This includes the course name, description, duration, etc.
+   - Users can click on a course to view its details.
 
 ## Feature: Question bank and test creation by the professor
 **Tasks included**
