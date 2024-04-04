@@ -222,6 +222,21 @@ csci_5709_b00954473/Assignments/Assignment3/frontend/src/Components/molecules/qu
 3. Once a particular question is clicked, a person can either answer to the question using the comment option or even reply to it
 
 
+## Feature: Course view and study feature for students.
+**Tasks included**
+1. View My Courses list
+2. View Course Content
+
+## Feature: Question bank and test creation by the professor
+**Tasks included**
+1. Creation of Question Bank
+2. Creation and Generation of Responses
+
+
+## Feature: Pricing Model for Professor
+**Tasks included**
+1. Subscribing to the platform
+
 
 ## License
 
