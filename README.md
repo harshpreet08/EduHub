@@ -130,6 +130,23 @@ platform in order to secure the credentials.
 - Middlewares: This folder will have middlewares for all the features which will pre-validate
 and handle the request body.
 
+### Frontend
+As we are using ReactJS for frontend, so
+there are package.json and package-lock.json for maintaining the dependencies of the project.
+- tailwind.config.js: As we are using Tailwind CSS for our project, this file will help us
+to determine the file name format in which we have to apply Tailwind CSS.
+- postcss.config.js: This file will define the plugins for the Tailwind CSS.
+- index.jsx: This file is the entry point of an application where we have defined our
+browser router.
+- Assets folder: This folder will have static images and other static resources which we
+are using in our application.
+- Components: This folder will store all the react components designed for our website.
+- pages: This folder will have the main pages of our application. For ex. Login page,
+Course dashboard page etc.
+- Readme.md : This file will have the information of our project, like which technology
+we are using and helps others to get started with the project.
+- Core: This folder will have routes for the EduHub Application.
+
 
 ## Feature : User Authentication (Account Management)
 - **Overview**: This feature is intended to provide functionality for user authentication and account management. It allows users to securely sign up, log in, and manage their accounts within the application. **The whole authentication is implement using JWT tokens**.
