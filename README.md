@@ -93,6 +93,26 @@ baseURL = 'localhost:6002'  //changing url to local backend
 
 - Now you are all set to run and test the application. Wohooo!!
 
+## Deployment
+### Frontend
+
+To deploy our project environment, we utilized Netlify. Here's a summary of the deployment process we followed:
+
+- Setting Up the Netlify Account
+- Connecting to Github Repository
+- Configuring Build Settings
+- Continuous Deployment
+
+### Backend
+
+To deploy our project environment, we utilized Render. Here's a summary of the deployment process we followed:
+
+- Creating a Render Account
+- Deploying Backend Services
+- Configuring Environment Variables
+- Continuous Deployment
+
+
 
 ## Feature : User Authentication (Account Management)
 - **Overview**: This feature is intended to provide functionality for user authentication and account management. It allows users to securely sign up, log in, and manage their accounts within the application. **The whole authentication is implement using JWT tokens**.
