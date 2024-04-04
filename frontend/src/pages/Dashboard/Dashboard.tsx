@@ -121,7 +121,7 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Navbar
-        pages={["Contact Us", "My Courses","Session", "FAQs", "Logout"]}
+        pages={["Contact", "My Courses","Session", "FAQs", "Logout"]}
       ></Navbar>
       <div
         style={{

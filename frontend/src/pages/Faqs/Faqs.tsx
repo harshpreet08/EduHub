@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import Faq from "react-faq-component";
 import faqimage from "../../Assests/faq.svg";
 import Navbar from "../../Components/NavBar";
+import React from "react";
 
 const FAQS: React.FC = () => {
   const data = {

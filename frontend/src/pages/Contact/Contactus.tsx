@@ -1,12 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import ContactImage from "../../Assests/contactpage.png";
 import Navbar from "../../Components/NavBar";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contactus: React.FC = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    description: "",
+  });
+  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(true);
+  const [emailError, setEmailError] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    const allFieldsFilled = Object.values(formData).every(
+      (val) => val.trim() !== ""
+    );
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      formData.email.trim()
+    );
+    setIsSaveButtonDisabled(!allFieldsFilled);
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "https://eduhub-node-backend.onrender.com/contact/contact-us",
+        {
+          fullName: formData.fullName,
+          email: formData.email,
+          description: formData.description,
+        }
+      );
+
+      // Handle successful response
+      console.log("Data successfully submitted:", response.data);
+      toast.success("Form saved successfully");
+    } catch (error) {
+      // Handle errors
+      console.error("Error submitting data:", error);
+    }
+  };
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar pages={["Contact", "My Courses","Session", "FAQs", "Logout"]}></Navbar>
       <Box
         sx={{
           display: "flex",
@@ -45,27 +95,44 @@ const Contactus: React.FC = () => {
             }}
             noValidate
             autoComplete="off"
+            onSubmit={handleSubmit}
           >
             <TextField
               id="outlined-basic"
               label="Full Name"
               variant="standard"
+              name="fullName"
               // sx={{ bgcolor: "#eaeaea" }}
               required
+              value={formData.fullName}
+              onChange={handleChange}
             />
             <TextField
               id="outlined-basic"
               label="Email"
+              name="email"
               variant="standard"
               required
+              value={formData.email}
+              onChange={handleChange}
+              error={!!emailError}
+              helperText={emailError}
             />
             <TextField
               id="standard"
               label="Description"
+              name="description"
               variant="standard"
               required
+              value={formData.description}
+              onChange={handleChange}
             />
-            <Button variant="contained" sx={{ bgcolor: "#4a5cfb" }}>
+            <Button
+              variant="contained"
+              sx={{ bgcolor: "#4a5cfb" }}
+              onClick={handleSubmit}
+              disabled={isSaveButtonDisabled}
+            >
               Save
             </Button>
           </Box>
