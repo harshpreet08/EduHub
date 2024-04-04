@@ -9,7 +9,7 @@
 * [Rachit Khanna]()
 * [Disha Anand]()
 * [Rahul Goswami]()
-* [Freya Vora]()
+* [Freya Vora](fr793929@dal.ca)
 * [Disha Anand]()
 
 
