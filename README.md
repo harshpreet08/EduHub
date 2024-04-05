@@ -8,7 +8,7 @@
 * [Kunal Rajeshkumar Makwana](kn362288@dal.ca)
 * [Rachit Khanna]()
 * [Disha Anand]()
-* [Rahul Goswami]()
+* [Rahul Goswami](rh917388@dal.ca)
 * [Freya Vora](fr793929@dal.ca)
 * [Harshpreet Singh]()
 
@@ -305,6 +305,13 @@ Upon editing, the modified blog post details will be updated in the database.
 
 Users can view a list of available blog posts.
 The blog posts will be fetched from the backend and displayed in the frontend.
+
+## Feature: Dashboard
+**Tasks included**
+
+1. Course Listing:
+When students login the first page they land is to Dashboard. The dashboard has course listing.
+Every course has enrolling option. After you click on the enroll now the students gets enrolled in that course and then rest of the flow is carried out.
 
 
 ## License
