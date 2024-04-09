@@ -2,6 +2,7 @@
 
 - _Deployed Frontend URL_: <https://eduhub-react-frontend.vercel.app/>
 - _Deployed Backend URL_: <https://eduhub-node-backend.onrender.com>
+- _Backend: <https://testbackend-sy5g.onrender.com/> (Test Feature Only)
 
 ## Authors
 
