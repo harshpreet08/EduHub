@@ -305,12 +305,71 @@ Here, similar files are created for Chapters and Subchapters view.
    - This includes the course name, description, duration, etc.
    - Users can click on a course to view its details.
 
-## Feature: Question bank and test creation by the professor
+## Frontend Code for Feature  (Question Bank and Test Creation)
 
-**Tasks included**
+* *Git Url For folder*: <https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/main/frontend/src/pages/Tests/Professor?ref_type=heads>
 
-1. Creation of Question Bank
-2. Creation and Generation of Responses
+It has two folder one for CSS files and another for JSX files 
+
+JSX folder contains 4 JSX files
+
+* [QuestionBank.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/JSX/QuestionBank.jsx?ref_type=heads)
+* [AddQuestion.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/JSX/CreateTest.jsx?ref_type=heads)
+* [EditQuestion.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/JSX/EditQuestion.jsx?ref_type=heads)
+* [CreateTest.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/JSX/CreateTest.jsx?ref_type=heads)
+
+CSS folder contain 4 CSS files
+
+* [QuestionPage.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/CSS/QuestionPage.css?ref_type=heads)
+* [AddQuestionPage.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/CSS/AddQuestionPage.css?ref_type=heads)
+* [EditQuestionPage.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/CSS/EditQuestionPage.css?ref_type=heads)
+* [CreateTestPage.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Professor/CSS/CreateTestPage.css?ref_type=heads)
+
+## Backend Code for Feature (Question Bank and Test Creation)
+
+* *Git Url for the folder:* <https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/rachit_dev2/testBackend?ref_type=heads>
+
+Folder Structure: 
+
+1. Controller
+2. Entity
+3. Repository
+4. Service
+
+## Frontend Code for Feature  (Test Attempt and Result Generation)
+
+* *Git Url For folder*: <https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/main/frontend/src/pages/Tests/Student>
+
+It has two folder one for CSS files and another for JSX files 
+
+JSX folder contains 5 JSX files
+
+* [FinishTestScreen.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/JSX/FinishTestScreen.jsx)
+* [ResultDetailedView.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/JSX/ResultDetailedView.jsx)
+* [ResultList.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/JSX/ResultList.jsx)
+* [TestList.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/JSX/TestList.jsx)
+* [TestScreen.jsx](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/JSX/TestScreen.jsx)
+
+CSS folder contain 4 CSS files
+
+* [FinishTestScreen.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/CSS/FinishTestScreen.css)
+* [ResultDetailedView.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/CSS/ResultDetailedView.css)
+* [ResultList.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/CSS/ResultList.css)
+* [TestList.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/CSS/TestList.css)
+* [TestScreen.css](https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/blob/main/frontend/src/pages/Tests/Student/CSS/TestScreen.css)
+
+## Backend Code for Feature (Test Attempt and Result Generation)
+
+* *Git Url for the folder:* <https://git.cs.dal.ca/harshpreet/csci_5709_grp-06/-/tree/rachit_dev2/testBackend?ref_type=heads>
+
+Folder Structure: 
+
+1. Controller
+2. Entity
+3. Repository
+4. Service
+
+
 
 ## Feature: Pricing Model for Professor
 
