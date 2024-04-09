@@ -6,8 +6,8 @@
 ## Authors
 
 - [Kunal Rajeshkumar Makwana](kn362288@dal.ca)
-- [Rachit Khanna]()
-- [Disha Anand]()
+- [Rachit Khanna](rc257785@dal.ca)
+- [Disha Anand](ds442718@dal.ca)
 - [Rahul Goswami](rh917388@dal.ca)
 - [Freya Vora](fr793929@dal.ca)
 - [Harshpreet Singh](harshpreet.singh@dal.ca)
